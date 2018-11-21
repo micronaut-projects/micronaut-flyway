@@ -1,17 +1,13 @@
 dependencies {
-    compile project(":runtime")
-    compileOnly project(":inject-java")
+    compileOnly "io.micronaut:micronaut-inject-java:$micronautVersion"
     compile "org.flywaydb:flyway-core:$flywayVersion"
-    compile project(":management")
+    compile "io.micronaut:micronaut-management:$micronautVersion"
 
-    testCompile project(":inject-java")
-    testCompile project(":inject-groovy")
-    testCompile project(":http-client")
-    testCompile project(":http-server-netty")
-    testCompile project(":test-utils")
-
-    testCompile project(':configurations:hibernate-jpa')
-    testCompile project(':configurations:jdbc-hikari')
+    testCompile "io.micronaut:micronaut-inject-java:$micronautVersion"
+    testCompile "org.codehaus.groovy:groovy-sql:$groovyVersion"
+    testCompile "io.micronaut:micronaut-http-client:$micronautVersion"
+    testCompile "io.micronaut:micronaut-http-server-netty:$micronautVersion"
+    testCompile "io.micronaut.configuration:micronaut-jdbc-hikari:$micronautVersion"
+    testCompile "com.h2database:h2:1.4.196"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
-    testCompile dependencyVersion("h2")
 }
