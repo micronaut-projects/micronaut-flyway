@@ -20,7 +20,6 @@ import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
 import io.micronaut.inject.qualifiers.Qualifiers
-import io.micronaut.testutils.YamlAsciidocTagCleaner
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
@@ -28,7 +27,7 @@ import spock.util.concurrent.PollingConditions
 
 import javax.sql.DataSource
 
-class FlywayAsyncSpec extends Specification implements YamlAsciidocTagCleaner {
+class FlywayAsyncSpec extends Specification {
 
     @Shared
     Map<String, Object> config = [
