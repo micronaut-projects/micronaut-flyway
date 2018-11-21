@@ -1,4 +1,4 @@
-Micronaut also provides a built-in endpoint to expose all the applied migrations in `/flyway`.
+This configuration also provides a built-in endpoint to expose all the applied migrations in `/flyway`.
 
 To enable the endpoint add the following to the configuration:
 
