@@ -1,0 +1,272 @@
+You can define Flyway configuration for each datasource. The following example demonstrates using it:
+
+[source, yaml]
+.src/main/resources/application.yml
+----
+include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/FlywaySpec.groovy[tag=yamlconfig,indent=0]
+----
+
+<1> Disable schema DDL creation.
+<2> Define flyway configuration under `flyway.datasources` key.
+<3> Configure flyway configuration for `default` data source.
+<4> The migrations directory is `src/main/resources/databsemigrations`.
+
+
+In that directory you need to include all your migrations, for example:
+
+[source,sql]
+.resources/databasemicrations/V1__create-books-schema.sql
+----
+include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[indent=0]
+----
+
+There are several options available for configuration:
+
+++++
+<a id="io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties" href="#io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties">&#128279;</a>
+++++
+.Configuration Properties for FlywayConfigurationProperties
+|===
+|Property |Type |Description
+
+| `+flyway.datasources.*.configuration+`
+|org.flywaydb.core.api.configuration.Configuration
+|
+
+
+| `+flyway.datasources.*.dry-run-output+`
+|java.io.OutputStream
+|
+
+
+| `+flyway.datasources.*.error-overrides+`
+|java.lang.String[]
+|
+
+
+| `+flyway.datasources.*.group+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.installed-by+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.mixed+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.ignore-missing-migrations+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.ignore-ignored-migrations+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.ignore-pending-migrations+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.ignore-future-migrations+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.validate-on-migrate+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.clean-on-validation-error+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.clean-disabled+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.locations+`
+|java.lang.String[]
+|
+
+
+| `+flyway.datasources.*.encoding+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.schemas+`
+|java.lang.String[]
+|
+
+
+| `+flyway.datasources.*.table+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.target+`
+|org.flywaydb.core.api.MigrationVersion
+|
+
+
+| `+flyway.datasources.*.placeholder-replacement+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.placeholders+`
+|java.util.Map
+|
+
+
+| `+flyway.datasources.*.placeholder-prefix+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.placeholder-suffix+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.sql-migration-prefix+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.undo-sql-migration-prefix+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.repeatable-sql-migration-prefix+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.sql-migration-separator+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.sql-migration-suffixes+`
+|java.lang.String[]
+|
+
+
+| `+flyway.datasources.*.data-source+`
+|javax.sql.DataSource
+|
+
+
+| `+flyway.datasources.*.connect-retries+`
+|int
+|
+
+
+| `+flyway.datasources.*.init-sql+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.baseline-version+`
+|org.flywaydb.core.api.MigrationVersion
+|
+
+
+| `+flyway.datasources.*.baseline-description+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.baseline-on-migrate+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.out-of-order+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.callbacks+`
+|org.flywaydb.core.api.callback.Callback[]
+|
+
+
+| `+flyway.datasources.*.skip-default-callbacks+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.resolvers+`
+|org.flywaydb.core.api.resolver.MigrationResolver[]
+|
+
+
+| `+flyway.datasources.*.skip-default-resolvers+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.stream+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.batch+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.oracle-sqlplus+`
+|boolean
+|
+
+
+| `+flyway.datasources.*.license-key+`
+|java.lang.String
+|
+
+
+| `+flyway.datasources.*.enabled+`
+|boolean
+|Set whether this flyway configuration is enabled. Default value (true).
+
+
+| `+flyway.datasources.*.async+`
+|boolean
+|Whether flyway migrations should run asynchronously.
+
+
+| `+flyway.datasources.*.url+`
+|java.lang.String
+|The JDBC url of the database to migrate
+
+
+| `+flyway.datasources.*.user+`
+|java.lang.String
+|The user of the database to migrate
+
+
+| `+flyway.datasources.*.password+`
+|java.lang.String
+|The password of the database to migrate
+
+
+|===
+
+NOTE: By default Micronaut will configure Flyway to use the datasources defined under `datasources` configuration key. If
+you want to use a different datasource you need to define the properties `+flyway.datasources.*.url+`, `+flyway.datasources.*.user+`
+and `+flyway.datasources.*.password+`.
+
