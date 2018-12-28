@@ -244,6 +244,11 @@ There are several options available for configuration:
 |Set whether this flyway configuration is enabled. Default value (true).
 
 
+| `+flyway.datasources.*.clean-schema+`
+|boolean
+|Set whether Flyway will clean the schema before running the migrations. Default value (false).
+
+
 | `+flyway.datasources.*.async+`
 |boolean
 |Whether flyway migrations should run asynchronously.
@@ -270,3 +275,5 @@ NOTE: By default Micronaut will configure Flyway to use the datasources defined 
 you want to use a different datasource you need to define the properties `+flyway.datasources.*.url+`, `+flyway.datasources.*.user+`
 and `+flyway.datasources.*.password+`.
 
+NOTE: Micronaut doesn't use Flyway property `cleanDisabled` because by default Flyway cleans the schemas before running
+the migrations. Please use Micronaut's `clean-schema` to enable it.
