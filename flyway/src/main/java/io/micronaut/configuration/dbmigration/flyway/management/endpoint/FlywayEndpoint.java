@@ -17,6 +17,7 @@
 package io.micronaut.configuration.dbmigration.flyway.management.endpoint;
 
 import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties;
+import io.micronaut.configuration.dbmigration.flyway.common.Pair;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.management.endpoint.annotation.Endpoint;
@@ -25,7 +26,8 @@ import io.reactivex.Flowable;
 import org.flywaydb.core.Flyway;
 import org.reactivestreams.Publisher;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Provides a flyway endpoint to get all the migrations applied.
@@ -71,30 +73,5 @@ public class FlywayEndpoint {
                     return new FlywayReport(pair.getFirst().getNameQualifier(),
                                 Arrays.asList(pair.getSecond().info().all()));
                 });
-    }
-
-    /**
-     * A pair of any types.
-     *
-     * @param <T1> The first type
-     * @param <T2> The second type
-     */
-    private class Pair<T1, T2> {
-
-        private final T1 first;
-        private final T2 second;
-
-        Pair(T1 first, T2 second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        T2 getSecond() {
-            return second;
-        }
-
-        T1 getFirst() {
-            return first;
-        }
     }
 }
