@@ -111,4 +111,4 @@ subprojects { Project subproject ->
     task allDeps(type: DependencyReportTask) {}
 }
 
-apply from:"https://raw.githubusercontent.com/micronaut-projects/micronaut-core/ae8c52a65b4315d0f36edf362295d645559f496e/gradle/docs.gradle"
+apply from:"https://raw.githubusercontent.com/micronaut-projects/micronaut-docs/${micronautDocsVersion}/gradle/docs.gradle"
