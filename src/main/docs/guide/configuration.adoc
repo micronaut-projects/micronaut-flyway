@@ -275,5 +275,4 @@ NOTE: By default Micronaut will configure Flyway to use the datasources defined 
 you want to use a different datasource you need to define the properties `+flyway.datasources.*.url+`, `+flyway.datasources.*.user+`
 and `+flyway.datasources.*.password+`.
 
-NOTE: Micronaut doesn't use Flyway property `cleanDisabled` because by default Flyway cleans the schemas before running
-the migrations. Please use Micronaut's `clean-schema` to enable it.
+NOTE: Micronaut doesn't use the Flyway property `cleanDisabled` because by default Flyway cleans the schema before running migrations. Please use Micronaut's `clean-schema` configuration property to enable it.
