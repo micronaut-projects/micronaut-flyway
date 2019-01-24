@@ -94,9 +94,9 @@ class FlywayStartupEventListener {
                         new Pair<>(c, applicationContext.findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier()))))
                 .filter(pair -> pair.getSecond().isPresent())
                 .forEach(pair -> {
-                    FlywayConfigurationProperties c = pair.getFirst();
+                    FlywayConfigurationProperties config = pair.getFirst();
                     Flyway flyway = pair.getSecond().get();
-                    if (c.isCleanSchema()) {
+                    if (config.isCleanSchema()) {
                         flyway.clean();
                     }
                     flyway.migrate();
