@@ -113,9 +113,6 @@ public class FlywayConfigurationProperties implements Toggleable {
 
     /**
      * Whether Flyway will clean the schema before running the migrations. Default value ({@value #DEFAULT_CLEAN_SCHEMA}).
-     * Micronaut doesn't use {@link FluentConfiguration#isCleanDisabled()} because by default Flyway cleans the schema
-     * without user interaction.
-     *
      * @return Whether clean the schema before running the migrations
      */
     public boolean isCleanSchema() {
