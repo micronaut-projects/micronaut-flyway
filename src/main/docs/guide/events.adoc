@@ -1,0 +1,5 @@
+Micronaut fires two different events when:
+
+- The schema has been cleaned: link:{api}/io/micronaut/configuration/dbmigration/flyway/event/SchemaCleanedEvent.html[SchemaCleanedEvent].
+- The migrations have been executed: link:{api}/io/micronaut/configuration/dbmigration/flyway/event/MigrationFinishedEvent.html[MigrationFinishedEvent].
+

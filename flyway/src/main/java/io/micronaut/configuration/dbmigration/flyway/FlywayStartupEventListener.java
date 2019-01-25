@@ -17,8 +17,11 @@
 package io.micronaut.configuration.dbmigration.flyway;
 
 import io.micronaut.configuration.dbmigration.flyway.common.Pair;
+import io.micronaut.configuration.dbmigration.flyway.event.MigrationFinishedEvent;
+import io.micronaut.configuration.dbmigration.flyway.event.SchemaCleanedEvent;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Requires;
+import io.micronaut.context.event.ApplicationEventPublisher;
 import io.micronaut.context.event.StartupEvent;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.runtime.event.annotation.EventListener;
@@ -44,15 +47,19 @@ class FlywayStartupEventListener {
 
     private final ApplicationContext applicationContext;
     private final Collection<FlywayConfigurationProperties> flywayConfigurationProperties;
+    private final ApplicationEventPublisher eventPublisher;
 
     /**
      * @param applicationContext            The application context
      * @param flywayConfigurationProperties Collection of Flyway configuration properties
+     * @param eventPublisher                The event publisher
      */
     public FlywayStartupEventListener(ApplicationContext applicationContext,
-                          Collection<FlywayConfigurationProperties> flywayConfigurationProperties) {
+                                      Collection<FlywayConfigurationProperties> flywayConfigurationProperties,
+                                      ApplicationEventPublisher eventPublisher) {
         this.applicationContext = applicationContext;
         this.flywayConfigurationProperties = flywayConfigurationProperties;
+        this.eventPublisher = eventPublisher;
     }
 
     /**
@@ -98,8 +105,10 @@ class FlywayStartupEventListener {
                     Flyway flyway = pair.getSecond().get();
                     if (config.isCleanSchema()) {
                         flyway.clean();
+                        eventPublisher.publishEvent(new SchemaCleanedEvent(config));
                     }
                     flyway.migrate();
+                    eventPublisher.publishEvent(new MigrationFinishedEvent(config));
                 });
     }
 }
