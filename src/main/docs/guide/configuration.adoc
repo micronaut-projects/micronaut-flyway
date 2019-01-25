@@ -22,6 +22,9 @@ include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[
 
 There are several options available for configuration:
 
+//TODO: https://github.com/micronaut-projects/micronaut-docs/issues/5
+//include::{includedir}configurationProperties/io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties.adoc[]
+
 ++++
 <a id="io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties" href="#io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties">&#128279;</a>
 ++++
