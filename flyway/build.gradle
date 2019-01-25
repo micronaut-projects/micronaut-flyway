@@ -10,7 +10,7 @@ dependencies {
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut.docs:micronaut-docs-asciidoc-config-props:$micronautDocsVersion"
 
-    compileOnly "io.micronaut:micronaut-inject-java:"
+    compileOnly "io.micronaut:micronaut-inject-java"
     compile "org.flywaydb:flyway-core:$flywayVersion"
     compile "io.micronaut:micronaut-management"
 
