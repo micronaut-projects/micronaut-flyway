@@ -42,6 +42,9 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_ASYNC = false;
 
+    @SuppressWarnings("WeakerAccess")
+    public static final boolean DEFAULT_CLEAN_SCHEMA = false;
+
     @ConfigurationBuilder(prefixes = "")
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
@@ -49,6 +52,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     private final String nameQualifier;
     private boolean enabled = DEFAULT_ENABLED;
     private boolean async = DEFAULT_ASYNC;
+    private boolean cleanSchema = DEFAULT_CLEAN_SCHEMA;
     private String url;
     private String user;
     private String password;
@@ -105,6 +109,23 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public void setAsync(boolean async) {
         this.async = async;
+    }
+
+    /**
+     * Whether Flyway will clean the schema before running the migrations. Default value ({@value #DEFAULT_CLEAN_SCHEMA}).
+     * @return Whether clean the schema before running the migrations
+     */
+    public boolean isCleanSchema() {
+        return cleanSchema;
+    }
+
+    /**
+     * Set whether Flyway will clean the schema before running the migrations. Default value ({@value #DEFAULT_CLEAN_SCHEMA}).
+     *
+     * @param cleanSchema true to clean the schema before running the migrations.
+     */
+    public void setCleanSchema(boolean cleanSchema) {
+        this.cleanSchema = cleanSchema;
     }
 
     /**

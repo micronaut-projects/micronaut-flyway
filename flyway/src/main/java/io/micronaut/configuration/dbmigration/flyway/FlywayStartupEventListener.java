@@ -16,6 +16,7 @@
 
 package io.micronaut.configuration.dbmigration.flyway;
 
+import io.micronaut.configuration.dbmigration.flyway.common.Pair;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.event.StartupEvent;
@@ -28,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Listener for {@link StartupEvent}s to run flyway operations.
@@ -90,9 +90,16 @@ class FlywayStartupEventListener {
     public void run(boolean async) {
         flywayConfigurationProperties.stream()
                 .filter(c -> c.isAsync() == async)
-                .map(c -> applicationContext.findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier())))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .forEach(Flyway::migrate);
+                .map(c ->
+                        new Pair<>(c, applicationContext.findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier()))))
+                .filter(pair -> pair.getSecond().isPresent())
+                .forEach(pair -> {
+                    FlywayConfigurationProperties config = pair.getFirst();
+                    Flyway flyway = pair.getSecond().get();
+                    if (config.isCleanSchema()) {
+                        flyway.clean();
+                    }
+                    flyway.migrate();
+                });
     }
 }
