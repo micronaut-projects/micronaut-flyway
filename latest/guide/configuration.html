@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Configuration 1.0.0.RC1</title>
+    <title>2 Configuration 1.0.0.RC2</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -35,7 +35,10 @@ function addJsClass() {
                         <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>2</strong><span>Configuration</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>3</strong><span>Endpoint</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>3</strong><span>Events</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>4</strong><span>Endpoint</span></a>
                         </div>
                         
                     </div>
@@ -62,14 +65,14 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/endpoint.html"><strong>3</strong><span>Endpoint</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>3</strong><span>Events</span> >></a></div>
                 
 
 
                 <div class="project">
                     <h1>2 Configuration</h1>
 
-                    <p><strong>Version:</strong> 1.0.0.RC1</p>
+                    <p><strong>Version:</strong> 1.0.0.RC2</p>
                 </div>
 
                 
@@ -91,7 +94,7 @@ function addJsClass() {
 <div class="listingblock">
 <div class="title">src/main/resources/application.yml</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml" data-lang="yaml">datasources:
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">datasources:
     default: <i class="conum" data-value="3"></i><b>(3)</b>
         url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
         username: 'sa'
@@ -138,7 +141,7 @@ flyway:
 <div class="listingblock">
 <div class="title">resources/databasemicrations/V1__create-books-schema.sql</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql" data-lang="sql">create table books (
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
   id int not null primary key,
   name varchar(255) not null,
   constraint id unique (id),
@@ -381,6 +384,11 @@ flyway:
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set whether this flyway configuration is enabled. Default value (true).</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether Flyway will clean the schema before running the migrations. Default value (false).</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.async</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether flyway migrations should run asynchronously.</p></td>
@@ -422,7 +430,7 @@ and <code>flyway.datasources.*.password</code>.
                 
                     <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/endpoint.html"><strong>3</strong><span>Endpoint</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>3</strong><span>Events</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
