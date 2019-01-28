@@ -20,7 +20,7 @@ import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperti
 import io.micronaut.context.event.ApplicationEvent;
 
 /**
- * Fired when a the schema has been cleaned.
+ * Fired when a Flyway schema has been cleaned.
  *
  * @author Iván López
  * @since 1.0.0
@@ -28,7 +28,8 @@ import io.micronaut.context.event.ApplicationEvent;
 public class SchemaCleanedEvent extends ApplicationEvent {
 
     /**
-     * @param config The Flyway configuration that was cleaned
+     * @param config The Flyway configuration that corresponds 
+     * to the schema that was cleaned
      */
     public SchemaCleanedEvent(FlywayConfigurationProperties config) {
         super(config);
