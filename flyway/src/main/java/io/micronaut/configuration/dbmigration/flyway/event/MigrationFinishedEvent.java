@@ -28,7 +28,8 @@ import io.micronaut.context.event.ApplicationEvent;
 public class MigrationFinishedEvent extends ApplicationEvent {
 
     /**
-     * @param config The Flyway configuration that finished the migration
+     * @param config The Flyway configuration that corresponds to the
+     * Flyway instance that has been migrated
      */
     public MigrationFinishedEvent(FlywayConfigurationProperties config) {
         super(config);
