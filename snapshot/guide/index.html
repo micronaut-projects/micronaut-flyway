@@ -45,7 +45,9 @@
                                 
                                 <div class="toc-item" style="margin-left:0"><a href="#configuration"><strong>2</strong><span>Configuration</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#endpoint"><strong>3</strong><span>Endpoint</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#events"><strong>3</strong><span>Events</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#endpoint"><strong>4</strong><span>Endpoint</span></a></div>
                                 
                             </div>
                         </div>
@@ -80,7 +82,9 @@
         
         <div class="toc-item" style="margin-left:0px" id="toc-item-configuration"><a href="#configuration"><strong>2</strong><span>Configuration</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-endpoint"><a href="#endpoint"><strong>3</strong><span>Endpoint</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-events"><a href="#events"><strong>3</strong><span>Events</span></a></div>
+        
+        <div class="toc-item" style="margin-left:0px" id="toc-item-endpoint"><a href="#endpoint"><strong>4</strong><span>Endpoint</span></a></div>
         
         </div>
     </div>
@@ -472,7 +476,31 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 
 
-<h1 id="endpoint">3 Endpoint</h1>
+<h1 id="events">3 Events</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-configuration-flyway/edit/master/src/main/docs/guide/events.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>Micronaut fires two different events when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The schema has been cleaned: <a href="../api/io/micronaut/configuration/dbmigration/flyway/event/SchemaCleanedEvent.html">SchemaCleanedEvent</a>.</p>
+</li>
+<li>
+<p>The migrations have been executed: <a href="../api/io/micronaut/configuration/dbmigration/flyway/event/MigrationFinishedEvent.html">MigrationFinishedEvent</a>.</p>
+</li>
+</ul>
+</div>
+
+
+<h1 id="endpoint">4 Endpoint</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-configuration-flyway/edit/master/src/main/docs/guide/endpoint.adoc"'>
