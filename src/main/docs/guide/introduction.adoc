@@ -1,18 +1,4 @@
 To use the Micronaut's integration with https://flywaydb.org/[Flyway] you must have the `micronaut-flyway`
 dependency on your classpath:
 
-.build.gradle
-[source,groovy,subs="attributes"]
-----
-compile "io.micronaut.configuration:micronaut-flyway:{version}"
-----
-
-.pom.xml
-[source,xml]
-----
-<dependency>
-    <groupId>io.micronaut.configuration</groupId>
-    <artifactId>micronaut-flyway</artifactId>
-    <version>{version}</version>
-</dependency>
-----
+dependency:micronaut-flyway[groupId="io.micronaut.configuration"]
