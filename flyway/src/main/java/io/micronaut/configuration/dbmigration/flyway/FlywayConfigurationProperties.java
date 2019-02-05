@@ -31,7 +31,7 @@ import javax.sql.DataSource;
  *
  * @author Iván López
  * @see org.flywaydb.core.api.configuration.FluentConfiguration
- * @since 1.1.0
+ * @since 1.0.0
  */
 @EachProperty("flyway.datasources")
 public class FlywayConfigurationProperties implements Toggleable {

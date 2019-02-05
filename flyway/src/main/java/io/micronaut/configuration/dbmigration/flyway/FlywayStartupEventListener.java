@@ -37,7 +37,7 @@ import java.util.Collection;
  * Listener for {@link StartupEvent}s to run flyway operations.
  *
  * @author Iván López
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Requires(beans = Flyway.class)
 @Singleton

@@ -19,7 +19,7 @@
  *
  * @author Iván López
  * @see <a href="https://flywaydb.org/">Flyway</a>
- * @since 1.1
+ * @since 1.0.0
  */
 @Configuration
 @Requires(property = "flyway.enabled", notEquals = "false")

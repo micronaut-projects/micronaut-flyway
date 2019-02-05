@@ -26,7 +26,7 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
  * Factory used to create {@link Flyway} beans with the configuration defined in {@link FlywayConfigurationProperties}.
  *
  * @author Iván López
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Factory
 public class FlywayFactory {

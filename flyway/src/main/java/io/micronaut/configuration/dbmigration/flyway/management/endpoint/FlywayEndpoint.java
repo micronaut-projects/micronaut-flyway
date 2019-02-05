@@ -33,7 +33,7 @@ import java.util.Collection;
  * Provides a flyway endpoint to get all the migrations applied.
  *
  * @author Iván López
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Endpoint(id = FlywayEndpoint.NAME)
 public class FlywayEndpoint {

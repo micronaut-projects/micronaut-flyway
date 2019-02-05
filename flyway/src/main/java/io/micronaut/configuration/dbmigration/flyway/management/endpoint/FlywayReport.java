@@ -25,7 +25,7 @@ import java.util.List;
  * Flyway report for one datasource.
  *
  * @author Iván López
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class FlywayReport {
 

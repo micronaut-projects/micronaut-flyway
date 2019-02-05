@@ -28,7 +28,7 @@ import java.util.Optional;
  * Converts a string to a {@link Location} to configure flyway.
  *
  * @author James Kleeh
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Singleton
 public class LocationConverter implements TypeConverter<CharSequence, Location> {

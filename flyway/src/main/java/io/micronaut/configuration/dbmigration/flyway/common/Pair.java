@@ -23,7 +23,7 @@ package io.micronaut.configuration.dbmigration.flyway.common;
  * @param <T2> The second type
  *
  * @author Jame Kleeh
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class Pair<T1, T2> {
 
