@@ -1,0 +1,4 @@
+io.micronaut.configuration.dbmigration.flyway
+io.micronaut.configuration.dbmigration.flyway.common
+io.micronaut.configuration.dbmigration.flyway.event
+io.micronaut.configuration.dbmigration.flyway.management.endpoint
