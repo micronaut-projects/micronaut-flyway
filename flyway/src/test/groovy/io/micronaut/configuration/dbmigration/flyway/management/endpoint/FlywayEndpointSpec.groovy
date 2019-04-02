@@ -26,6 +26,8 @@ import io.micronaut.http.client.RxHttpClient
 import io.micronaut.runtime.server.EmbeddedServer
 import spock.lang.Specification
 
+import javax.sql.DataSource
+
 class FlywayEndpointSpec extends Specification {
 
     void "test flyway endpoint bean is available"() {
@@ -101,6 +103,8 @@ class FlywayEndpointSpec extends Specification {
         RxHttpClient rxClient = embeddedServer.applicationContext.createBean(RxHttpClient, server)
 
         when:
+        //datasource must be loaded to show the migrations
+        embeddedServer.applicationContext.getBeansOfType(DataSource)
         HttpResponse<List<Map>> response = rxClient.toBlocking()
             .exchange(HttpRequest.GET("/flyway"), Argument.of(List, Map))
 
@@ -142,6 +146,8 @@ class FlywayEndpointSpec extends Specification {
         RxHttpClient rxClient = embeddedServer.applicationContext.createBean(RxHttpClient, server)
 
         when:
+        //datasource must be loaded to show the migrations
+        embeddedServer.applicationContext.getBeansOfType(DataSource)
         HttpResponse<List> response = rxClient.toBlocking()
             .exchange(HttpRequest.GET("/flyway"), Argument.of(List, Map))
 

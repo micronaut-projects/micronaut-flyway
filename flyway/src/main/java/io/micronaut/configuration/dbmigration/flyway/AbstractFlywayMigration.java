@@ -15,22 +15,20 @@ import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 @Singleton
-public class AbstractFlywayMigration {
+class AbstractFlywayMigration {
 
-    protected final ApplicationContext applicationContext;
-    protected final ApplicationEventPublisher eventPublisher;
+    final ApplicationContext applicationContext;
+    final ApplicationEventPublisher eventPublisher;
 
-    // TODO: Change this
-    public AbstractFlywayMigration(ApplicationContext applicationContext, ApplicationEventPublisher eventPublisher) {
+    AbstractFlywayMigration(ApplicationContext applicationContext, ApplicationEventPublisher eventPublisher) {
         this.applicationContext = applicationContext;
         this.eventPublisher = eventPublisher;
     }
 
-    public void run(FlywayConfigurationProperties config, String name, @Nullable DataSource dataSource) {
+    void run(FlywayConfigurationProperties config, String name, DataSource dataSource) {
         FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-        if (dataSource != null) {
-            fluentConfiguration.dataSource(dataSource);
-        }
+        fluentConfiguration.dataSource(dataSource);
+
         Flyway flyway = fluentConfiguration.load();
         this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(name), false);
         if (config.isEnabled()) {
@@ -42,59 +40,6 @@ public class AbstractFlywayMigration {
         }
     }
 
-//    public void run(DataSource dataSource, String name) {
-//        applicationContext.findBean(
-//                FlywayConfigurationProperties.class,
-//                Qualifiers.byName(name)
-//        ).ifPresent(config -> {
-//            FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-//            fluentConfiguration.dataSource(dataSource);
-//            Flyway flyway = fluentConfiguration.load();
-//            this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(name), false);
-//            if (config.isEnabled()) {
-//                if (config.isAsync()) {
-//                    runAsync(config, flyway);
-//                } else {
-//                    runFlyway(config, flyway);
-//                }
-//            }
-//        });
-//    }
-
-//    public void run(FlywayConfigurationProperties config) {
-//        String name = config.getNameQualifier();
-//
-//        FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-//        Flyway flyway = fluentConfiguration.load();
-//        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(name), false);
-//        if (config.isEnabled()) {
-//            if (config.isAsync()) {
-//                runAsync(config, flyway);
-//            } else {
-//                runFlyway(config, flyway);
-//            }
-//        }
-//    }
-
-//    public void run(FlywayConfigurationProperties config, DataSource dataSource) {
-//        String name = config.getNameQualifier();
-//
-//        FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-//        if (dataSource != null) {
-//            fluentConfiguration.dataSource(dataSource);
-//        } else {
-//            fluentConfiguration;
-//        }
-//        Flyway flyway = fluentConfiguration.load();
-//        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(name), false);
-//        if (config.isEnabled()) {
-//            if (config.isAsync()) {
-//                runAsync(config, flyway);
-//            } else {
-//                runFlyway(config, flyway);
-//            }
-//        }
-//    }
 
     private void runFlyway(FlywayConfigurationProperties config, Flyway flyway) {
         if (config.isCleanSchema()) {
@@ -106,7 +51,7 @@ public class AbstractFlywayMigration {
     }
 
     @Async(TaskExecutors.IO)
-    public void runAsync(FlywayConfigurationProperties config, Flyway flyway) {
+    void runAsync(FlywayConfigurationProperties config, Flyway flyway) {
         runFlyway(config, flyway);
     }
 }

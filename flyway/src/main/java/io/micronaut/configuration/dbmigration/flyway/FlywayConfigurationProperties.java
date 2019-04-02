@@ -21,6 +21,7 @@ import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
+import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 import javax.sql.DataSource;
@@ -44,7 +45,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "")
+    @ConfigurationBuilder(prefixes = "", excludes = "locations")
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
 //    private final DataSource dataSource;
@@ -168,6 +169,15 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public boolean hasAlternativeDatabaseConfiguration() {
         return StringUtils.hasText(this.getUrl()) && StringUtils.hasText(this.getUser());
+    }
+
+    public void setLocations(String... locations) {
+        fluentConfiguration.locations(locations);
+
+    }
+
+    public Location[] getLocations() {
+        return fluentConfiguration.getLocations();
     }
 
     /**

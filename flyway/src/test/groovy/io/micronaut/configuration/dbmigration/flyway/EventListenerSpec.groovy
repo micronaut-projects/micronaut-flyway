@@ -22,6 +22,7 @@ import io.micronaut.context.ApplicationContext
 import io.micronaut.context.annotation.Requires
 import io.micronaut.context.env.Environment
 import io.micronaut.runtime.event.annotation.EventListener
+import org.flywaydb.core.Flyway
 import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
@@ -51,18 +52,16 @@ class EventListenerSpec extends Specification {
         )
 
         when: 'running the migrations'
-//        applicationContext.getBean(Flyway)
         applicationContext.getBean(DataSource)
         applicationContext.getBean(FlywayConfigurationProperties)
+        applicationContext.getBean(Flyway)
 
         then: 'the events are fired'
         new PollingConditions().eventually {
             applicationContext.getBean(TestEventListener).migrationFinishedEvents.size() == 1
-        }
-
-        new PollingConditions().eventually {
             applicationContext.getBean(TestEventListener).schemaCleanedEvents.size() == 1
         }
+
     }
 
     @Singleton
