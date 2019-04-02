@@ -23,7 +23,6 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
-import javax.annotation.Nullable;
 import javax.sql.DataSource;
 
 /**
@@ -48,7 +47,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     @ConfigurationBuilder(prefixes = "")
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
-    private final DataSource dataSource;
+//    private final DataSource dataSource;
     private final String nameQualifier;
     private boolean enabled = DEFAULT_ENABLED;
     private boolean async = DEFAULT_ASYNC;
@@ -58,20 +57,10 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String password;
 
     /**
-     * @param dataSource DataSource with the same name qualifier.
      * @param name       The name qualifier.
      */
-    public FlywayConfigurationProperties(@Nullable @Parameter DataSource dataSource,
-                                         @Parameter String name) {
-        this.dataSource = dataSource;
+    public FlywayConfigurationProperties(@Parameter String name) {
         this.nameQualifier = name;
-    }
-
-    /**
-     * @return The {@link DataSource}
-     */
-    public DataSource getDataSource() {
-        return dataSource;
     }
 
     /**

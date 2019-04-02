@@ -35,6 +35,7 @@ public class LocationConverter implements TypeConverter<CharSequence, Location> 
 
     @Override
     public Optional<Location> convert(CharSequence object, Class<Location> targetType, ConversionContext context) {
+        System.out.println("object = [" + object + "], targetType = [" + targetType + "], context = [" + context + "]");
         try {
             return Optional.of(new Location(object.toString()));
         } catch (FlywayException e) {

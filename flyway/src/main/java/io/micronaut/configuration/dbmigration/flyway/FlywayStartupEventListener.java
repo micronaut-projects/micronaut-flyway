@@ -16,22 +16,7 @@
 
 package io.micronaut.configuration.dbmigration.flyway;
 
-import io.micronaut.configuration.dbmigration.flyway.common.Pair;
-import io.micronaut.configuration.dbmigration.flyway.event.MigrationFinishedEvent;
-import io.micronaut.configuration.dbmigration.flyway.event.SchemaCleanedEvent;
-import io.micronaut.context.ApplicationContext;
-import io.micronaut.context.annotation.Requires;
-import io.micronaut.context.event.ApplicationEventPublisher;
 import io.micronaut.context.event.StartupEvent;
-import io.micronaut.inject.qualifiers.Qualifiers;
-import io.micronaut.runtime.event.annotation.EventListener;
-import io.micronaut.scheduling.annotation.Async;
-import org.flywaydb.core.Flyway;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.inject.Singleton;
-import java.util.Collection;
 
 /**
  * Listener for {@link StartupEvent}s to run flyway operations.
@@ -39,76 +24,77 @@ import java.util.Collection;
  * @author Iván López
  * @since 1.0.0
  */
-@Requires(beans = Flyway.class)
-@Singleton
+//@Requires(beans = Flyway.class)
+//@Singleton
 class FlywayStartupEventListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FlywayStartupEventListener.class);
-
-    private final ApplicationContext applicationContext;
-    private final Collection<FlywayConfigurationProperties> flywayConfigurationProperties;
-    private final ApplicationEventPublisher eventPublisher;
-
-    /**
-     * @param applicationContext            The application context
-     * @param flywayConfigurationProperties Collection of Flyway configuration properties
-     * @param eventPublisher                The event publisher
-     */
-    public FlywayStartupEventListener(ApplicationContext applicationContext,
-                                      Collection<FlywayConfigurationProperties> flywayConfigurationProperties,
-                                      ApplicationEventPublisher eventPublisher) {
-        this.applicationContext = applicationContext;
-        this.flywayConfigurationProperties = flywayConfigurationProperties;
-        this.eventPublisher = eventPublisher;
-    }
-
-    /**
-     * Runs Flyway migrations synchronously.
-     *
-     * @param event Server startup event
-     */
-    @EventListener
-    public void onStartup(StartupEvent event) {
-        if (LOG.isTraceEnabled()) {
-            LOG.trace("Executing synchronous flyway migrations");
-        }
-        run(false);
-    }
-
-    /**
-     * Runs Flyway migrations asynchronously.
-     *
-     * @param event Server startup event
-     */
-    @Async
-    @EventListener
-    public void onStartupAsync(StartupEvent event) {
-        if (LOG.isTraceEnabled()) {
-            LOG.trace("Executing asynchronous flyway migrations");
-        }
-        run(true);
-    }
-
-    /**
-     * Runs Flyway migrations for all the created {@link Flyway} beans.
-     *
-     * @param async if true only flyway configurations set to async are run.
-     */
-    public void run(boolean async) {
-        flywayConfigurationProperties.stream()
-                .filter(c -> c.isAsync() == async)
-                .map(c ->
-                        new Pair<>(c, applicationContext.findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier()))))
-                .filter(pair -> pair.getSecond().isPresent())
-                .forEach(pair -> {
-                    FlywayConfigurationProperties config = pair.getFirst();
-                    Flyway flyway = pair.getSecond().get();
-                    if (config.isCleanSchema()) {
-                        flyway.clean();
-                        eventPublisher.publishEvent(new SchemaCleanedEvent(config));
-                    }
-                    flyway.migrate();
-                    eventPublisher.publishEvent(new MigrationFinishedEvent(config));
-                });
-    }
+//    private static final Logger LOG = LoggerFactory.getLogger(FlywayStartupEventListener.class);
+//
+//    private final ApplicationContext applicationContext;
+//    private final Collection<FlywayConfigurationProperties> flywayConfigurationProperties;
+//    private final ApplicationEventPublisher eventPublisher;
+//
+//    /**
+//     * @param applicationContext            The application context
+//     * @param flywayConfigurationProperties Collection of Flyway configuration properties
+//     * @param eventPublisher                The event publisher
+//     */
+//    public FlywayStartupEventListener(ApplicationContext applicationContext,
+//                                      Collection<FlywayConfigurationProperties> flywayConfigurationProperties,
+//                                      ApplicationEventPublisher eventPublisher) {
+//        System.out.println("applicationContext = [" + applicationContext + "], flywayConfigurationProperties = [" + flywayConfigurationProperties + "], eventPublisher = [" + eventPublisher + "]");
+//        this.applicationContext = applicationContext;
+//        this.flywayConfigurationProperties = flywayConfigurationProperties;
+//        this.eventPublisher = eventPublisher;
+//    }
+//
+//    /**
+//     * Runs Flyway migrations synchronously.
+//     *
+//     * @param event Server startup event
+//     */
+//    @EventListener
+//    public void onStartup(StartupEvent event) {
+//        if (LOG.isTraceEnabled()) {
+//            LOG.trace("Executing synchronous flyway migrations");
+//        }
+//        run(false);
+//    }
+//
+//    /**
+//     * Runs Flyway migrations asynchronously.
+//     *
+//     * @param event Server startup event
+//     */
+//    @Async
+//    @EventListener
+//    public void onStartupAsync(StartupEvent event) {
+//        if (LOG.isTraceEnabled()) {
+//            LOG.trace("Executing asynchronous flyway migrations");
+//        }
+//        run(true);
+//    }
+//
+//    /**
+//     * Runs Flyway migrations for all the created {@link Flyway} beans.
+//     *
+//     * @param async if true only flyway configurations set to async are run.
+//     */
+//    public void run(boolean async, FlywayConfigurationProperties flywayConfigurationProperties, Flyway flyway) {
+//        flywayConfigurationProperties.stream()
+//                .filter(c -> c.isAsync() == async)
+//                .map(c ->
+//                        new Pair<>(c, applicationContext.findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier()))))
+//                .filter(pair -> pair.getSecond().isPresent())
+//                .forEach(pair -> {
+//                    FlywayConfigurationProperties config = pair.getFirst();
+//                    Flyway flyway = pair.getSecond().get();
+//                    if (config.isCleanSchema()) {
+//                        flyway.clean();
+//                        eventPublisher.publishEvent(new SchemaCleanedEvent(config));
+//                    }
+//                    flyway.migrate();
+//                    eventPublisher.publishEvent(new MigrationFinishedEvent(config));
+//                });
+//    }
 }

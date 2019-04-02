@@ -23,6 +23,8 @@ import io.micronaut.inject.qualifiers.Qualifiers
 import org.flywaydb.core.Flyway
 import spock.lang.Specification
 
+import javax.sql.DataSource
+
 class FlywayConfigurationPropertiesEnabledSpec extends Specification {
 
     void 'if no flyway configuration then no FlywayConfigurationProperties and Flyway beans are created'() {
@@ -71,6 +73,7 @@ class FlywayConfigurationPropertiesEnabledSpec extends Specification {
         )
 
         when:
+        applicationContext.getBean(DataSource, Qualifiers.byName('movies'))
         applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('movies'))
         applicationContext.getBean(Flyway, Qualifiers.byName('movies'))
 
@@ -78,6 +81,7 @@ class FlywayConfigurationPropertiesEnabledSpec extends Specification {
         noExceptionThrown()
 
         when:
+        applicationContext.getBean(DataSource, Qualifiers.byName('books'))
         applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('books'))
         applicationContext.getBean(Flyway, Qualifiers.byName('books'))
 
