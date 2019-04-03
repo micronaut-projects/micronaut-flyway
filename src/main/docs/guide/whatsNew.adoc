@@ -1,0 +1,21 @@
+This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.
+
+== 1.1.0.RC4
+
+* Underlying implementation has been changed to run the migrations as soon as possible. If you are not extending or overriding
+the API should not be visible changes.
+
+
+== 1.1.0.RC3
+
+* Upgrade to Micronaut 1.0.4.
+* Upgrade to Flyway 5.2.4.
+
+== 1.1.0.RC2
+
+* Add configuration property to clean the schema before running the migrations.
+* Fire events after clean the schema and after run the migrations.
+
+== 1.1.0.RC1
+
+* First public release.
