@@ -17,7 +17,6 @@
 package io.micronaut.configuration.dbmigration.flyway.management.endpoint;
 
 import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties;
-import io.micronaut.configuration.dbmigration.flyway.common.Pair;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.management.endpoint.annotation.Endpoint;
@@ -64,14 +63,50 @@ public class FlywayEndpoint {
 
         return Flowable.fromIterable(flywayConfigurationProperties)
                 .filter(FlywayConfigurationProperties::isEnabled)
-                .map(c -> {
-                    return new Pair<>(c, applicationContext
-                            .findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier())).orElse(null));
-                })
+                .map(c -> new Pair<>(c,
+                        applicationContext
+                                .findBean(Flyway.class, Qualifiers.byName(c.getNameQualifier()))
+                                .orElse(null)))
                 .filter(pair -> pair.getSecond() != null)
-                .map(pair -> {
-                    return new FlywayReport(pair.getFirst().getNameQualifier(),
-                                Arrays.asList(pair.getSecond().info().all()));
-                });
+                .map(pair -> new FlywayReport(
+                        pair.getFirst().getNameQualifier(),
+                        Arrays.asList(pair.getSecond().info().all()))
+                );
     }
+
+    /**
+     * A pair of any types.
+     *
+     * @param <T1> The first type
+     * @param <T2> The second type
+     */
+    static class Pair<T1, T2> {
+
+        private final T1 first;
+        private final T2 second;
+
+        /**
+         * @param first  The first parameter
+         * @param second The second parameter
+         */
+        public Pair(T1 first, T2 second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        /**
+         * @return The first parameter
+         */
+        public T1 getFirst() {
+            return first;
+        }
+
+        /**
+         * @return The second parameter
+         */
+        public T2 getSecond() {
+            return second;
+        }
+    }
+
 }

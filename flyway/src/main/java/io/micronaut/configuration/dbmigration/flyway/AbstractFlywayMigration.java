@@ -32,7 +32,7 @@ import javax.sql.DataSource;
 /**
  * Parent class that runs Flyway database migrations.
  *
- * @author Jame Kleeh
+ * @author James Kleeh
  * @author Iván López
  * @since 1.0.0
  */
