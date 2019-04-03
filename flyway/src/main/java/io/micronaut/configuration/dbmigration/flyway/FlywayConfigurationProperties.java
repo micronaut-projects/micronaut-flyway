@@ -24,8 +24,6 @@ import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
-import javax.sql.DataSource;
-
 /**
  * Create a Flyway Configuration for each sub-property of flyway.*.
  *
@@ -48,7 +46,6 @@ public class FlywayConfigurationProperties implements Toggleable {
     @ConfigurationBuilder(prefixes = "", excludes = "locations")
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
-//    private final DataSource dataSource;
     private final String nameQualifier;
     private boolean enabled = DEFAULT_ENABLED;
     private boolean async = DEFAULT_ASYNC;
@@ -58,7 +55,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String password;
 
     /**
-     * @param name       The name qualifier.
+     * @param name The name qualifier.
      */
     public FlywayConfigurationProperties(@Parameter String name) {
         this.nameQualifier = name;
@@ -103,6 +100,7 @@ public class FlywayConfigurationProperties implements Toggleable {
 
     /**
      * Whether Flyway will clean the schema before running the migrations. Default value ({@value #DEFAULT_CLEAN_SCHEMA}).
+     *
      * @return Whether clean the schema before running the migrations
      */
     public boolean isCleanSchema() {
@@ -161,23 +159,28 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * @return The locations for the database migrations
+     */
+    public Location[] getLocations() {
+        return fluentConfiguration.getLocations();
+    }
+
+    /**
+     * @param locations The locations for the migrations
+     */
+    public void setLocations(String... locations) {
+        fluentConfiguration.locations(locations);
+    }
+
+    /**
      * Whether there is an alternative database configuration for the migration. By default Micronaut will use the
-     * {@link DataSource} defined for the application but if both {@code url} and {@code user} are defined, then those
+     * {@link javax.sql.DataSource} defined for the application but if both {@code url} and {@code user} are defined, then those
      * will be use for Liquibase.
      *
      * @return true if there is an alternative database configuration
      */
     public boolean hasAlternativeDatabaseConfiguration() {
         return StringUtils.hasText(this.getUrl()) && StringUtils.hasText(this.getUser());
-    }
-
-    public void setLocations(String... locations) {
-        fluentConfiguration.locations(locations);
-
-    }
-
-    public Location[] getLocations() {
-        return fluentConfiguration.getLocations();
     }
 
     /**

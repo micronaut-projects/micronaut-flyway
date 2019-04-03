@@ -22,18 +22,18 @@ import io.micronaut.context.event.ApplicationEventPublisher;
 import io.micronaut.context.event.BeanCreatedEvent;
 import io.micronaut.context.event.BeanCreatedEventListener;
 import io.micronaut.inject.qualifiers.Qualifiers;
-import org.flywaydb.core.Flyway;
 import org.flywaydb.core.internal.jdbc.DriverDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import javax.sql.DataSource;
-import java.util.Optional;
 
 /**
- * Factory used to create {@link Flyway} beans with the configuration defined in {@link FlywayConfigurationProperties}.
+ * Run migrations when the {@link DataSource} is only specified in Flyway configuration and there is no Micronaut
+ * DataSource defined.
  *
+ * @author James Kleeh
  * @author Iván López
  * @since 1.0.0
  */
@@ -42,6 +42,10 @@ public class AlternativeMigrationRunner extends AbstractFlywayMigration implemen
 
     static final Logger LOG = LoggerFactory.getLogger(Condition.class);
 
+    /**
+     * @param applicationContext The application context
+     * @param eventPublisher     The event publisher
+     */
     public AlternativeMigrationRunner(ApplicationContext applicationContext,
                                       ApplicationEventPublisher eventPublisher) {
         super(applicationContext, eventPublisher);

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017-2018 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.micronaut.configuration.dbmigration.flyway;
 
 import io.micronaut.context.ApplicationContext;
@@ -9,11 +25,21 @@ import io.micronaut.inject.qualifiers.Qualifiers;
 
 import javax.inject.Singleton;
 import javax.sql.DataSource;
-import java.util.Collection;
 
+/**
+ * Run migrations when there is a {@link DataSource} defined for it.
+ *
+ * @author James Kleeh
+ * @author Iván López
+ * @since 1.0.0
+ */
 @Singleton
 public class DataSourceMigrationRunner extends AbstractFlywayMigration implements BeanCreatedEventListener<DataSource> {
 
+    /**
+     * @param applicationContext The application context
+     * @param eventPublisher     The event publisher
+     */
     public DataSourceMigrationRunner(ApplicationContext applicationContext,
                                      ApplicationEventPublisher eventPublisher) {
         super(applicationContext, eventPublisher);
@@ -21,21 +47,18 @@ public class DataSourceMigrationRunner extends AbstractFlywayMigration implement
 
     @Override
     public DataSource onCreated(BeanCreatedEvent<DataSource> event) {
-        System.out.println("event = [" + event + "]");
-
         DataSource dataSource = event.getBean();
 
         if (event.getBeanDefinition() instanceof NameResolver) {
             ((NameResolver) event.getBeanDefinition())
-                    .resolveName().ifPresent(name -> {
-
-                applicationContext.findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name))
-                .ifPresent(flywayConfig -> run(flywayConfig, name, dataSource));
-            });
+                    .resolveName()
+                    .ifPresent(name -> {
+                        applicationContext
+                                .findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name))
+                                .ifPresent(flywayConfig -> run(flywayConfig, name, dataSource));
+                    });
         }
 
         return dataSource;
     }
-
-
 }
