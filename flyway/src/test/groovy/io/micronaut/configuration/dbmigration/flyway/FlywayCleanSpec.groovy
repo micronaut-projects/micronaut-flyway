@@ -52,7 +52,6 @@ class FlywayCleanSpec extends Specification {
         )
 
         when: 'running the migrations'
-//        applicationContext.getBean(Flyway)
         applicationContext.getBean(DataSource)
 
         then: 'the previously existing foo table in the schema is still there'
@@ -85,9 +84,7 @@ class FlywayCleanSpec extends Specification {
         )
 
         and: 'running the migrations'
-//        applicationContext.getBean(Flyway)
         applicationContext.getBean(DataSource)
-        applicationContext.getBean(FlywayConfigurationProperties)
 
         when: 'trying to access the "foo" table'
         sql.rows('select count(*) from foo').get(0)[0] == 0

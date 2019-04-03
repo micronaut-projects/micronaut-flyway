@@ -19,7 +19,6 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
-import io.micronaut.inject.qualifiers.Qualifiers
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
@@ -56,7 +55,7 @@ class FlywayAsyncSpec extends Specification {
         noExceptionThrown()
 
         when:
-        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('default'))
+        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()

@@ -19,7 +19,6 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
-import io.micronaut.inject.qualifiers.Qualifiers
 import io.micronaut.runtime.server.EmbeddedServer
 import org.yaml.snakeyaml.Yaml
 import spock.lang.AutoCleanup
@@ -101,7 +100,7 @@ flyway:
         noExceptionThrown()
 
         when:
-        FlywayConfigurationProperties config = embeddedServer.applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('default'))
+        FlywayConfigurationProperties config = embeddedServer.applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()

@@ -106,13 +106,13 @@ class FlywayConfigurationPropertiesEnabledSpec extends Specification {
         )
 
         when:
-        applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('movies'))
+        applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()
 
         when:
-        applicationContext.getBean(Flyway, Qualifiers.byName('movies'))
+        applicationContext.getBean(Flyway)
 
         then:
         def e = thrown(NoSuchBeanException)
