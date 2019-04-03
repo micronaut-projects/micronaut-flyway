@@ -125,18 +125,6 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         ApplicationContext applicationContext = server.applicationContext
 
         when:
-        applicationContext.getBean(FlywayConfigurationProperties)
-
-        then:
-        noExceptionThrown()
-
-        when:
-        applicationContext.getBean(Flyway)
-
-        then:
-        noExceptionThrown()
-
-        when:
         Map db = [url: 'jdbc:h2:mem:flywayBooksDB3', user: 'sa', password: '', driver: 'org.h2.Driver']
         Sql sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
 

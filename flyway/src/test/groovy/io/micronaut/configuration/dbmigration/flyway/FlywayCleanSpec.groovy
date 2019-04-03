@@ -46,7 +46,7 @@ class FlywayCleanSpec extends Specification {
                 'jpa.default.properties.hibernate.show_sql'     : true,
 
                 'flyway.datasources.default.locations'          : 'classpath:moremigrations',
-                'flyway.datasources.default.baseline-on-migrate': true,
+                'flyway.datasources.default.baseline-on-migrate': true, // Avoid Flyway complains because the schema is non-empty
             ] as Map,
             Environment.TEST
         )

@@ -47,7 +47,7 @@ class FlywayAsyncSpec extends Specification {
     @AutoCleanup
     ApplicationContext applicationContext = ApplicationContext.run(config as Map<String, Object>, Environment.TEST)
 
-    void 'test flyway changelogs are executed asynchronously'() {
+    void 'test Flyway migrations are executed asynchronously'() {
         when:
         applicationContext.getBean(DataSource)
 
