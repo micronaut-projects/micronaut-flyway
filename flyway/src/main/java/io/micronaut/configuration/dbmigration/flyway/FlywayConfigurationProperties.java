@@ -54,7 +54,6 @@ public class FlywayConfigurationProperties implements Toggleable {
     private boolean cleanSchema = DEFAULT_CLEAN_SCHEMA;
     private String url;
     private String user;
-    private String username;
     private String password;
 
     /**
@@ -148,17 +147,10 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
-     * @return The username of the database to migrate
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
      * @param username The username of the database to migrate
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.user = username;
     }
 
     /**
@@ -191,14 +183,13 @@ public class FlywayConfigurationProperties implements Toggleable {
 
     /**
      * Whether there is an alternative database configuration for the migration. By default Micronaut will use the
-     * {@link javax.sql.DataSource} defined for the application but if both {@code url} and {@code user} (or {@code username})
-     * are defined, then those will be use for Flyway.
+     * {@link javax.sql.DataSource} defined for the application but if both {@code url} and {@code user} are defined,
+     * then those will be use for Flyway.
      *
      * @return true if there is an alternative database configuration
      */
     public boolean hasAlternativeDatabaseConfiguration() {
-        return StringUtils.hasText(this.getUrl()) &&
-                (StringUtils.hasText(this.getUser()) || StringUtils.hasText(this.getUsername()));
+        return StringUtils.hasText(this.getUrl()) && StringUtils.hasText(this.getUser());
     }
 
     /**

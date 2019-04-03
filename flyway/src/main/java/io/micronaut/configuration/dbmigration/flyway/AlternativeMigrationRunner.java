@@ -58,8 +58,7 @@ public class AlternativeMigrationRunner extends AbstractFlywayMigration implemen
 
         if (config.isEnabled()) {
             if (config.hasAlternativeDatabaseConfiguration()) {
-                String username = config.getUsername() != null ? config.getUsername() : config.getUser();
-                DataSource dataSource = new DriverDataSource(Thread.currentThread().getContextClassLoader(), null, config.getUrl(), username, config.getPassword());
+                DataSource dataSource = new DriverDataSource(Thread.currentThread().getContextClassLoader(), null, config.getUrl(), config.getUser(), config.getPassword());
                 run(config, name, dataSource);
             } else {
                 if (!applicationContext.containsBean(DataSource.class, Qualifiers.byName(config.getNameQualifier()))) {
