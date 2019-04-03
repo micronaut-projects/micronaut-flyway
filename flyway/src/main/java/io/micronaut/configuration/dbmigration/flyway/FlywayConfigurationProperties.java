@@ -17,6 +17,7 @@
 package io.micronaut.configuration.dbmigration.flyway;
 
 import io.micronaut.context.annotation.ConfigurationBuilder;
+import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.core.util.StringUtils;
@@ -31,6 +32,7 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
  * @see org.flywaydb.core.api.configuration.FluentConfiguration
  * @since 1.0.0
  */
+@Context
 @EachProperty("flyway.datasources")
 public class FlywayConfigurationProperties implements Toggleable {
 
