@@ -59,9 +59,9 @@ public class AlternativeMigrationRunner extends AbstractFlywayMigration implemen
         if (config.isEnabled()) {
             if (config.hasAlternativeDatabaseConfiguration()) {
                 DataSource dataSource = new DriverDataSource(Thread.currentThread().getContextClassLoader(), null, config.getUrl(), config.getUser(), config.getPassword());
-                run(config, name, dataSource);
+                run(config, dataSource);
             } else {
-                if (!applicationContext.containsBean(DataSource.class, Qualifiers.byName(config.getNameQualifier()))) {
+                if (!applicationContext.containsBean(DataSource.class, Qualifiers.byName(name))) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("* Flyway bean not created for identifier [" + name + "] because no data source was found with a named qualifier of the same name.");
                     }

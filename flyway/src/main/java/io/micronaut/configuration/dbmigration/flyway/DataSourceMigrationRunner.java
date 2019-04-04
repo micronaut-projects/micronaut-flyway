@@ -55,7 +55,7 @@ public class DataSourceMigrationRunner extends AbstractFlywayMigration implement
                     .ifPresent(name -> {
                         applicationContext
                                 .findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name))
-                                .ifPresent(flywayConfig -> run(flywayConfig, name, dataSource));
+                                .ifPresent(flywayConfig -> run(flywayConfig, dataSource));
                     });
         }
 

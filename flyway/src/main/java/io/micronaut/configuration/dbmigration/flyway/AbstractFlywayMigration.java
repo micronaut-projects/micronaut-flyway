@@ -52,18 +52,17 @@ class AbstractFlywayMigration {
     }
 
     /**
-     * Configure the Flyway runner for a specific configuration, a qualifier and a dataSource.
+     * Configure the Flyway runner for a specific configuration and a dataSource.
      *
      * @param config     The {@link FlywayConfigurationProperties}
-     * @param name       The qualifier
      * @param dataSource The {@link DataSource}
      */
-    void run(FlywayConfigurationProperties config, String name, DataSource dataSource) {
+    void run(FlywayConfigurationProperties config, DataSource dataSource) {
         FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
         fluentConfiguration.dataSource(dataSource);
 
         Flyway flyway = fluentConfiguration.load();
-        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(name), false);
+        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
         if (config.isEnabled()) {
             if (config.isAsync()) {
                 runAsync(config, flyway);
