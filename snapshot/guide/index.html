@@ -45,11 +45,13 @@
                                 
                                 <div class="toc-item" style="margin-left:0"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#configuration"><strong>2</strong><span>Configuration</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#whatsNew"><strong>2</strong><span>What's New</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#events"><strong>3</strong><span>Events</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#configuration"><strong>3</strong><span>Configuration</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#endpoint"><strong>4</strong><span>Endpoint</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#events"><strong>4</strong><span>Events</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#endpoint"><strong>5</strong><span>Endpoint</span></a></div>
                                 
                             </div>
                         </div>
@@ -83,11 +85,13 @@
         
         <div class="toc-item" style="margin-left:0px" id="toc-item-introduction"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-configuration"><a href="#configuration"><strong>2</strong><span>Configuration</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-whatsNew"><a href="#whatsNew"><strong>2</strong><span>What's New</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-events"><a href="#events"><strong>3</strong><span>Events</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-configuration"><a href="#configuration"><strong>3</strong><span>Configuration</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-endpoint"><a href="#endpoint"><strong>4</strong><span>Endpoint</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-events"><a href="#events"><strong>4</strong><span>Events</span></a></div>
+        
+        <div class="toc-item" style="margin-left:0px" id="toc-item-endpoint"><a href="#endpoint"><strong>5</strong><span>Endpoint</span></a></div>
         
         </div>
     </div>
@@ -132,7 +136,75 @@ dependency on your classpath:</p>
 </div>
 
 
-<h1 id="configuration">2 Configuration</h1>
+<h1 id="whatsNew">2 What's New</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/whatsNew.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.</p>
+</div>
+<div class="sect1">
+<h2 id="_1_1_0_rc4">1.1.0.RC4</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Underlying implementation has been changed to run the migrations as soon as possible. If you are not extending or overriding the API, there are no functional changes to note.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_1_0_rc3">1.1.0.RC3</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade to Micronaut 1.0.4.</p>
+</li>
+<li>
+<p>Upgrade to Flyway 5.2.4.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_1_0_rc2">1.1.0.RC2</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add configuration property to clean the schema before running the migrations.</p>
+</li>
+<li>
+<p>Fire events after clean the schema and after run the migrations.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_1_0_rc1">1.1.0.RC1</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>First public release.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<h1 id="configuration">3 Configuration</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration.adoc"'>
@@ -284,11 +356,6 @@ flyway:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-disabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -461,6 +528,16 @@ flyway:
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The password of the database to migrate</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The locations for the migrations</p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock note">
@@ -479,7 +556,7 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 
 
-<h1 id="events">3 Events</h1>
+<h1 id="events">4 Events</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/events.adoc"'>
@@ -503,7 +580,7 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 
 
-<h1 id="endpoint">4 Endpoint</h1>
+<h1 id="endpoint">5 Endpoint</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/endpoint.adoc"'>
