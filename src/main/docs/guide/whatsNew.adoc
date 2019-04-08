@@ -2,8 +2,7 @@ This section will outline any breaking changes between major or milestone releas
 
 == 1.1.0.RC4
 
-* Underlying implementation has been changed to run the migrations as soon as possible. If you are not extending or overriding
-the API should not be visible changes.
+* Underlying implementation has been changed to run the migrations as soon as possible. If you are not extending or overriding the API, there are no functional changes to note.
 
 
 == 1.1.0.RC3
