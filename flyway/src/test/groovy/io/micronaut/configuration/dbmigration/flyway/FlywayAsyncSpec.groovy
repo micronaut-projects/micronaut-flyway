@@ -19,7 +19,6 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
-import io.micronaut.inject.qualifiers.Qualifiers
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
@@ -48,7 +47,7 @@ class FlywayAsyncSpec extends Specification {
     @AutoCleanup
     ApplicationContext applicationContext = ApplicationContext.run(config as Map<String, Object>, Environment.TEST)
 
-    void 'test flyway changelogs are executed asynchronously'() {
+    void 'test Flyway migrations are executed asynchronously'() {
         when:
         applicationContext.getBean(DataSource)
 
@@ -56,7 +55,7 @@ class FlywayAsyncSpec extends Specification {
         noExceptionThrown()
 
         when:
-        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('default'))
+        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()

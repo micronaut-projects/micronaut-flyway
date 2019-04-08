@@ -17,14 +17,13 @@
 package io.micronaut.configuration.dbmigration.flyway;
 
 import io.micronaut.context.annotation.ConfigurationBuilder;
+import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
+import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
-
-import javax.annotation.Nullable;
-import javax.sql.DataSource;
 
 /**
  * Create a Flyway Configuration for each sub-property of flyway.*.
@@ -33,6 +32,7 @@ import javax.sql.DataSource;
  * @see org.flywaydb.core.api.configuration.FluentConfiguration
  * @since 1.0.0
  */
+@Context
 @EachProperty("flyway.datasources")
 public class FlywayConfigurationProperties implements Toggleable {
 
@@ -45,10 +45,9 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "")
+    @ConfigurationBuilder(prefixes = "", excludes = "locations")
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
-    private final DataSource dataSource;
     private final String nameQualifier;
     private boolean enabled = DEFAULT_ENABLED;
     private boolean async = DEFAULT_ASYNC;
@@ -58,20 +57,10 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String password;
 
     /**
-     * @param dataSource DataSource with the same name qualifier.
-     * @param name       The name qualifier.
+     * @param name The name qualifier.
      */
-    public FlywayConfigurationProperties(@Nullable @Parameter DataSource dataSource,
-                                         @Parameter String name) {
-        this.dataSource = dataSource;
+    public FlywayConfigurationProperties(@Parameter String name) {
         this.nameQualifier = name;
-    }
-
-    /**
-     * @return The {@link DataSource}
-     */
-    public DataSource getDataSource() {
-        return dataSource;
     }
 
     /**
@@ -113,6 +102,7 @@ public class FlywayConfigurationProperties implements Toggleable {
 
     /**
      * Whether Flyway will clean the schema before running the migrations. Default value ({@value #DEFAULT_CLEAN_SCHEMA}).
+     *
      * @return Whether clean the schema before running the migrations
      */
     public boolean isCleanSchema() {
@@ -157,6 +147,13 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * @param username The username of the database to migrate
+     */
+    public void setUsername(String username) {
+        this.user = username;
+    }
+
+    /**
      * @return The password of the database to migrate
      */
     public String getPassword() {
@@ -171,9 +168,23 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * @return The locations for the database migrations
+     */
+    public Location[] getLocations() {
+        return fluentConfiguration.getLocations();
+    }
+
+    /**
+     * @param locations The locations for the migrations
+     */
+    public void setLocations(String... locations) {
+        fluentConfiguration.locations(locations);
+    }
+
+    /**
      * Whether there is an alternative database configuration for the migration. By default Micronaut will use the
-     * {@link DataSource} defined for the application but if both {@code url} and {@code user} are defined, then those
-     * will be use for Liquibase.
+     * {@link javax.sql.DataSource} defined for the application but if both {@code url} and {@code user} are defined,
+     * then those will be use for Flyway.
      *
      * @return true if there is an alternative database configuration
      */

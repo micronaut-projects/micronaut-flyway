@@ -19,8 +19,11 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
+import io.micronaut.runtime.server.EmbeddedServer
 import org.flywaydb.core.Flyway
 import spock.lang.Specification
+
+import javax.sql.DataSource
 
 class FlywayConfigurationPropertiesSpec extends Specification {
 
@@ -38,7 +41,13 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         )
 
         when:
-        applicationContext.getBean(FlywayStartupEventListener)
+        applicationContext.getBean(DataSource)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()
@@ -74,7 +83,13 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         )
 
         when:
-        applicationContext.getBean(FlywayStartupEventListener)
+        applicationContext.getBean(DataSource)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()
@@ -98,7 +113,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
 
     void 'test define flyway database connection and not use Micronaut datasource'() {
         given:
-        ApplicationContext applicationContext = ApplicationContext.run(
+        EmbeddedServer server = ApplicationContext.run(EmbeddedServer,
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
              'flyway.datasources.books.locations': 'classpath:databasemigrations',
              'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB3;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
@@ -107,18 +122,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
             ] as Map,
             Environment.TEST
         )
-
-        when:
-        applicationContext.getBean(FlywayStartupEventListener)
-
-        then:
-        noExceptionThrown()
-
-        when:
-        applicationContext.getBean(Flyway)
-
-        then:
-        noExceptionThrown()
+        ApplicationContext applicationContext = server.applicationContext
 
         when:
         Map db = [url: 'jdbc:h2:mem:flywayBooksDB3', user: 'sa', password: '', driver: 'org.h2.Driver']

@@ -27,6 +27,7 @@ import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
 import javax.inject.Singleton
+import javax.sql.DataSource
 
 class EventListenerSpec extends Specification {
 
@@ -51,16 +52,16 @@ class EventListenerSpec extends Specification {
         )
 
         when: 'running the migrations'
+        applicationContext.getBean(DataSource)
+        applicationContext.getBean(FlywayConfigurationProperties)
         applicationContext.getBean(Flyway)
 
         then: 'the events are fired'
         new PollingConditions().eventually {
             applicationContext.getBean(TestEventListener).migrationFinishedEvents.size() == 1
-        }
-
-        new PollingConditions().eventually {
             applicationContext.getBean(TestEventListener).schemaCleanedEvents.size() == 1
         }
+
     }
 
     @Singleton
