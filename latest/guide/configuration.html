@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Configuration 1.0.0.RC3</title>
+    <title>3 Configuration 1.0.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -32,13 +32,16 @@ function addJsClass() {
                         <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>2</strong><span>Configuration</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/whatsNew.html"><strong>2</strong><span>What's New</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>3</strong><span>Events</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>3</strong><span>Configuration</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>4</strong><span>Endpoint</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>4</strong><span>Events</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>5</strong><span>Endpoint</span></a>
                         </div>
                         
                     </div>
@@ -59,27 +62,27 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/whatsNew.html">&lt;&lt; <strong>2</strong><span>What's New</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>3</strong><span>Events</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>2 Configuration</h1>
+                    <h1>3 Configuration</h1>
 
-                    <p><strong>Version:</strong> 1.0.0.RC3</p>
+                    <p><strong>Version:</strong> 1.0.0</p>
                 </div>
 
                 
 
                 
 
-<h1 id="configuration">2 Configuration</h1>
+<h1 id="configuration">3 Configuration</h1>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration.adoc"'>
@@ -231,11 +234,6 @@ flyway:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-disabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -408,6 +406,16 @@ flyway:
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The password of the database to migrate</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The locations for the migrations</p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock note">
@@ -428,9 +436,9 @@ and <code>flyway.datasources.*.password</code>.
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/whatsNew.html">&lt;&lt; <strong>2</strong><span>What's New</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>3</strong><span>Events</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
