@@ -15,7 +15,7 @@ include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/Flyw
 In that directory you need to include all your migrations, for example:
 
 [source,sql]
-.resources/databasemicrations/V1__create-books-schema.sql
+.resources/databasemigrations/V1__create-books-schema.sql
 ----
 include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[indent=0]
 ----
