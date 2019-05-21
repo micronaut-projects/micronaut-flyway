@@ -189,7 +189,7 @@ public class FlywayConfigurationProperties implements Toggleable {
      * @return true if there is an alternative database configuration
      */
     public boolean hasAlternativeDatabaseConfiguration() {
-        return StringUtils.hasText(this.getUrl()) && StringUtils.hasText(this.getUser());
+        return StringUtils.hasText(this.getUrl());
     }
 
     /**
