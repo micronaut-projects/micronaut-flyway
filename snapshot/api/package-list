@@ -1,9 +1,3 @@
-io.micronaut.views
-io.micronaut.views.csp
-io.micronaut.views.exceptions
-io.micronaut.views.freemarker
-io.micronaut.views.handlebars
-io.micronaut.views.model
-io.micronaut.views.model.security
-io.micronaut.views.thymeleaf
-io.micronaut.views.velocity
+io.micronaut.configuration.dbmigration.flyway
+io.micronaut.configuration.dbmigration.flyway.event
+io.micronaut.configuration.dbmigration.flyway.management.endpoint

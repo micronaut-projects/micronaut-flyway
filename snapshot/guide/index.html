@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Micronaut Views</title>
+    <title>Micronaut Flyway</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
     <link rel="stylesheet" href="../css/custom.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
@@ -45,7 +45,13 @@
                                 
                                 <div class="toc-item" style="margin-left:0"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
                                 
-                                <div class="toc-item" style="margin-left:0"><a href="#views"><strong>2</strong><span>Server Side View Rendering</span></a></div>
+                                <div class="toc-item" style="margin-left:0"><a href="#whatsNew"><strong>2</strong><span>What's New</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#configuration"><strong>3</strong><span>Configuration</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#events"><strong>4</strong><span>Events</span></a></div>
+                                
+                                <div class="toc-item" style="margin-left:0"><a href="#endpoint"><strong>5</strong><span>Endpoint</span></a></div>
                                 
                             </div>
                         </div>
@@ -66,6 +72,7 @@
                 <li class="mobile">
                     <a title="Go to Configuration Reference documentation" href="../guide/configurationreference.html" class="button">Conf</a>
                 </li>
+
             </ul>
 
         </div>
@@ -78,685 +85,585 @@
         
         <div class="toc-item" style="margin-left:0px" id="toc-item-introduction"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
         
-        <div class="toc-item" style="margin-left:0px" id="toc-item-views"><a href="#views"><strong>2</strong><span>Server Side View Rendering</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-whatsNew"><a href="#whatsNew"><strong>2</strong><span>What's New</span></a></div>
         
-        <div class="toc-item" style="margin-left:10px" id="toc-item-thymeleaf"><a href="#thymeleaf"><strong>2.1</strong><span>Thymeleaf</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-configuration"><a href="#configuration"><strong>3</strong><span>Configuration</span></a></div>
         
-        <div class="toc-item" style="margin-left:10px" id="toc-item-handlebars"><a href="#handlebars"><strong>2.2</strong><span>Handlebars.java</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-events"><a href="#events"><strong>4</strong><span>Events</span></a></div>
         
-        <div class="toc-item" style="margin-left:10px" id="toc-item-velocity"><a href="#velocity"><strong>2.3</strong><span>Apache Velocity</span></a></div>
-        
-        <div class="toc-item" style="margin-left:10px" id="toc-item-freemarker"><a href="#freemarker"><strong>2.4</strong><span>Apache Freemarker</span></a></div>
-        
-        <div class="toc-item" style="margin-left:10px" id="toc-item-csp"><a href="#csp"><strong>2.5</strong><span>CSP Header Support</span></a></div>
-        
-        <div class="toc-item" style="margin-left:10px" id="toc-item-views-security"><a href="#views-security"><strong>2.6</strong><span>Security Integration</span></a></div>
+        <div class="toc-item" style="margin-left:0px" id="toc-item-endpoint"><a href="#endpoint"><strong>5</strong><span>Endpoint</span></a></div>
         
         </div>
     </div>
     
     <div class="docs-content">
     <div class="project">
-        <h1>Micronaut Views</h1>
+        <h1>Micronaut Flyway</h1>
         <p></p>
-        <p>Provides integration between Micronaut and server-side views technologies</p>
-        <p><strong>Version:</strong> 1.2.0.BUILD-SNAPSHOT</p>
+        <p>Integration between Micronaut and Flyway</p>
+        <p><strong>Version:</strong> 1.1.0.BUILD-SNAPSHOT</p>
     </div>
     
 
 <h1 id="introduction">1 Introduction</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/introduction.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/introduction.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
 
 
 <div class="paragraph">
-<p>This project integrates Micronaut and Server Side View Rendering.</p>
-</div>
-
-
-<h1 id="views">2 Server Side View Rendering</h1>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Although Micronaut is primarily designed around message encoding / decoding there are occasions where it is convenient to render a view on the server side.</p>
-</div>
-<div class="paragraph">
-<p>The <code>views</code> module provides support for view rendering on the server side and does so by rendering views on the I/O thread pool in order to avoid blocking the Netty event loop.</p>
-</div>
-<div class="paragraph">
-<p>To use the view rendering features described in this section, add the following dependency on your classpath.</p>
+<p>To use the Micronaut&#8217;s integration with <a href="https://flywaydb.org/">Flyway</a> you must have the <code>micronaut-flyway</code>
+dependency on your classpath:</p>
 </div>
 <div class="paragraph">
 <p>        <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">compile <span class="hljs-string">'io.micronaut:micronaut-views'</span></code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">compile <span class="hljs-string">'io.micronaut.configuration:micronaut-flyway'</span></code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;io.micronaut&lt;/groupId&gt;
-    &lt;artifactId&gt;micronaut-views&lt;/artifactId&gt;
+    &lt;groupId&gt;io.micronaut.configuration&lt;/groupId&gt;
+    &lt;artifactId&gt;micronaut-flyway&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
 </p>
 </div>
-<div class="paragraph">
-<p>Views and templates can then be placed in the <code>src/main/resources/views</code> directory of your project.</p>
+
+
+<h1 id="whatsNew">2 What's New</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/whatsNew.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
 </div>
+
+
 <div class="paragraph">
-<p>If you wish to use a different folder instead of <code>views</code>, set the property <code>micronaut.views.folder</code>.</p>
+<p>This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.</p>
 </div>
-<div class="paragraph">
-<p>Your controller&#8217;s method can render the response with a template with the the <a href="../api/io/micronaut/views/View.html">View</a> annotation.</p>
+<div class="sect1">
+<h2 id="_1_0_0">1.0.0</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Underlying implementation has been changed to run the migrations as soon as possible. If you are not extending or overriding the API, there are no functional changes to note.</p>
+</li>
+</ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_0_0_rc3">1.0.0.RC3</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade to Micronaut 1.0.4.</p>
+</li>
+<li>
+<p>Upgrade to Flyway 5.2.4.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_0_0_rc2">1.0.0.RC2</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add configuration property to clean the schema before running the migrations.</p>
+</li>
+<li>
+<p>Fire events after clean the schema and after run the migrations.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_0_0_rc1">1.0.0.RC1</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>First public release.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<h1 id="configuration">3 Configuration</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
 <div class="paragraph">
-<p>The following is an example of a controller which renders a template by passing a model as a <code>java.util.Map</code> via the returned response object.</p>
+<p>You can define Flyway configuration for each datasource. The following example demonstrates using it:</p>
 </div>
 <div class="listingblock">
-<div class="title">src/main/java/myapp/ViewsController.java</div>
+<div class="title">src/main/resources/application.yml</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller("/views")
-class ViewsController {
-
-    @View("home")
-    @Get("/")
-    public HttpResponse index() {
-        return HttpResponse.ok(CollectionUtils.mapOf("loggedIn", true, "username", "sdelamo"))
-    }
-
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">datasources:
+    default: <i class="conum" data-value="3"></i><b>(3)</b>
+        url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
+        username: 'sa'
+        password: ''
+        driverClassName: 'org.h2.Driver'
+jpa:
+    default: <i class="conum" data-value="3"></i><b>(3)</b>
+        packages-to-scan:
+            - 'example.micronaut'
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none <i class="conum" data-value="1"></i><b>(1)</b>
+                show_sql: true
+flyway:
+    datasources: <i class="conum" data-value="2"></i><b>(2)</b>
+        default: <i class="conum" data-value="3"></i><b>(3)</b>
+            locations: classpath:databasemigrations <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Use <code>@View</code> annotation to indicate the view name which should be used to render a view for the route.</td>
+<td>Disable schema DDL creation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define flyway configuration under <code>flyway.datasources</code> key.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Configure flyway configuration for <code>default</code> data source.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The migrations directory is <code>src/main/resources/databsemigrations</code>.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In addition, you can return any POJO object and the properties of the POJO will be exposed to the view for rendering:</p>
+<p>In that directory you need to include all your migrations, for example:</p>
 </div>
 <div class="listingblock">
-<div class="title">src/main/java/myapp/ViewsController.java</div>
+<div class="title">resources/databasemigrations/V1__create-books-schema.sql</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller("/views")
-class ViewsController {
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
+  id int not null primary key,
+  name varchar(255) not null,
+  constraint id unique (id),
+  constraint name unique (name),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are several options available for configuration:</p>
+</div>
+<a id="io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties" href="#io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties">&#128279;</a>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/configuration/dbmigration/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.configuration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.configuration.Configuration</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.dry-run-output</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.OutputStream</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.error-overrides</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.group</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.installed-by</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.mixed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.ignore-missing-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.ignore-ignored-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.ignore-pending-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.ignore-future-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.validate-on-migrate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-on-validation-error</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-disabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.encoding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.schemas</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.target</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.MigrationVersion</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.placeholder-replacement</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.placeholders</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Map</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.placeholder-prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.placeholder-suffix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.undo-sql-migration-prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.repeatable-sql-migration-prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-separator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-suffixes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.data-source</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">javax.sql.DataSource</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.connect-retries</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.init-sql</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.baseline-version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.MigrationVersion</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.baseline-description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.baseline-on-migrate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.out-of-order</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.callbacks</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.callback.Callback[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.skip-default-callbacks</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.resolvers</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.resolver.MigrationResolver[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.skip-default-resolvers</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.stream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.batch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.oracle-sqlplus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.license-key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether this flyway configuration is enabled. Default value (true).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.async</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether flyway migrations should run asynchronously.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether Flyway will clean the schema before running the migrations. Default value (false).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JDBC url of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.user</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The locations for the migrations</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By default Micronaut will configure Flyway to use the datasources defined under <code>datasources</code> configuration key. If
+you want to use a different datasource you need to define the properties <code>flyway.datasources.*.url</code>, <code>flyway.datasources.*.user</code>
+and <code>flyway.datasources.*.password</code>.
+</td>
+</tr>
+</table>
+</div>
 
-    @View("home")
-    @Get("/pogo")
-    public HttpResponse&lt;Person&gt; pogo() {
-        return HttpResponse.ok(new Person("sdelamo", true))
-    }
 
-}</code></pre>
+<h1 id="events">4 Events</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/events.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>Micronaut fires two different events when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The schema has been cleaned: <a href="../api/io/micronaut/configuration/dbmigration/flyway/event/SchemaCleanedEvent.html">SchemaCleanedEvent</a>.</p>
+</li>
+<li>
+<p>The migrations have been executed: <a href="../api/io/micronaut/configuration/dbmigration/flyway/event/MigrationFinishedEvent.html">MigrationFinishedEvent</a>.</p>
+</li>
+</ul>
+</div>
+
+
+<h1 id="endpoint">5 Endpoint</h1>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/endpoint.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>This configuration also provides a built-in endpoint to expose all the applied migrations in <code>/flyway</code>.</p>
+</div>
+<div class="paragraph">
+<p>To enable the endpoint add the following to the configuration:</p>
+</div>
+<div class="listingblock">
+<div class="title">resources/application.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">endpoints:
+    flyway:
+        enabled: true <i class="conum" data-value="1"></i><b>(1)</b>
+        sensitive: false <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Use <code>@View</code> annotation to indicate the view name which should be used to render the POJO responded by the controller.</td>
+<td><code>/flyway</code> endpoint is enabled (this is the default).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>/flyway</code> endpoint is open for unauthenticated access.</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>You can also return a <a href="../api/io/micronaut/views/ModelAndView.html">ModelAndView</a> and skip specifying the <a href="../api/io/micronaut/views/View.html">View</a> annotation.</p>
-</div>
 <div class="listingblock">
-<div class="title">src/main/java/myapp/ViewsController.java</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller("/views")
-class ViewsController {
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl http://localhost:8080/flyway
 
-    @Get("/modelAndView")
-    ModelAndView modelAndView() {
-        return new ModelAndView("home",
-                new Person(loggedIn: true, username: 'sdelamo'))
-    }</code></pre>
+[{
+    "name": "default",
+    "migrations": [{
+        "checksum": 1952043475,
+        "installedOn": "2018-11-12T11:32:52.000+0000",
+        "executionTime": 96,
+        "installedRank": 1,
+        "version": {
+            "version": "1"
+        },
+        "description": "init",
+        "installedBy": "root",
+        "state": "SUCCESS",
+        "type": "SQL",
+        "script": "V1__init.sql"
+    }, {
+        "checksum": -1926058189,
+        "installedOn": "2018-11-12T11:32:52.000+0000",
+        "executionTime": 10,
+        "installedRank": 2,
+        "version": {
+            "version": "2"
+        },
+        "description": "testdata",
+        "installedBy": "root",
+        "state": "SUCCESS",
+        "type": "SQL",
+        "script": "V2__testdata.sql"
+    }]
+}]</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>You can also provide implementations of <a href="../api/io/micronaut/views/model/ViewsModelDecorator.html">ViewsModelDecorator</a> to decorate the model with
-extra properties.</p>
-</div>
-<div class="paragraph">
-<p>The following sections show different template engines integrations.</p>
-</div>
-<div class="paragraph">
-<p>To create your own implementation create a class which implements <a href="../api/io/micronaut/views/ViewsRenderer.html">ViewsRenderer</a> and annotate it with <a href="../api/io/micronaut/http/annotation/Produces.html">@Produces</a> to the media types the view rendering supports producing.</p>
-</div>
-
-
-<h2 id="thymeleaf">2.1 Thymeleaf</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/thymeleaf.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Micronaut includes <a href="../api/io/micronaut/views/thymeleaf/ThymeleafViewsRenderer.html">ThymeleafViewsRenderer</a> which uses
-the <a href="https://www.thymeleaf.org">Thymeleaf</a> Java template engine.</p>
-</div>
-<div class="paragraph">
-<p>In addition to the <a href="#views">Views</a> dependency, add the following dependency on your classpath.</p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">runtime <span class="hljs-string">'org.thymeleaf:thymeleaf:3.0.11.RELEASE'</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
-    &lt;artifactId&gt;thymeleaf&lt;/artifactId&gt;
-    &lt;version&gt;3.0.11.RELEASE&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</p>
-</div>
-<div class="paragraph">
-<p>Thymeleaf integration instantiates a <code>ClassLoaderTemplateResolver</code>.</p>
-</div>
-<div class="paragraph">
-<p>The properties used can be customized by overriding the values of:</p>
-</div>
-<a id="io.micronaut.views.thymeleaf.ThymeleafViewsRendererConfigurationProperties" href="#io.micronaut.views.thymeleaf.ThymeleafViewsRendererConfigurationProperties">&#128279;</a>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/views/thymeleaf/ThymeleafViewsRendererConfigurationProperties.html">ThymeleafViewsRendererConfigurationProperties</a></caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the section on <a href="https://docs.micronaut.io/latest/guide/index.html#providedEndpoints">Built-in endpoints</a> in the
+user guide for more information.
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.enabled</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether thymeleaf rendering is enabled. Default value (true).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.character-encoding</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the character encoding to use. Default value ("UTF-8").</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.template-mode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">org.thymeleaf.templatemode.TemplateMode</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the template mode.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.suffix</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the suffix to use.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.force-suffix</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to force the suffix. Default value (false).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.force-template-mode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to force template mode. Default value (false).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.cacheable</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether templates are cacheable.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.cache-ttlms</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.Long</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache TTL in millis.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.check-existence</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether templates should be checked for existence.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.thymeleaf.cache-ttl</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.time.Duration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache TTL as a duration.</p></td>
-</tr>
-</tbody>
 </table>
-<div class="paragraph">
-<p>The example shown in the <a href="#views">Views</a> section, could be rendered with the following Thymeleaf template:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/home.html</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org"&gt;
-&lt;head&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;section&gt;
-    &lt;h1 th:if="${loggedIn}"&gt;username: &lt;span th:text="${username}"&gt;&lt;/span&gt;&lt;/h1&gt;
-    &lt;h1 th:unless="${loggedIn}"&gt;You are not logged in&lt;/h1&gt;
-&lt;/section&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>and layout:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/layoutFile.html</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org"&gt;
-&lt;head&gt;
-    &lt;title th:replace="${title}"&gt;Layout Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Layout H1&lt;/h1&gt;
-&lt;div th:replace="${content}"&gt;
-    &lt;p&gt;Layout content&lt;/p&gt;
-&lt;/div&gt;
-&lt;footer&gt;
-    Layout footer
-&lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-
-
-<h2 id="handlebars">2.2 Handlebars.java</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/handlebars.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Micronaut includes <a href="../api/io/micronaut/views/handlebars/HandlebarsViewsRenderer.html">HandlebarsViewsRenderer</a> which uses
-the <a href="http://jknack.github.io/handlebars.java/">Handlebars.java</a> project.</p>
-</div>
-<div class="paragraph">
-<p>In addition to the <a href="#views">Views</a> dependency, add the following dependency on your classpath. For example, in <code>build.gradle</code></p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">runtime <span class="hljs-string">'com.github.jknack:handlebars:4.1.0'</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;com.github.jknack&lt;/groupId&gt;
-    &lt;artifactId&gt;handlebars&lt;/artifactId&gt;
-    &lt;version&gt;4.1.0&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</p>
-</div>
-<div class="paragraph">
-<p>The example shown in the <a href="#views">Views</a> section, could be rendered with the following Handlebars template:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/home.hbs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    {{#if loggedIn}}
-    &lt;h1&gt;username: &lt;span&gt;{{username}}&lt;/span&gt;&lt;/h1&gt;
-    {{else}}
-    &lt;h1&gt;You are not logged in&lt;/h1&gt;
-    {{/if}}
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-
-
-<h2 id="velocity">2.3 Apache Velocity</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/velocity.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Micronaut includes <a href="../api/io/micronaut/views/velocity/VelocityViewsRenderer.html">VelocityViewsRenderer</a> which uses
-the <a href="http://velocity.apache.org">Apache Velocity</a> Java-based template engine.</p>
-</div>
-<div class="paragraph">
-<p>In addition to the <a href="#views">Views</a> dependency, add the following dependency on your classpath.</p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">runtime <span class="hljs-string">'org.apache.velocity:velocity-engine-core:2.0'</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;
-    &lt;artifactId&gt;velocity-engine-core&lt;/artifactId&gt;
-    &lt;version&gt;2.0&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</p>
-</div>
-<div class="paragraph">
-<p>The example shown in the <a href="#views">Views</a> section, could be rendered with the following Velocity template:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/home.vm</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    #if( $loggedIn )
-    &lt;h1&gt;username: &lt;span&gt;$username&lt;/span&gt;&lt;/h1&gt;
-    #else
-    &lt;h1&gt;You are not logged in&lt;/h1&gt;
-    #end
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-
-
-<h2 id="freemarker">2.4 Apache Freemarker</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/freemarker.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Micronaut includes <a href="../api/io/micronaut/views/freemarker/FreemarkerViewsRenderer.html">FreemarkerViewsRenderer</a> which uses
-the <a href="https://freemarker.apache.org">Apache Freemarker</a> Java-based template engine.</p>
-</div>
-<div class="paragraph">
-<p>In addition to the <a href="#views">Views</a> dependency, add the following dependency on your classpath.</p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="gradle">runtime <span class="hljs-string">'org.freemarker:freemarker:2.3.28'</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
-    &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
-    &lt;version&gt;2.3.28&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</p>
-</div>
-<div class="paragraph">
-<p>The example shown in the <a href="#views">Views</a> section, could be rendered with the following Freemarker template:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/home.ftl</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;#--
-
-    Copyright 2017-2019 original authors
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
---&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;#if loggedIn??&gt;
-    &lt;h1&gt;username: &lt;span&gt;${username}&lt;/span&gt;&lt;/h1&gt;
-    &lt;#else&gt;
-    &lt;h1&gt;You are not logged in&lt;/h1&gt;
-    &lt;/#if&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Freemarker integration instantiates a freemarker <a href="https://freemarker.apache.org/docs/api/freemarker/template/Configuration.html"><code>Configuration</code></a>.</p>
-</div>
-<div class="paragraph">
-<p>All configurable properties are extracted from <a href="https://freemarker.apache.org/docs/api/freemarker/template/Configuration.html"><code>Configuration</code></a> and
-<a href="https://freemarker.apache.org/docs/api/freemarker/core/Configurable.html"><code>Configurable</code></a>, and properties names are reused in the Micronaut configuration.</p>
-</div>
-<div class="paragraph">
-<p>If a value is not declared and is null, the default configuration from Freemarker is used. The expected format of each value is the same from Freemarker, and no conversion or validation is done by Micronaut. You can find in <a href="https://freemarker.apache.org/docs/pgui_config.html">Freemarker documentation</a> how to configure each one.</p>
-</div>
-
-
-<h2 id="csp">2.5 CSP Header Support</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/csp.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>Micronaut supports CSP (<a href="https://www.w3.org/TR/CSP2/">Content Security Policy Level 2</a>) out of the box. By default, CSP is disabled. To enable CSP, modify your configuration. For example:</p>
-</div>
-<div class="listingblock">
-<div class="title">application.yml</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">micronaut:
-    views:
-        csp:
-            enabled: true</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>See the following table for all configuration options:</p>
-</div>
-<a id="io.micronaut.views.csp.CspConfiguration" href="#io.micronaut.views.csp.CspConfiguration">&#128279;</a>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/views/csp/CspConfiguration.html">CspConfiguration</a></caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.csp.enabled</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether CSP is enabled. Default false.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.csp.policy-directives</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the policy directives.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.csp.report-only</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If true, the Content-Security-Policy-Report-Only header will be sent instead
- of Content-Security-Policy. Default false.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.views.csp.filter-path</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the path the CSP filter should apply to. Default value "/**".</p></td>
-</tr>
-</tbody>
-</table>
-
-
-<h2 id="views-security">2.6 Security Integration</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-views/edit/master/src/main/docs/guide/views/views-security.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>The views project has integration with the Micronaut security project. <a href="../api/io/micronaut/views/model/security/SecurityViewModelProcessor.html">SecurityViewModelProcessor</a> is enabled by default and injects the current username in the view. The following properties allow you to customize the injection:</p>
-</div>
-<a id="io.micronaut.views.model.security.SecurityViewModelProcessorConfigurationProperties" href="#io.micronaut.views.model.security.SecurityViewModelProcessorConfigurationProperties">&#128279;</a>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/views/model/security/SecurityViewModelProcessorConfigurationProperties.html">SecurityViewModelProcessorConfigurationProperties</a></caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.security.views-model-decorator.enabled</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable {@link SecurityViewModelProcessor}. Default value (true).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.security.views-model-decorator.security-key</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Model key name. Default value ("security").</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.security.views-model-decorator.principal-name-key</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nested security map key for the user&#8217;s name property. Default value ("name").</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>micronaut.security.views-model-decorator.attributes-key</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nested security map key for the user&#8217;s attributes property. Default value ("attributes").</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>In a controller, you can return a model without specifying in the model the authenticated user:</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/java/myapp/BooksController.java</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller("/")
-public class BooksController {
-
-    @Secured(SecurityRule.IS_AUTHENTICATED)
-    @View("securitydecorator")
-    @Get
-    public Map&lt;String, Object&gt; index() {
-        Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();
-        model.put("books", Arrays.asList("Developing Microservices"));
-        return model;
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>and still access the authenticated user in the view (for example a velocity template):</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/views/books.vm</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;User Books&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    #if( $security )
-      &lt;h1&gt;User: ${security['name']} email: ${security['attributes']['email']}&lt;/h1&gt;
-    #end
-
-    #foreach($book in $books)
-      $book
-    #end
-
-    #if( $securitycustom )
-    &lt;h1&gt;Custom: ${securitycustom['name']}&lt;/span&gt;&lt;/h1&gt;
-    #end
-
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can access information about the current user with the <code>security</code> map.</p>
 </div>
 
     </div>
