@@ -101,7 +101,7 @@
         <h1>Micronaut Flyway</h1>
         <p></p>
         <p>Integration between Micronaut and Flyway</p>
-        <p><strong>Version:</strong> 1.0.1.BUILD-SNAPSHOT</p>
+        <p><strong>Version:</strong> 1.1.0.BUILD-SNAPSHOT</p>
     </div>
     
 
@@ -273,6 +273,22 @@ flyway:
   constraint name unique (name),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Flyway migrations are executed when datasources are created. Because Micronaut beans are, by default, created
+lazily, if you do not inject a <code>Datasource</code> somewhere, then migrations are not executed.
+This may be the case when you create a command in a separate module just to run migrations, e.g. using micronaut support
+for <a href="https://docs.micronaut.io/latest/guide/index.html#commandLineApps">picocli</a>.
+In this case it is enough to inject a <code>Datasource</code> in anyone of your singletons and migrations will be executed.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>There are several options available for configuration:</p>
