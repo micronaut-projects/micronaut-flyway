@@ -20,6 +20,12 @@ In that directory you need to include all your migrations, for example:
 include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[indent=0]
 ----
 
+NOTE: Flyway migrations are executed when datasources are created. Because Micronaut beans are, by default, created
+lazily, if you do not inject a `Datasource` somewhere, then migrations are not executed.
+This may be the case when you create a command in a separate module just to run migrations, e.g. using micronaut support
+for https://docs.micronaut.io/latest/guide/index.html#commandLineApps[picocli].
+In this case it is enough to inject a `Datasource` in anyone of your singletons and migrations will be executed.
+
 There are several options available for configuration:
 
 include::{includedir}configurationProperties/io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties.adoc[]
