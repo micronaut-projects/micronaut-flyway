@@ -141,8 +141,6 @@ class FlywayConfigurationPropertiesSpec extends Specification {
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
              'flyway.datasources.books.locations': 'classpath:databasemigrations',
              'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB3;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;USER=sa',
-             'flyway.datasources.books.user'     : '',
-             'flyway.datasources.books.password' : '',
             ] as Map,
             Environment.TEST
         )
