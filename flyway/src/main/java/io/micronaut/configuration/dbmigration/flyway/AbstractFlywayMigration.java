@@ -62,12 +62,13 @@ class AbstractFlywayMigration {
      * @param dataSource The {@link DataSource}
      */
     void run(FlywayConfigurationProperties config, DataSource dataSource) {
-        FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-        fluentConfiguration.dataSource(dataSource);
-
-        Flyway flyway = fluentConfiguration.load();
-        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
         if (config.isEnabled()) {
+            FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
+            fluentConfiguration.dataSource(dataSource);
+
+            Flyway flyway = fluentConfiguration.load();
+            this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
+
             if (config.isAsync()) {
                 runAsync(config, flyway);
             } else {
