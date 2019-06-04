@@ -25,6 +25,8 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.Async;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import javax.sql.DataSource;
@@ -38,6 +40,8 @@ import javax.sql.DataSource;
  */
 @Singleton
 class AbstractFlywayMigration {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractFlywayMigration.class);
 
     final ApplicationContext applicationContext;
     final ApplicationEventPublisher eventPublisher;
@@ -74,8 +78,14 @@ class AbstractFlywayMigration {
 
     private void runFlyway(FlywayConfigurationProperties config, Flyway flyway) {
         if (config.isCleanSchema()) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Cleaning schema for database with qualifier [{}]", config.getNameQualifier());
+            }
             flyway.clean();
             eventPublisher.publishEvent(new SchemaCleanedEvent(config));
+        }
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Running migrations for database with qualifier [{}]", config.getNameQualifier());
         }
         flyway.migrate();
         eventPublisher.publishEvent(new MigrationFinishedEvent(config));
