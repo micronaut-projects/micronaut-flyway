@@ -1,0 +1,22 @@
+You can define Flyway configuration for each datasource. The following example demonstrates using it:
+
+[source, yaml]
+.src/main/resources/application.yml
+----
+include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/FlywaySpec.groovy[tag=yamlconfig,indent=0]
+----
+
+<1> Disable schema DDL creation.
+<2> Define flyway configuration under `flyway.datasources` key.
+<3> Configure flyway configuration for `default` data source.
+<4> The migrations directory is `src/main/resources/databsemigrations`.
+
+In that directory you need to include all your migrations, for example:
+
+[source,sql]
+.resources/databasemigrations/V1__create-books-schema.sql
+----
+include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[indent=0]
+----
+
+NOTE: Starting with Micronaut `1.1.3` it is not necessary to define the `jpa` configuration if you only want to run the migrations but not actually use JPA.

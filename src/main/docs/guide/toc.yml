@@ -1,6 +1,10 @@
 introduction:
   title: Introduction
 whatsNew: What's New
-configuration: Configuration
+configuration:
+  title: Configuration
+  jpa: JPA/Hibernate
+  gorm: GORM
+  additionalConfig: Additional configuration
 events: Events
 endpoint: Endpoint
