@@ -135,19 +135,19 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         applicationContext.close()
     }
 
-    void 'test define flyway database connection via JDBC only and not use Micronaut datasource'() {
+    void 'test define flyway database connection via JDBC only with the credentials on the URL and not use Micronaut datasource'() {
         given:
         EmbeddedServer server = ApplicationContext.run(EmbeddedServer,
-            ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
-             'flyway.datasources.books.locations': 'classpath:databasemigrations',
-             'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB3;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;USER=sa',
-            ] as Map,
-            Environment.TEST
+           ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
+            'flyway.datasources.books.locations': 'classpath:databasemigrations',
+            'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB4;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;USER=sa;PASSWORD=',
+           ] as Map,
+           Environment.TEST
         )
         ApplicationContext applicationContext = server.applicationContext
 
         when:
-        Map db = [url: 'jdbc:h2:mem:flywayBooksDB3', user: '', password: '', driver: 'org.h2.Driver']
+        Map db = [url: 'jdbc:h2:mem:flywayBooksDB4', user: 'sa', password: '', driver: 'org.h2.Driver']
         Sql sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
 
         then:
