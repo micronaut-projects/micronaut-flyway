@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>3.1 JPA/Hibernate 1.1.0.BUILD-SNAPSHOT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <div class="navTitle">
+        
+        Micronaut Flyway
+    </div>
+    <div class="navLinks">
+        <ul>
+            <li>
+                <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                    <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                    <div id="nav-summary-childs" style="display:none;">
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/whatsNew.html"><strong>2</strong><span>What's New</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/configuration.html"><strong>3</strong><span>Configuration</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/events.html"><strong>4</strong><span>Events</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/endpoint.html"><strong>5</strong><span>Endpoint</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li class="separator selected">
+                <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../../guide/whatsNew.html">&lt;&lt; <strong>2</strong><span>What's New</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>3.1 JPA/Hibernate</h1>
+
+                    <p><strong>Version:</strong> 1.1.0.BUILD-SNAPSHOT</p>
+                </div>
+
+                
+
+                
+
+<h2 id="jpa">3.1 JPA/Hibernate</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/jpa.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="paragraph">
+<p>You can define Flyway configuration for each datasource. The following example demonstrates using it:</p>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/application.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">datasources:
+  default: <i class="conum" data-value="3"></i><b>(3)</b>
+    url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
+    username: 'sa'
+    password: ''
+    driverClassName: 'org.h2.Driver'
+jpa:
+  default: <i class="conum" data-value="3"></i><b>(3)</b>
+    packages-to-scan:
+      - 'example.micronaut'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none <i class="conum" data-value="1"></i><b>(1)</b>
+        show_sql: true
+flyway:
+    datasources: <i class="conum" data-value="2"></i><b>(2)</b>
+        default: <i class="conum" data-value="3"></i><b>(3)</b>
+            locations: classpath:databasemigrations <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Disable schema DDL creation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define flyway configuration under <code>flyway.datasources</code> key.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Configure flyway configuration for <code>default</code> data source.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The migrations directory is <code>src/main/resources/databsemigrations</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In that directory you need to include all your migrations, for example:</p>
+</div>
+<div class="listingblock">
+<div class="title">resources/databasemigrations/V1__create-books-schema.sql</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
+  id int not null primary key,
+  name varchar(255) not null,
+  constraint id unique (id),
+  constraint name unique (name),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Starting with Micronaut <code>1.1.3</code> it is not necessary to define the <code>jpa</code> configuration if you only want to run the migrations but not actually use JPA.
+</td>
+</tr>
+</table>
+</div>
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../../guide/whatsNew.html">&lt;&lt; <strong>2</strong><span>What's New</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>
