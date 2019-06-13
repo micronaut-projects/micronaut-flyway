@@ -11,6 +11,8 @@ dependencies {
     annotationProcessor "io.micronaut.docs:micronaut-docs-asciidoc-config-props:$micronautDocsVersion"
 
     compileOnly "io.micronaut:micronaut-inject-java"
+    compileOnly "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
+
     compile "org.flywaydb:flyway-core:$flywayVersion"
     compile "io.micronaut:micronaut-management"
 
@@ -19,6 +21,8 @@ dependencies {
     testCompile "io.micronaut:micronaut-http-client"
     testCompile "io.micronaut:micronaut-http-server-netty"
     testCompile "io.micronaut.configuration:micronaut-jdbc-hikari"
+    testCompile "io.micronaut.configuration:micronaut-hibernate-gorm"
+    testCompile "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
     testCompile "com.h2database:h2:1.4.196"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
 }

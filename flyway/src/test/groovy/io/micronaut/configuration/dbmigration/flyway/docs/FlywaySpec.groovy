@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package io.micronaut.configuration.dbmigration.flyway
+package io.micronaut.configuration.dbmigration.flyway.docs
 
 import groovy.sql.Sql
+import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties
+import io.micronaut.configuration.dbmigration.flyway.YamlAsciidocTagCleaner
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
 import io.micronaut.runtime.server.EmbeddedServer
@@ -32,20 +34,20 @@ class FlywaySpec extends Specification implements YamlAsciidocTagCleaner {
     String yamlConfig = '''\
 //tag::yamlconfig[]
 datasources:
-    default: # <3>
-        url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
-        username: 'sa'
-        password: ''
-        driverClassName: 'org.h2.Driver'
+  default: # <3>
+    url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
+    username: 'sa'
+    password: ''
+    driverClassName: 'org.h2.Driver'
 jpa:
-    default: # <3>
-        packages-to-scan:
-            - 'example.micronaut'
-        properties:
-            hibernate:
-                hbm2ddl:
-                    auto: none # <1>
-                show_sql: true
+  default: # <3>
+    packages-to-scan:
+      - 'example.micronaut'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none # <1>
+        show_sql: true
 flyway:
     datasources: # <2>
         default: # <3>
