@@ -8,3 +8,4 @@ configuration:
   additionalConfig: Additional configuration
 events: Events
 endpoint: Endpoint
+repository: Repository
