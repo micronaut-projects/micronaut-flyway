@@ -10,7 +10,8 @@ buildscript {
         classpath 'io.github.groovylang.groovydoc:groovydoc-gradle-plugin:1.0.1'
         classpath "io.micronaut.docs:micronaut-docs-asciidoc-extensions:$micronautDocsVersion"
         classpath "io.micronaut.docs:micronaut-docs-gradle-plugins:$micronautDocsVersion"
-     }
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.1.0"
+    }
 }
 
 plugins {
