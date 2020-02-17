@@ -83,9 +83,6 @@ subprojects { Project subproject ->
                 if(group == 'org.codehaus.groovy') {
                     details.useVersion(groovyVersion)
                 }
-                if(group == 'org.ow2.asm') {
-                    details.useVersion(asmVersion)
-                }
             }
         }
     }
