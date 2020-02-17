@@ -18,9 +18,7 @@ plugins {
 }
 
 repositories {
-
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    mavenCentral()
 }
 
 version project.projectVersion
@@ -34,16 +32,14 @@ ext {
 
 subprojects { Project subproject ->
 
+    repositories {
+        maven { url "https://repo.grails.org/grails/core" }
+    }
     version project.projectVersion
     group "io.micronaut.configuration"
     ext {
         isConfiguration = subproject.projectDir.parentFile.name == 'configurations'
         isBuildSnapshot = version.toString().endsWith("-SNAPSHOT")
-    }
-
-    repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://repo.grails.org/grails/core" }
     }
 
     apply plugin:"groovy"
