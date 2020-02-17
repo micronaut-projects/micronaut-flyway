@@ -130,6 +130,14 @@ subprojects { Project subproject ->
     }
 
     checkstyleTest.enabled = false
+
+    tasks.withType(GroovyCompile) {
+        groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
+    }
+    tasks.withType(JavaCompile){
+        options.encoding = "UTF-8"
+        options.compilerArgs.add('-parameters')
+    }
 }
 
 apply from:"https://raw.githubusercontent.com/micronaut-projects/micronaut-docs/v${micronautDocsVersion}/gradle/docs.gradle"
