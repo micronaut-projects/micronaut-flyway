@@ -27,7 +27,7 @@ include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs
 <2> Disable schema DDL creation.
 <3> Define flyway configuration under `flyway.datasources` key.
 <4> Define flyway configuration for the `default` datasource.
-<5> The migrations directory is `src/main/resources/databsemigrations`.
+<5> The migrations directory is `src/main/resources/databasemigrations`.
 
 
 === Multiple Data sources
