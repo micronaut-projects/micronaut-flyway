@@ -1,5 +1,10 @@
 This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.
 
+== 1.2.0
+
+* Fix issue with Micronaut Data https://github.com/micronaut-projects/micronaut-data/issues/441[#441].
+* Upgrade to Micronaut 1.3.3.
+
 == 1.1.0
 
 * Added support for GORM.
