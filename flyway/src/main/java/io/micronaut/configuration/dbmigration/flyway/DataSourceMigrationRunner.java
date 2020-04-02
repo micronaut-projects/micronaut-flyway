@@ -22,7 +22,9 @@ import io.micronaut.context.event.BeanCreatedEvent;
 import io.micronaut.context.event.BeanCreatedEventListener;
 import io.micronaut.core.naming.NameResolver;
 import io.micronaut.inject.qualifiers.Qualifiers;
+import io.micronaut.jdbc.DataSourceResolver;
 
+import javax.annotation.Nullable;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
@@ -36,18 +38,23 @@ import javax.sql.DataSource;
 @Singleton
 public class DataSourceMigrationRunner extends AbstractFlywayMigration implements BeanCreatedEventListener<DataSource> {
 
+    private final DataSourceResolver dataSourceResolver;
+
     /**
      * @param applicationContext The application context
      * @param eventPublisher     The event publisher
+     * @param dataSourceResolver The data source resolver
      */
     public DataSourceMigrationRunner(ApplicationContext applicationContext,
-                                     ApplicationEventPublisher eventPublisher) {
+                                     ApplicationEventPublisher eventPublisher,
+                                     @Nullable DataSourceResolver dataSourceResolver) {
         super(applicationContext, eventPublisher);
+        this.dataSourceResolver = dataSourceResolver != null ? dataSourceResolver : DataSourceResolver.DEFAULT;
     }
 
     @Override
     public DataSource onCreated(BeanCreatedEvent<DataSource> event) {
-        DataSource dataSource = event.getBean();
+        DataSource dataSource = dataSourceResolver.resolve(event.getBean());
 
         if (event.getBeanDefinition() instanceof NameResolver) {
             ((NameResolver) event.getBeanDefinition())

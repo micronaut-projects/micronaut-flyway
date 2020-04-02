@@ -20,6 +20,7 @@ import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
 import org.h2.jdbc.JdbcSQLException
+import org.h2.jdbc.JdbcSQLSyntaxErrorException
 import spock.lang.Specification
 
 import javax.sql.DataSource
@@ -90,7 +91,7 @@ class FlywayCleanSpec extends Specification {
         sql.rows('select count(*) from foo').get(0)[0] == 0
 
         then: 'it has been deleted'
-        def e = thrown(JdbcSQLException)
+        def e = thrown(JdbcSQLSyntaxErrorException)
         e.message.contains('Table "FOO" not found')
     }
 }
