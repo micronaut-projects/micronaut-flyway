@@ -19,6 +19,7 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
+import io.micronaut.inject.qualifiers.Qualifiers
 import io.micronaut.runtime.server.EmbeddedServer
 import org.flywaydb.core.Flyway
 import spock.lang.Specification
@@ -41,7 +42,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         )
 
         when:
-        applicationContext.getBean(DataSource)
+        applicationContext.getBean(DataSource, Qualifiers.byName("books"))
 
         then:
         noExceptionThrown()
@@ -83,7 +84,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         )
 
         when:
-        applicationContext.getBean(DataSource)
+        applicationContext.getBean(DataSource, Qualifiers.byName("books"))
 
         then:
         noExceptionThrown()
