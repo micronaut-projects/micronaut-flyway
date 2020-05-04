@@ -31,11 +31,11 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         given:
         ApplicationContext applicationContext = ApplicationContext.run(
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
-             'datasources.books.url'             : 'jdbc:h2:mem:flywayBooksDB1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
-             'datasources.books.username'        : 'sa',
-             'datasources.books.password'        : '',
-             'datasources.books.driverClassName' : 'org.h2.Driver',
-             'flyway.datasources.books.locations': 'classpath:databasemigrations',
+             'datasources.default.url'             : 'jdbc:h2:mem:flywayBooksDB1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+             'datasources.default.username'        : 'sa',
+             'datasources.default.password'        : '',
+             'datasources.default.driverClassName' : 'org.h2.Driver',
+             'flyway.datasources.default.locations': 'classpath:databasemigrations',
             ] as Map,
             Environment.TEST
         )
@@ -73,11 +73,11 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         given:
         ApplicationContext applicationContext = ApplicationContext.run(
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
-             'datasources.books.url'             : 'jdbc:h2:mem:flywayBooksDB2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
-             'datasources.books.username'        : 'sa',
-             'datasources.books.password'        : '',
-             'datasources.books.driverClassName' : 'org.h2.Driver',
-             'flyway.datasources.books.locations': 'classpath:databasemigrations,classpath:othermigrations',
+             'datasources.default.url'             : 'jdbc:h2:mem:flywayBooksDB2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+             'datasources.default.username'        : 'sa',
+             'datasources.default.password'        : '',
+             'datasources.default.driverClassName' : 'org.h2.Driver',
+             'flyway.datasources.default.locations': 'classpath:databasemigrations,classpath:othermigrations',
             ] as Map,
             Environment.TEST
         )

@@ -97,10 +97,11 @@ flyway:
         ApplicationContext applicationContext = ApplicationContext.run(flatten(flywayMap) as Map<String, Object>, Environment.TEST)
 
         when:
-        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties)
+        Collection<FlywayConfigurationProperties> configurationProperties = applicationContext.getBeansOfType(FlywayConfigurationProperties)
 
         then:
-        noExceptionThrown()
+        configurationProperties.find { it.nameQualifier == 'default' }
+        configurationProperties.find { it.nameQualifier == 'books' }
 
         when:
         Map m = new Yaml().load(cleanYamlAsciidocTag(gormConfig))
