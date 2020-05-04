@@ -97,7 +97,7 @@ flyway:
         ApplicationContext applicationContext = ApplicationContext.run(flatten(flywayMap) as Map<String, Object>, Environment.TEST)
 
         when:
-        applicationContext.getBeansOfType(FlywayConfigurationProperties)
+        FlywayConfigurationProperties config = applicationContext.getBean(FlywayConfigurationProperties)
 
         then:
         noExceptionThrown()
