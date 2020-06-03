@@ -15,6 +15,9 @@ dependencies {
     testImplementation "io.micronaut:micronaut-http-server-netty"
     testImplementation "io.micronaut.configuration:micronaut-jdbc-hikari"
     testImplementation "io.micronaut.configuration:micronaut-hibernate-gorm"
+    testImplementation("org.spockframework:spock-core:${spockVersion}") {
+        exclude module:'groovy-all'
+    }
     testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
     testImplementation "com.h2database:h2:1.4.196"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
