@@ -9,10 +9,10 @@ dependency:micronaut-hibernate-gorm[groupId="io.micronaut.configuration"]
 [source, groovy]
 .src/main/groovy/example/Book.groovy
 ----
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/Book.groovy[tag=bookImport]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/Book.groovy[tag=bookImport]
 
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/Book.groovy[tag=annotation]
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/Book.groovy[tag=domain]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/Book.groovy[tag=annotation]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/Book.groovy[tag=domain]
 ----
 
 3.- Then it is necessary to configure GORM datasource:
@@ -20,7 +20,7 @@ include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs
 [source, yaml]
 .src/main/resources/application.yml
 ----
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/GormSpec.groovy[tag=yamlconfig,indent=0]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/GormSpec.groovy[tag=yamlconfig,indent=0]
 ----
 
 <1> Definition of the first data source in GORM. The name it's `default` and it can't be changed.
@@ -37,7 +37,7 @@ It is also possible to configure Flyway migrations with multiple data sources wh
 [source, yaml]
 .src/main/resources/application.yml
 ----
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/GormMultipleDataSourcesSpec.groovy[tag=yamlconfig,indent=0]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/GormMultipleDataSourcesSpec.groovy[tag=yamlconfig,indent=0]
 ----
 
 <1> Definition of the first data source in GORM. The name it's `default` and it can't be changed.

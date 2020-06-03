@@ -1,7 +1,7 @@
 
 There are several options available for configuration:
 
-include::{includedir}configurationProperties/io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties.adoc[]
+include::{includedir}configurationProperties/io.micronaut.flyway.FlywayConfigurationProperties.adoc[]
 
 NOTE: By default Micronaut will configure Flyway to use the datasources defined under `datasources` configuration key. If
 you want to use a different datasource you need to define the properties `+flyway.datasources.*.url+`, `+flyway.datasources.*.user+`

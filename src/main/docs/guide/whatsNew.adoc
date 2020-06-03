@@ -1,5 +1,11 @@
 This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.
 
+== 2.0.0.M1
+
+* Upgrade to Micronaut 2.0.0.M3.
+* Upgrade to Flyway 6.4.3
+* Rename package `io.micronaut.configuration.dbmigration.flyway` to `io.micronaut.flyway`.
+
 == 1.2.0
 
 * Fix issue with Micronaut Data https://github.com/micronaut-projects/micronaut-data/issues/441[#441].

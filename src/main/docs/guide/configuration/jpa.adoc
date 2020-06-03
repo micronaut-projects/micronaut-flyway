@@ -3,7 +3,7 @@ You can define Flyway configuration for each datasource. The following example d
 [source, yaml]
 .src/main/resources/application.yml
 ----
-include::{flywaytests}/groovy/io/micronaut/configuration/dbmigration/flyway/docs/FlywaySpec.groovy[tag=yamlconfig,indent=0]
+include::{flywaytests}/groovy/io/micronaut/flyway/docs/FlywaySpec.groovy[tag=yamlconfig,indent=0]
 ----
 
 <1> Disable schema DDL creation.

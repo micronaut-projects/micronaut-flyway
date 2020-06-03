@@ -1,4 +1,4 @@
 To use the Micronaut's integration with https://flywaydb.org/[Flyway] you must have the `micronaut-flyway`
 dependency on your classpath:
 
-dependency:micronaut-flyway[groupId="io.micronaut.configuration"]
+dependency:micronaut-flyway[groupId="io.micronaut.flyway"]
