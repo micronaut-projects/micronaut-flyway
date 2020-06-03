@@ -3,7 +3,6 @@ package io.micronaut.configuration.dbmigration.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
-import org.h2.jdbc.JdbcSQLException
 import org.h2.jdbc.JdbcSQLSyntaxErrorException
 import spock.lang.Specification
 
