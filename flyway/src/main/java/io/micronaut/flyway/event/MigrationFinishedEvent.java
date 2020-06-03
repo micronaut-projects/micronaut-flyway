@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.configuration.dbmigration.flyway.event;
+package io.micronaut.flyway.event;
 
-import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties;
+import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.context.event.ApplicationEvent;
 
 /**

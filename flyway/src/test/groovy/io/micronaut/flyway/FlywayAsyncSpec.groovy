@@ -1,8 +1,9 @@
-package io.micronaut.configuration.dbmigration.flyway
+package io.micronaut.flyway
 
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
+import io.micronaut.flyway.FlywayConfigurationProperties
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification

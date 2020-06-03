@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.configuration.dbmigration.flyway.event;
-
-import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties;
-import io.micronaut.context.event.ApplicationEvent;
-
 /**
- * Fired when a Flyway schema has been cleaned.
+ * Flyway integration with Micronaut.
  *
  * @author Iván López
+ * @see <a href="https://flywaydb.org/">Flyway</a>
  * @since 1.0.0
  */
-public class SchemaCleanedEvent extends ApplicationEvent {
+@Configuration
+@Requires(property = "flyway.enabled", notEquals = "false")
+package io.micronaut.flyway;
 
-    /**
-     * @param config The Flyway configuration that corresponds 
-     * to the schema that was cleaned
-     */
-    public SchemaCleanedEvent(FlywayConfigurationProperties config) {
-        super(config);
-    }
-}
+import io.micronaut.context.annotation.Configuration;
+import io.micronaut.context.annotation.Requires;

@@ -1,4 +1,4 @@
-package io.micronaut.configuration.dbmigration.flyway
+package io.micronaut.flyway
 
 trait YamlAsciidocTagCleaner {
 

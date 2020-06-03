@@ -1,4 +1,4 @@
-package io.micronaut.configuration.dbmigration.flyway.management.endpoint
+package io.micronaut.flyway.endpoint
 
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment

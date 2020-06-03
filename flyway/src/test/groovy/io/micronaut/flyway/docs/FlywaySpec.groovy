@@ -1,10 +1,10 @@
-package io.micronaut.configuration.dbmigration.flyway.docs
+package io.micronaut.flyway.docs
 
 import groovy.sql.Sql
-import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties
-import io.micronaut.configuration.dbmigration.flyway.YamlAsciidocTagCleaner
+import io.micronaut.flyway.FlywayConfigurationProperties
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
+import io.micronaut.flyway.YamlAsciidocTagCleaner
 import io.micronaut.runtime.server.EmbeddedServer
 import org.yaml.snakeyaml.Yaml
 import spock.lang.AutoCleanup

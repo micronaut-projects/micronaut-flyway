@@ -1,4 +1,4 @@
-package io.micronaut.configuration.dbmigration.flyway
+package io.micronaut.flyway
 
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment

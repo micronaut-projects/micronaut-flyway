@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.configuration.dbmigration.flyway.management.endpoint;
+package io.micronaut.flyway.endpoint;
 
-import io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties;
+import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.management.endpoint.annotation.Endpoint;

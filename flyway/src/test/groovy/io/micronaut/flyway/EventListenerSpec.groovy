@@ -1,7 +1,7 @@
-package io.micronaut.configuration.dbmigration.flyway
+package io.micronaut.flyway
 
-import io.micronaut.configuration.dbmigration.flyway.event.MigrationFinishedEvent
-import io.micronaut.configuration.dbmigration.flyway.event.SchemaCleanedEvent
+import io.micronaut.flyway.event.MigrationFinishedEvent
+import io.micronaut.flyway.event.SchemaCleanedEvent
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.annotation.Requires
 import io.micronaut.context.env.Environment

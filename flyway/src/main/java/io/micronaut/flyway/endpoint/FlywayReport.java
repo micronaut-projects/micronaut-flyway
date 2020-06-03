@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.configuration.dbmigration.flyway.management.endpoint;
+package io.micronaut.flyway.endpoint;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.flywaydb.core.api.MigrationInfo;

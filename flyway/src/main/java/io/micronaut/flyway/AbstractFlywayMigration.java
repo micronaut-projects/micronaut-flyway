@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.configuration.dbmigration.flyway;
+package io.micronaut.flyway;
 
-import io.micronaut.configuration.dbmigration.flyway.event.MigrationFinishedEvent;
-import io.micronaut.configuration.dbmigration.flyway.event.SchemaCleanedEvent;
+import io.micronaut.flyway.event.MigrationFinishedEvent;
+import io.micronaut.flyway.event.SchemaCleanedEvent;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.event.ApplicationEventPublisher;
 import io.micronaut.inject.qualifiers.Qualifiers;

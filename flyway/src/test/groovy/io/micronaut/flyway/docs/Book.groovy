@@ -1,4 +1,4 @@
-package io.micronaut.configuration.dbmigration.flyway.docs
+package io.micronaut.flyway.docs
 
 //tag::bookImport[]
 import grails.gorm.annotation.Entity
