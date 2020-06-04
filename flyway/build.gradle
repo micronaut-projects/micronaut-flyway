@@ -22,3 +22,9 @@ dependencies {
     testImplementation "com.h2database:h2:1.4.199"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
 }
+
+micronautBuild {
+    resolutionStrategy {
+        force "com.h2database:h2:1.4.199"
+    }
+}
