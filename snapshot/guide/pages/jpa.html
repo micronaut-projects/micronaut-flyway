@@ -124,9 +124,9 @@ jpa:
           auto: none <i class="conum" data-value="1"></i><b>(1)</b>
         show_sql: true
 flyway:
-    datasources: <i class="conum" data-value="2"></i><b>(2)</b>
-        default: <i class="conum" data-value="3"></i><b>(3)</b>
-            locations: classpath:databasemigrations <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+  datasources: <i class="conum" data-value="2"></i><b>(2)</b>
+    default: <i class="conum" data-value="3"></i><b>(3)</b>
+      enabled: true <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -141,19 +141,53 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Configure flyway configuration for <code>default</code> data source.</td>
+<td>Configure flyway configuration for <code>default</code> datasource.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The migrations directory is <code>src/main/resources/databsemigrations</code>.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You need to put the migrations in Flyway default directory <code>src/main/resources/db/migration</code>. If you want to
+modify the default directory or add more, you need to set the property <code>flyway.datasources.default.locations</code>.
+For example:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">flyway:
+  datasources:
+    default:
+      enabled: true
+      locations:
+        - classpath:databasemigrations <i class="conum" data-value="1"></i><b>(1)</b>
+        - classpath:other <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This will configure Flyway to look for migrations in the directories <code>src/main/resources/databasemigrations</code> and
+<code>src/main/resources/other</code>.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In that directory you need to include all your migrations, for example:</p>
+<p>Now, in the migration directory you can include your migrations:</p>
 </div>
 <div class="listingblock">
-<div class="title">resources/databasemigrations/V1__create-books-schema.sql</div>
+<div class="title">src/main/resources/db/migration/V1__create-books-schema.sql</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
   id int not null primary key,

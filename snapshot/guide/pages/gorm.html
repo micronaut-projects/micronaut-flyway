@@ -157,7 +157,7 @@ class Book {
 flyway:
   datasources: <i class="conum" data-value="3"></i><b>(3)</b>
     default: <i class="conum" data-value="4"></i><b>(4)</b>
-      locations: classpath:databasemigrations <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+      enabled: true <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -180,7 +180,7 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>The migrations directory is <code>src/main/resources/databasemigrations</code>.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
 </tr>
 </table>
 </div>
@@ -214,9 +214,9 @@ dataSources:
 flyway:
   datasources:
     default: <i class="conum" data-value="3"></i><b>(3)</b>
-      locations: classpath:databasemigrations
+      enabled: true
     books: <i class="conum" data-value="4"></i><b>(4)</b>
-      locations: classpath:databasemigrations</code></pre>
+      enabled: true</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -231,11 +231,11 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Define flyway configuration for the <code>default</code> datasource.</td>
+<td>Enable the flyway migrations for the <code>books</code> datasource.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Define flyway configuration for the <code>books</code> datasource.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
 </tr>
 </table>
 </div>
