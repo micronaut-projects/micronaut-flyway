@@ -6,9 +6,9 @@ To enable the endpoint add the following to the configuration:
 .resources/application.yml
 ----
 endpoints:
-    flyway:
-        enabled: true # <1>
-        sensitive: false # <2>
+  flyway:
+    enabled: true # <1>
+    sensitive: false # <2>
 ----
 <1> `/flyway` endpoint is enabled (this is the default).
 <2> `/flyway` endpoint is open for unauthenticated access.

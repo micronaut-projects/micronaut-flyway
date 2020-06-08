@@ -11,7 +11,7 @@ import javax.sql.DataSource
 
 class FlywayConfigurationPropertiesSpec extends Specification {
 
-    void "test change default database migrations locations"() {
+    void "test use the default database migrations locations"() {
         given:
         ApplicationContext applicationContext = ApplicationContext.run(
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
@@ -19,7 +19,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
              'datasources.default.username'        : 'sa',
              'datasources.default.password'        : '',
              'datasources.default.driverClassName' : 'org.h2.Driver',
-             'flyway.datasources.default.locations': 'classpath:databasemigrations',
+             'flyway.datasources.default.enabled'  : true,
             ] as Map,
             Environment.TEST
         )
@@ -61,7 +61,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
              'datasources.default.username'        : 'sa',
              'datasources.default.password'        : '',
              'datasources.default.driverClassName' : 'org.h2.Driver',
-             'flyway.datasources.default.locations': 'classpath:databasemigrations,classpath:othermigrations',
+             'flyway.datasources.default.locations': 'classpath:db/migration,classpath:othermigrations',
             ] as Map,
             Environment.TEST
         )
@@ -99,7 +99,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         given:
         EmbeddedServer server = ApplicationContext.run(EmbeddedServer,
             ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
-             'flyway.datasources.books.locations': 'classpath:databasemigrations',
+             'flyway.datasources.books.locations': 'classpath:db/migration',
              'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB3;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
              'flyway.datasources.books.user'     : 'sa',
              'flyway.datasources.books.password' : '',
@@ -123,7 +123,7 @@ class FlywayConfigurationPropertiesSpec extends Specification {
         given:
         EmbeddedServer server = ApplicationContext.run(EmbeddedServer,
            ['spec.name'                         : FlywayConfigurationPropertiesSpec.simpleName,
-            'flyway.datasources.books.locations': 'classpath:databasemigrations',
+            'flyway.datasources.books.locations': 'classpath:db/migration',
             'flyway.datasources.books.url'      : 'jdbc:h2:mem:flywayBooksDB4;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;USER=sa;PASSWORD=',
            ] as Map,
            Environment.TEST
