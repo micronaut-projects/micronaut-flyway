@@ -28,7 +28,7 @@ dataSource: # <1>
 flyway:
   datasources: # <3>
     default: # <4>
-      locations: classpath:databasemigrations # <5>
+      enabled: true # <5>
 '''//end::yamlconfig[]
 
     @Shared
@@ -46,7 +46,7 @@ flyway:
         flyway     : [
             datasources: [
                 default: [
-                    locations: 'classpath:databasemigrations'
+                    enabled: true
                 ]
             ]
         ]

@@ -8,15 +8,33 @@ include::{flywaytests}/groovy/io/micronaut/flyway/docs/FlywaySpec.groovy[tag=yam
 
 <1> Disable schema DDL creation.
 <2> Define flyway configuration under `flyway.datasources` key.
-<3> Configure flyway configuration for `default` data source.
-<4> The migrations directory is `src/main/resources/databsemigrations`.
+<3> Configure flyway configuration for `default` datasource.
+<4> Enable the flyway migrations for the `default` datasource.
 
-In that directory you need to include all your migrations, for example:
+NOTE: You need to put the migrations in Flyway default directory `src/main/resources/db/migration`. If you want to
+modify the default directory or add more, you need to set the property `flyway.datasources.default.locations`.
+For example:
+
+[source,yaml]
+----
+flyway:
+  datasources:
+    default:
+      enabled: true
+      locations:
+        - classpath:databasemigrations # <1>
+        - classpath:other # <1>
+----
+<1> This will configure Flyway to look for migrations in the directories `src/main/resources/databasemigrations` and
+`src/main/resources/other`.
+
+
+Now, in the migration directory you can include your migrations:
 
 [source,sql]
-.resources/databasemigrations/V1__create-books-schema.sql
+.src/main/resources/db/migration/V1__create-books-schema.sql
 ----
-include::{flywaytests}/resources/databasemigrations/V1__create-books-schema.sql[indent=0]
+include::{flywaytests}/resources/db/migration/V1__create-books-schema.sql[indent=0]
 ----
 
 NOTE: Starting with Micronaut `1.1.3` it is not necessary to define the `jpa` configuration if you only want to run the migrations but not actually use JPA.

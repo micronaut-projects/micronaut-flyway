@@ -21,8 +21,9 @@
  * @since 1.0.0
  */
 @Configuration
-@Requires(property = "flyway.enabled", notEquals = "false")
+@Requires(property = "flyway.enabled", notEquals = StringUtils.FALSE, defaultValue = StringUtils.TRUE)
 package io.micronaut.flyway;
 
 import io.micronaut.context.annotation.Configuration;
 import io.micronaut.context.annotation.Requires;
+import io.micronaut.core.util.StringUtils;

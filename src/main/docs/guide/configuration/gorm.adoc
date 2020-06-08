@@ -27,7 +27,7 @@ include::{flywaytests}/groovy/io/micronaut/flyway/docs/GormSpec.groovy[tag=yamlc
 <2> Disable schema DDL creation.
 <3> Define flyway configuration under `flyway.datasources` key.
 <4> Define flyway configuration for the `default` datasource.
-<5> The migrations directory is `src/main/resources/databasemigrations`.
+<5> Enable the flyway migrations for the `default` datasource.
 
 
 === Multiple Data sources
@@ -42,8 +42,8 @@ include::{flywaytests}/groovy/io/micronaut/flyway/docs/GormMultipleDataSourcesSp
 
 <1> Definition of the first data source in GORM. The name it's `default` and it can't be changed.
 <2> Name of the additional data source.
-<3> Define flyway configuration for the `default` datasource.
-<4> Define flyway configuration for the `books` datasource.
+<3> Enable the flyway migrations for the `books` datasource.
+<4> Enable the flyway migrations for the `default` datasource.
 
 
 NOTE: For more information about how to configure GORM, take a look at the http://gorm.grails.org/latest/hibernate/manual/index.html[documentation].

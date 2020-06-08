@@ -33,9 +33,9 @@ jpa:
           auto: none # <1>
         show_sql: true
 flyway:
-    datasources: # <2>
-        default: # <3>
-            locations: classpath:databasemigrations # <4>
+  datasources: # <2>
+    default: # <3>
+      enabled: true # <4>
 '''//end::yamlconfig[]
 
     @Shared
@@ -57,7 +57,7 @@ flyway:
         flyway: [
             datasources: [
                 default: [
-                    locations: 'classpath:databasemigrations'
+                    enabled: true
                 ]
             ]
         ],

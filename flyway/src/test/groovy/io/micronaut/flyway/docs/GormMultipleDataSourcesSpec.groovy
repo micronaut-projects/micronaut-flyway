@@ -36,9 +36,9 @@ dataSources:
 flyway:
   datasources:
     default: # <3>
-      locations: classpath:databasemigrations
+      enabled: true
     books: # <4>
-      locations: classpath:databasemigrations
+      enabled: true
 '''//end::yamlconfig[]
 
     @Shared
@@ -67,10 +67,10 @@ flyway:
         flyway     : [
             datasources: [
                 default: [
-                    locations: 'classpath:databasemigrations'
+                    enabled: true
                 ],
                 books: [
-                    locations: 'classpath:databasemigrations'
+                    enabled: true
                 ]
             ]
         ]

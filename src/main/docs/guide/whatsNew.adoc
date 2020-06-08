@@ -1,5 +1,9 @@
 This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.
 
+== 2.0.0.M2
+
+* By default look for migrations in Flyway default location: `src/main/resources/db/migration`.
+
 == 2.0.0.M1
 
 * Upgrade to Micronaut 2.0.0.M3.
