@@ -11,7 +11,7 @@
 
         gtag('config', 'UA-82213539-2');
     </script>
-    <title>2 What's New 1.2.1.BUILD-SNAPSHOT</title>
+    <title>2 What's New 2.0.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -47,13 +47,16 @@ function addJsClass() {
                         <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>3</strong><span>Configuration</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>4</strong><span>Events</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/graalvm.html"><strong>4</strong><span>GraalVM support</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>5</strong><span>Endpoint</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>5</strong><span>Events</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/repository.html"><strong>6</strong><span>Repository</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>6</strong><span>Endpoint</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/repository.html"><strong>7</strong><span>Repository</span></a>
                         </div>
                         
                     </div>
@@ -87,7 +90,7 @@ function addJsClass() {
                 <div class="project">
                     <h1>2 What's New</h1>
 
-                    <p><strong>Version:</strong> 1.2.1.BUILD-SNAPSHOT</p>
+                    <p><strong>Version:</strong> 2.0.0.BUILD-SNAPSHOT</p>
                 </div>
 
                 
@@ -96,7 +99,7 @@ function addJsClass() {
 <h1 id="whatsNew"><a class="anchor" href="#whatsNew"></a>2 What's New</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/1.2.x/src/main/docs/guide/whatsNew.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/whatsNew.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -104,6 +107,39 @@ function addJsClass() {
 
 <div class="paragraph">
 <p>This section will outline any breaking changes between major or milestone releases as well as detail any new features that have been added.</p>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_m2">2.0.0.M2</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>By default look for migrations in Flyway default location: <code>src/main/resources/db/migration</code>.</p>
+</li>
+<li>
+<p>Add support for GraalVM.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_m1">2.0.0.M1</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade to Micronaut 2.0.0.M3.</p>
+</li>
+<li>
+<p>Upgrade to Flyway 6.4.3</p>
+</li>
+<li>
+<p>Rename package <code>io.micronaut.configuration.dbmigration.flyway</code> to <code>io.micronaut.flyway</code>.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_1_2_0">1.2.0</h2>
