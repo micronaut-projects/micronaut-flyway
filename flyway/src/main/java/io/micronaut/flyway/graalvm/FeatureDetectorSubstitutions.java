@@ -17,15 +17,20 @@ package io.micronaut.flyway.graalvm;
 
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
+import io.micronaut.core.annotation.Internal;
 
 /**
  * FeatureDetector substitution.
  *
- * Forked from the Quarkus implementation.
+ * Forked from the Quarkus: https://github.com/quarkusio/quarkus/blob/38280358d8cf04b91dad7ef5a9d463823f8ae675/extensions/flyway/runtime/src/main/java/io/quarkus/flyway/runtime/graal/FeatureDetectorSubstitutions.java
+ *
+ * @author Iván López
+ * @since 2.0.0
  */
 @Substitute
+@Internal
 @TargetClass(className = "org.flywaydb.core.internal.util.FeatureDetector")
-public final class FeatureDetectorSubstitutions {
+final class FeatureDetectorSubstitutions {
 
     @Substitute
     public FeatureDetectorSubstitutions(ClassLoader classLoader) {

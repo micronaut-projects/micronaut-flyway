@@ -18,6 +18,7 @@ package io.micronaut.flyway.graalvm;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
+import io.micronaut.core.annotation.Internal;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.internal.resource.LoadableResource;
 import org.flywaydb.core.internal.scanner.LocationScannerCache;
@@ -32,10 +33,14 @@ import java.util.List;
 /**
  * This substitution replaces the Flyway dynamic scanners with a fixed path scanner in native mode.
  *
- * Forked from the Quarkus implementation.
+ * Forked from the Quarkus: https://github.com/quarkusio/quarkus/blob/2c99a30985e7cae42933b949ecd2ee82d546c4aa/extensions/flyway/runtime/src/main/java/io/quarkus/flyway/runtime/graal/ScannerSubstitutions.java
+ *
+ * @author Iván López
+ * @since 2.0.0
  */
+@Internal
 @TargetClass(className = "org.flywaydb.core.internal.scanner.Scanner")
-public final class ScannerSubstitutions {
+final class ScannerSubstitutions {
 
     @Alias
     private List<LoadableResource> resources = new ArrayList<>();

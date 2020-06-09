@@ -16,6 +16,7 @@
 package io.micronaut.flyway.graalvm;
 
 import io.micronaut.context.condition.Condition;
+import io.micronaut.core.annotation.Internal;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.internal.resource.LoadableResource;
 import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
@@ -32,10 +33,14 @@ import java.util.List;
  * This class is used in order to prevent Flyway from doing classpath scanning which is both slow and won't work in
  * native mode.
  *
- * Forked from the Quarkus implementation.
+ * Forked from the Quarkus: https://github.com/quarkusio/quarkus/blob/7a5efed2a97d88656484b431b472210e2bb7d2f3/extensions/flyway/runtime/src/main/java/io/quarkus/flyway/runtime/QuarkusPathLocationScanner.java
+ *
+ * @author Iván López
+ * @since 2.0.0
  */
 @SuppressWarnings("rawtypes")
-public final class MicronautPathLocationScanner implements ResourceAndClassScanner {
+@Internal
+final class MicronautPathLocationScanner implements ResourceAndClassScanner {
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Condition.class);
 
     private static final String LOCATION_SEPARATOR = "/";
@@ -60,6 +65,16 @@ public final class MicronautPathLocationScanner implements ResourceAndClassScann
         return scannedResources;
     }
 
+    @Override
+    public Collection<Class<?>> scanForClasses() {
+        // Classes are not supported in native mode
+        return Collections.emptyList();
+    }
+
+    public static void setApplicationMigrationFiles(List<String> applicationMigrationFiles) {
+        MicronautPathLocationScanner.applicationMigrationFiles = applicationMigrationFiles;
+    }
+
     private boolean canHandleMigrationFile(Collection<Location> locations, String migrationFile) {
         for (Location location : locations) {
             String locationPath = location.getPath();
@@ -75,15 +90,5 @@ public final class MicronautPathLocationScanner implements ResourceAndClassScann
         }
 
         return false;
-    }
-
-    @Override
-    public Collection<Class<?>> scanForClasses() {
-        // Classes are not supported in native mode
-        return Collections.emptyList();
-    }
-
-    public static void setApplicationMigrationFiles(List<String> applicationMigrationFiles) {
-        MicronautPathLocationScanner.applicationMigrationFiles = applicationMigrationFiles;
     }
 }

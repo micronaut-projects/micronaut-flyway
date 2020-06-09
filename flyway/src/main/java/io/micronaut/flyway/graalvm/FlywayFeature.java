@@ -42,7 +42,7 @@ import java.util.stream.Stream;
 /**
  * A GraalVM feature that calculates the migration to apply at compile time.
  *
- * Forked from the Quarkus implementation.
+ * Forked from Quarkus: https://github.com/quarkusio/quarkus/blob/7a5efed2a97d88656484b431b472210e2bb7d2f3/extensions/flyway/deployment/src/main/java/io/quarkus/flyway/FlywayProcessor.java
  *
  * @author Iván López
  * @since 2.0.0
