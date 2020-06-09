@@ -1,0 +1,6 @@
+[
+  {
+    "name":"org.flywaydb.core.internal.logging.slf4j.Slf4jLogCreator",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  }
+]
