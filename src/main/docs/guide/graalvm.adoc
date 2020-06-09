@@ -1,0 +1,34 @@
+
+Micronaut Flyway is compatible with https://www.graalvm.org/[GraalVM] so it is possible
+to create native images and run the migrations during application startup.
+
+The list of migrations to run is precomputed during native image build time and by default to process looks for migrations
+in the Flyway default directory `src/main/resources/db/migration`. If you want to change that directory or add more directories
+to look for migrations you need to add an additional parameter to `native-image` command.
+
+For example, if you have the following configuration:
+
+[source,yaml]
+----
+flyway:
+  datasources:
+    default:
+      locations:
+        - classpath:databasemigrations # <1>
+        - classpath:other # <1>
+----
+<1> Flyway will look for migrations in `src/main/resources/databasemigrations` and `src/main/resources/other`.
+
+You need to use the parameter `flyway.locations` with a comma separated list of directories to look for:
+
+[source,bash]
+----
+native-image --no-server --no-fallback \
+    --class-path build/libs/micronaut-flyway-graal-*-all.jar \
+    -Dflyway.locations='classpath:databasemigrations,classpath:other' # <1>
+----
+<1> Define the locations to look for migrations.
+
+
+NOTE: See the section on https://docs.micronaut.io/latest/guide/index.html#graal[GraalVM] in the user guide for more
+information.

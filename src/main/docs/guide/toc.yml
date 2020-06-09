@@ -6,6 +6,7 @@ configuration:
   jpa: JPA/Hibernate
   gorm: GORM
   additionalConfig: Additional configuration
+graalvm: GraalVM support
 events: Events
 endpoint: Endpoint
 repository: Repository

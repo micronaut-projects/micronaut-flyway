@@ -3,6 +3,7 @@ This section will outline any breaking changes between major or milestone releas
 == 2.0.0.M2
 
 * By default look for migrations in Flyway default location: `src/main/resources/db/migration`.
+* Add support for GraalVM.
 
 == 2.0.0.M1
 
