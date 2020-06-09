@@ -2,7 +2,7 @@
 Micronaut Flyway is compatible with https://www.graalvm.org/[GraalVM] so it is possible
 to create native images and run the migrations during application startup.
 
-The list of migrations to run is precomputed during native image build time and by default to process looks for migrations
+The list of migrations to run is precomputed during native image build time and by default Micronaut looks for migrations
 in the Flyway default directory `src/main/resources/db/migration`. If you want to change that directory or add more directories
 to look for migrations you need to add an additional parameter to `native-image` command.
 
