@@ -51,9 +51,9 @@
             </div>
 <div class="sect2">
 <h3 id="_flyway_config_properties">Flyway Config Properties</h3>
-<a id="io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties" href="#io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties">&#128279;</a>
+<a id="io.micronaut.flyway.FlywayConfigurationProperties" href="#io.micronaut.flyway.FlywayConfigurationProperties">&#128279;</a>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/configuration/dbmigration/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
+<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -118,6 +118,11 @@
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.validate-migration-naming</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.validate-on-migrate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -138,12 +143,22 @@
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.default-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.schemas</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.tablespace</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -195,6 +210,11 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-suffixes</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.java-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.migration.JavaMigration[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -268,7 +288,17 @@
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.oracle-sqlplus-warn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.license-key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.load-default-configuration-files</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
