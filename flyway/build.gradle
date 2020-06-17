@@ -9,13 +9,13 @@ dependencies {
 
     api "org.flywaydb:flyway-core:$flywayVersion"
     api "io.micronaut:micronaut-management"
-    api "io.micronaut.sql:micronaut-jdbc:$micronautSqlVersion"
+    api "io.micronaut.sql:micronaut-jdbc"
 
     testAnnotationProcessor "io.micronaut:micronaut-inject-java"
     testImplementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
     testImplementation "io.micronaut:micronaut-http-client"
     testImplementation "io.micronaut:micronaut-http-server-netty"
-    testImplementation "io.micronaut.sql:micronaut-jdbc-hikari:$micronautSqlVersion"
+    testImplementation "io.micronaut.sql:micronaut-jdbc-hikari"
     testImplementation "io.micronaut.groovy:micronaut-hibernate-gorm:2.0.0.RC1"
     testImplementation("org.spockframework:spock-core:${spockVersion}") {
         exclude module:'groovy-all'
