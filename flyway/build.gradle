@@ -21,7 +21,7 @@ dependencies {
         exclude module:'groovy-all'
     }
     testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
-    testImplementation "com.h2database:h2:1.4.199"
+    testImplementation "com.h2database:h2:1.4.200"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
 }
 
