@@ -11,7 +11,7 @@
 
         gtag('config', 'UA-82213539-2');
     </script>
-    <title>3 Configuration 1.2.1.BUILD-SNAPSHOT</title>
+    <title>3 Configuration 2.1.0.BUILD-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -47,13 +47,16 @@ function addJsClass() {
                         <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>3</strong><span>Configuration</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>4</strong><span>Events</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/graalvm.html"><strong>4</strong><span>GraalVM support</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>5</strong><span>Endpoint</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/events.html"><strong>5</strong><span>Events</span></a>
                         </div>
                         
-                        <div class="toc-item" style="margin-left:0"><a href="../guide/repository.html"><strong>6</strong><span>Repository</span></a>
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/endpoint.html"><strong>6</strong><span>Endpoint</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../guide/repository.html"><strong>7</strong><span>Repository</span></a>
                         </div>
                         
                     </div>
@@ -80,14 +83,14 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/graalvm.html"><strong>4</strong><span>GraalVM support</span> >></a></div>
                 
 
 
                 <div class="project">
                     <h1>3 Configuration</h1>
 
-                    <p><strong>Version:</strong> 1.2.1.BUILD-SNAPSHOT</p>
+                    <p><strong>Version:</strong> 2.1.0.BUILD-SNAPSHOT</p>
                 </div>
 
                 
@@ -110,7 +113,7 @@ function addJsClass() {
 <h1 id="configuration"><a class="anchor" href="#configuration"></a>3 Configuration</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/1.2.x/src/main/docs/guide/configuration.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -121,7 +124,7 @@ function addJsClass() {
 <h2 id="jpa"><a class="anchor" href="#jpa"></a>3.1 JPA/Hibernate</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/1.2.x/src/main/docs/guide/configuration/jpa.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/jpa.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -149,9 +152,9 @@ jpa:
           auto: none <i class="conum" data-value="1"></i><b>(1)</b>
         show_sql: true
 flyway:
-    datasources: <i class="conum" data-value="2"></i><b>(2)</b>
-        default: <i class="conum" data-value="3"></i><b>(3)</b>
-            locations: classpath:databasemigrations <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+  datasources: <i class="conum" data-value="2"></i><b>(2)</b>
+    default: <i class="conum" data-value="3"></i><b>(3)</b>
+      enabled: true <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -166,19 +169,53 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Configure flyway configuration for <code>default</code> data source.</td>
+<td>Configure flyway configuration for <code>default</code> datasource.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The migrations directory is <code>src/main/resources/databsemigrations</code>.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You need to put the migrations in Flyway default directory <code>src/main/resources/db/migration</code>. If you want to
+modify the default directory or add more, you need to set the property <code>flyway.datasources.default.locations</code>.
+For example:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">flyway:
+  datasources:
+    default:
+      enabled: true
+      locations:
+        - classpath:databasemigrations <i class="conum" data-value="1"></i><b>(1)</b>
+        - classpath:other <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This will configure Flyway to look for migrations in the directories <code>src/main/resources/databasemigrations</code> and
+<code>src/main/resources/other</code>.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In that directory you need to include all your migrations, for example:</p>
+<p>Now, in the migration directory you can include your migrations:</p>
 </div>
 <div class="listingblock">
-<div class="title">resources/databasemigrations/V1__create-books-schema.sql</div>
+<div class="title">src/main/resources/db/migration/V1__create-books-schema.sql</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
   id int not null primary key,
@@ -204,7 +241,7 @@ Starting with Micronaut <code>1.1.3</code> it is not necessary to define the <co
 <h2 id="gorm"><a class="anchor" href="#gorm"></a>3.2 GORM</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/1.2.x/src/main/docs/guide/configuration/gorm.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/gorm.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -265,7 +302,7 @@ class Book {
 flyway:
   datasources: <i class="conum" data-value="3"></i><b>(3)</b>
     default: <i class="conum" data-value="4"></i><b>(4)</b>
-      locations: classpath:databasemigrations <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+      enabled: true <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -288,7 +325,7 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>The migrations directory is <code>src/main/resources/databasemigrations</code>.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
 </tr>
 </table>
 </div>
@@ -322,9 +359,9 @@ dataSources:
 flyway:
   datasources:
     default: <i class="conum" data-value="3"></i><b>(3)</b>
-      locations: classpath:databasemigrations
+      enabled: true
     books: <i class="conum" data-value="4"></i><b>(4)</b>
-      locations: classpath:databasemigrations</code></pre>
+      enabled: true</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -339,11 +376,11 @@ flyway:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Define flyway configuration for the <code>default</code> datasource.</td>
+<td>Enable the flyway migrations for the <code>books</code> datasource.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Define flyway configuration for the <code>books</code> datasource.</td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
 </tr>
 </table>
 </div>
@@ -364,7 +401,7 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <h2 id="additionalConfig"><a class="anchor" href="#additionalConfig"></a>3.3 Additional configuration</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/1.2.x/src/main/docs/guide/configuration/additionalConfig.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/additionalConfig.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -373,9 +410,9 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <div class="paragraph">
 <p>There are several options available for configuration:</p>
 </div>
-<a id="io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties" href="#io.micronaut.configuration.dbmigration.flyway.FlywayConfigurationProperties">&#128279;</a>
+<a id="io.micronaut.flyway.FlywayConfigurationProperties" href="#io.micronaut.flyway.FlywayConfigurationProperties">&#128279;</a>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/configuration/dbmigration/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
+<caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -440,6 +477,11 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.validate-migration-naming</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.validate-on-migrate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -460,12 +502,22 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.default-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.schemas</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.tablespace</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -517,6 +569,11 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-suffixes</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.java-migrations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.migration.JavaMigration[]</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -590,8 +647,33 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.oracle-sqlplus-warn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.license-key</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.resource-provider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.ResourceProvider</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.java-migration-class-provider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.ClassProvider</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.load-default-configuration-files</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.create-schemas</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -656,7 +738,7 @@ and <code>flyway.datasources.*.password</code>.
                 
                     <div class="toc-item prev-left"><a href="../guide/whatsNew.html">&lt;&lt; <strong>2</strong><span>What's New</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/events.html"><strong>4</strong><span>Events</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/graalvm.html"><strong>4</strong><span>GraalVM support</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
