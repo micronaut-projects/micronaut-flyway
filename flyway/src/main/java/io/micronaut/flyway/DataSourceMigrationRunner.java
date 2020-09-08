@@ -53,18 +53,19 @@ public class DataSourceMigrationRunner extends AbstractFlywayMigration implement
 
     @Override
     public DataSource onCreated(BeanCreatedEvent<DataSource> event) {
-        DataSource dataSource = dataSourceResolver.resolve(event.getBean());
-
+        DataSource dataSource = event.getBean();
         if (event.getBeanDefinition() instanceof NameResolver) {
             ((NameResolver) event.getBeanDefinition())
                     .resolveName()
                     .ifPresent(name -> {
                         applicationContext
                                 .findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name))
-                                .ifPresent(flywayConfig -> run(flywayConfig, dataSource));
+                                .ifPresent(flywayConfig -> {
+                                    DataSource unwrappedDataSource = dataSourceResolver.resolve(dataSource);
+                                    run(flywayConfig, unwrappedDataSource);
+                                });
                     });
         }
-
         return dataSource;
     }
 }
