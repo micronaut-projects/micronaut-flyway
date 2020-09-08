@@ -24,7 +24,6 @@ class FlywayAsyncSpec extends Specification {
         'jpa.default.properties.hibernate.hbm2ddl.auto': 'none',
         'jpa.default.properties.hibernate.show_sql'    : true,
 
-        'flyway.datasources.default.locations'         : 'classpath:databasemigrations',
         'flyway.datasources.default.async'             : true,
     ]
 
