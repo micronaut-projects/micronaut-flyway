@@ -1,6 +1,6 @@
 introduction:
   title: Introduction
-whatsNew: What's New
+releaseHistory: Release History
 configuration:
   title: Configuration
   jpa: JPA/Hibernate
