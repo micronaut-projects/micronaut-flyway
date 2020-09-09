@@ -28,5 +28,6 @@ dependencies {
 micronautBuild {
     resolutionStrategy {
         force "com.h2database:h2:1.4.199"
+        force "org.flywaydb:flyway-core:$flywayVersion"
     }
 }
