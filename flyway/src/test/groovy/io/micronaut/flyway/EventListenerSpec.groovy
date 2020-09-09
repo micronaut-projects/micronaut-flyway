@@ -9,7 +9,6 @@ import io.micronaut.runtime.event.annotation.EventListener
 import org.flywaydb.core.Flyway
 import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
-
 import javax.inject.Singleton
 import javax.sql.DataSource
 
@@ -45,7 +44,6 @@ class EventListenerSpec extends Specification {
             applicationContext.getBean(TestEventListener).migrationFinishedEvents.size() == 1
             applicationContext.getBean(TestEventListener).schemaCleanedEvents.size() == 1
         }
-
     }
 
     @Singleton
