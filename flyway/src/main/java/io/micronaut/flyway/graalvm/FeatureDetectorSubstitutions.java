@@ -62,6 +62,16 @@ final class FeatureDetectorSubstitutions {
     }
 
     @Substitute
+    public boolean isGCSAvailable() {
+        return false;
+    }
+
+    @Substitute
+    public boolean isAwsAvailable() {
+        return false;
+    }
+
+    @Substitute
     public boolean isAndroidAvailable() {
         return false;
     }
