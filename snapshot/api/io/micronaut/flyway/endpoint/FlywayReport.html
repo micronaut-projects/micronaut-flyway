@@ -107,7 +107,8 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">FlywayReport</span>
+<pre>@Introspected
+public class <span class="typeNameLabel">FlywayReport</span>
 extends java.lang.Object</pre>
 <div class="block">Flyway report for one datasource.</div>
 <dl>
@@ -188,8 +189,9 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FlywayReport</h4>
-<pre>public&nbsp;FlywayReport(java.lang.String&nbsp;name,
-                    java.util.List&lt;org.flywaydb.core.api.MigrationInfo&gt;&nbsp;changeSets)</pre>
+<pre>@Creator
+public&nbsp;FlywayReport(java.lang.String&nbsp;name,
+                             java.util.List&lt;org.flywaydb.core.api.MigrationInfo&gt;&nbsp;changeSets)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>name</code> - The name of the data source</dd>
