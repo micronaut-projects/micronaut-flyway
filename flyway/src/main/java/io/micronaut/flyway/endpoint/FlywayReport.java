@@ -15,7 +15,10 @@
  */
 package io.micronaut.flyway.endpoint;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.micronaut.core.annotation.Creator;
+import io.micronaut.core.annotation.Introspected;
 import org.flywaydb.core.api.MigrationInfo;
 
 import java.util.List;
@@ -26,6 +29,7 @@ import java.util.List;
  * @author Iván López
  * @since 1.0.0
  */
+@Introspected
 public class FlywayReport {
 
     private final String name;
@@ -35,6 +39,8 @@ public class FlywayReport {
      * @param name       The name of the data source
      * @param changeSets The list of changes
      */
+    @JsonCreator
+    @Creator
     public FlywayReport(String name, List<MigrationInfo> changeSets) {
         this.name = name;
         this.migrations = changeSets;
