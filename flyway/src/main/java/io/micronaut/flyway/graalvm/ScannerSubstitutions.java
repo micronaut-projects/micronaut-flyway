@@ -28,6 +28,7 @@ import org.flywaydb.core.internal.scanner.classpath.ResourceAndClassScanner;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -48,13 +49,15 @@ final class ScannerSubstitutions {
     @Alias
     private List<Class<?>> classes = new ArrayList<>();
 
+    @Alias
+    private HashMap<String, LoadableResource> relativeResourceMap = new HashMap<>();
+
     /**
      * Creates only {@link MicronautPathLocationScanner} instances.
      * Replaces the original method that tries to detect migrations using reflection techniques that are not allowed
      * in native mode.
      *
-     * @see org.flywaydb.core.internal.scanner.Scanner#Scanner(Class, Collection, ClassLoader, Charset, ResourceNameCache,
-     * LocationScannerCache)
+     * @see org.flywaydb.core.internal.scanner.Scanner#Scanner(Class, Collection, ClassLoader, Charset, ResourceNameCache, LocationScannerCache)
      */
     @SuppressWarnings("checkstyle:javadocmethod")
     @Substitute
@@ -67,6 +70,10 @@ final class ScannerSubstitutions {
 
         Collection scanForClasses = scanner.scanForClasses();
         classes.addAll(scanForClasses);
+
+        for (LoadableResource resource : this.resources) {
+            relativeResourceMap.put(resource.getRelativePath().toLowerCase(), resource);
+        }
     }
 
 }
