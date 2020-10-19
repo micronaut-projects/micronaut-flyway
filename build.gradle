@@ -13,17 +13,8 @@ subprojects { Project subproject ->
     group "io.micronaut.flyway"
 
     apply plugin: "io.micronaut.build.common"
-
-    if (subproject.parent.name == "docs-examples" || subproject.name == "docs-examples") {
-        return
-    }
-
     apply plugin: "io.micronaut.build.dependency-updates"
     apply plugin: "io.micronaut.build.publishing"
-
-    project.tasks.withType(Test) {
-        useJUnitPlatform()
-    }     
 }
 
 apply plugin: "io.micronaut.build.docs"
