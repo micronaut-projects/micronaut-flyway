@@ -44,7 +44,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "", excludes = "locations")
+    @ConfigurationBuilder(prefixes = "", excludes = {"locations", "jdbcProperties"})
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
     private final String nameQualifier;

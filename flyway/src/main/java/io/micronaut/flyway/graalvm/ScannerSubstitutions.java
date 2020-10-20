@@ -57,12 +57,12 @@ final class ScannerSubstitutions {
      * Replaces the original method that tries to detect migrations using reflection techniques that are not allowed
      * in native mode.
      *
-     * @see org.flywaydb.core.internal.scanner.Scanner#Scanner(Class, Collection, ClassLoader, Charset, ResourceNameCache, LocationScannerCache)
+     * @see org.flywaydb.core.internal.scanner.Scanner#Scanner(Class, Collection, ClassLoader, Charset, boolean, ResourceNameCache, LocationScannerCache)
      */
     @SuppressWarnings("checkstyle:javadocmethod")
     @Substitute
     public ScannerSubstitutions(Class<?> implementedInterface, Collection<Location> locations, ClassLoader classLoader,
-                                Charset encoding, ResourceNameCache resourceNameCache, LocationScannerCache locationScannerCache) {
+                                Charset encoding, boolean stream, ResourceNameCache resourceNameCache, LocationScannerCache locationScannerCache) {
         ResourceAndClassScanner scanner = new MicronautPathLocationScanner(locations);
 
         Collection resources = scanner.scanForResources();
