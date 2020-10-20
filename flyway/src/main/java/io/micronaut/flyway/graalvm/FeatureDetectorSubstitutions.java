@@ -42,6 +42,11 @@ final class FeatureDetectorSubstitutions {
     }
 
     @Substitute
+    public boolean isLog4J2Available() {
+        return false;
+    }
+
+    @Substitute
     public boolean isSlf4jAvailable() {
         return true;
     }
@@ -63,6 +68,16 @@ final class FeatureDetectorSubstitutions {
 
     @Substitute
     public boolean isAndroidAvailable() {
+        return false;
+    }
+
+    @Substitute
+    public boolean isAwsAvailable() {
+        return false;
+    }
+
+    @Substitute
+    public boolean isGCSAvailable() {
         return false;
     }
 
