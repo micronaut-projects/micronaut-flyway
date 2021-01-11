@@ -18,7 +18,7 @@ package io.micronaut.flyway.graalvm;
 import io.micronaut.context.condition.Condition;
 import io.micronaut.core.annotation.Internal;
 import org.flywaydb.core.api.Location;
-import org.flywaydb.core.internal.resource.LoadableResource;
+import org.flywaydb.core.api.resource.LoadableResource;
 import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.flywaydb.core.internal.scanner.classpath.ResourceAndClassScanner;
 import org.slf4j.LoggerFactory;
