@@ -46,7 +46,7 @@
         <div class="docs-content">
             <div class="project">
                 <h1>Configuration Reference</h1>
-                <p><strong>Version:</strong>3.4.1-SNAPSHOT</p>
+                <p><strong>Version:</strong>3.5.0-SNAPSHOT</p>
                 <p></p>
             </div>
 <div class="sect2">
@@ -79,7 +79,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.error-overrides</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -149,7 +149,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.schemas</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -169,7 +169,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.cherry-pick</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.MigrationPattern[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.MigrationPattern</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -214,12 +214,12 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.sql-migration-suffixes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.java-migrations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.migration.JavaMigration[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.migration.JavaMigration</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -264,7 +264,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.callbacks</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.callback.Callback[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.callback.Callback</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -274,7 +274,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.resolvers</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.resolver.MigrationResolver[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.resolver.MigrationResolver</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -348,16 +348,6 @@
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.conjur-url</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.conjur-token</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.vault-url</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -369,7 +359,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.vault-secrets</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -409,7 +399,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The locations for the migrations</p></td>
 </tr>
 </tbody>
