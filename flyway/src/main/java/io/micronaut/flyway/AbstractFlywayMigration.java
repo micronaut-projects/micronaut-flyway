@@ -15,10 +15,10 @@
  */
 package io.micronaut.flyway;
 
-import io.micronaut.flyway.event.MigrationFinishedEvent;
-import io.micronaut.flyway.event.SchemaCleanedEvent;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.event.ApplicationEventPublisher;
+import io.micronaut.flyway.event.MigrationFinishedEvent;
+import io.micronaut.flyway.event.SchemaCleanedEvent;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.Async;
@@ -55,24 +55,34 @@ class AbstractFlywayMigration {
     }
 
     /**
-     * Configure the Flyway runner for a specific configuration and a dataSource.
+     * Run the Flyway migrations for a specific config and a dataSource only if the config is enabled.
      *
      * @param config     The {@link FlywayConfigurationProperties}
      * @param dataSource The {@link DataSource}
      */
     void run(FlywayConfigurationProperties config, DataSource dataSource) {
         if (config.isEnabled()) {
-            FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
-            fluentConfiguration.dataSource(dataSource);
+            forceRun(config, dataSource);
+        }
+    }
 
-            Flyway flyway = fluentConfiguration.load();
-            this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
+    /**
+     * Run the Flyway migrations whether they are enabled or not, for the specific datasource.
+     *
+     * @param config     The {@link FlywayConfigurationProperties}
+     * @param dataSource The {@link DataSource}
+     */
+    void forceRun(FlywayConfigurationProperties config, DataSource dataSource) {
+        FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
+        fluentConfiguration.dataSource(dataSource);
 
-            if (config.isAsync()) {
-                runAsync(config, flyway);
-            } else {
-                runFlyway(config, flyway);
-            }
+        Flyway flyway = fluentConfiguration.load();
+        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
+
+        if (config.isAsync()) {
+            runAsync(config, flyway);
+        } else {
+            runFlyway(config, flyway);
         }
     }
 
