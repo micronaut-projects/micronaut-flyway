@@ -38,3 +38,20 @@ include::{flywaytests}/resources/db/migration/V1__create-books-schema.sql[indent
 ----
 
 NOTE: Starting with Micronaut `1.1.3` it is not necessary to define the `jpa` configuration if you only want to run the migrations but not actually use JPA.
+
+== Run migrations manually
+
+If you need more control to decide when the migrations are executed it is possible to configure the application like this:
+
+[source,yaml]
+----
+flyway:
+  enabled: true # <1>
+  datasources:
+    default:
+      enabled: false # <2>
+----
+<1> Flyway needs to be enabled
+<2> Disable flyway migrations for your specific datasource
+
+Now you can inject the `FlywayMigrator` bean and call manually the method `run` to execute the migrations when you want.
