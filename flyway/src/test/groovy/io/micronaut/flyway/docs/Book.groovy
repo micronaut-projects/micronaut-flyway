@@ -4,7 +4,9 @@ package io.micronaut.flyway.docs
 import grails.gorm.annotation.Entity
 //end::bookImport[]
 import io.micronaut.context.annotation.Requires
+import io.micronaut.core.annotation.Introspected
 
+@Introspected
 //tag::annotation[]
 @Entity
 //end::annotation[]
