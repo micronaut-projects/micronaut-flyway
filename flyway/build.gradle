@@ -10,10 +10,8 @@ dependencies {
     api "org.flywaydb:flyway-core:$flywayVersion"
     api "io.micronaut:micronaut-management"
     api "io.micronaut.sql:micronaut-jdbc"
-    api "io.projectreactor:reactor-core"
 
-//     TODO: Remove this when RxJava2 -> Reactor is done in core
-//    api "io.micronaut.reactor:micronaut-reactor"
+    implementation "io.projectreactor:reactor-core"
 
     testAnnotationProcessor "io.micronaut:micronaut-inject-java"
     testImplementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
