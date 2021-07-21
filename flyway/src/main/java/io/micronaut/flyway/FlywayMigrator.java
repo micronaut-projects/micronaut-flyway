@@ -52,6 +52,7 @@ public class FlywayMigrator extends AbstractFlywayMigration {
      * @param config     The {@link FlywayConfigurationProperties}
      * @param dataSource The {@link DataSource}
      */
+    @Override
     public void run(FlywayConfigurationProperties config,
                               DataSource dataSource) {
         super.forceRun(config, dataSource);
