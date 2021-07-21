@@ -11,11 +11,6 @@ buildscript {
 subprojects { Project subproject ->
     group "io.micronaut.flyway"
 
-    // TODO: Remove when using non-snapshot version of micronaut-core
-    repositories {
-        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
-    }
-
     apply plugin: "io.micronaut.build.internal.common"
     apply plugin: "io.micronaut.build.internal.dependency-updates"
     apply plugin: "io.micronaut.build.internal.publishing"
