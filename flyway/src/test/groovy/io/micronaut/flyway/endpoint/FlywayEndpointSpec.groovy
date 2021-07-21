@@ -6,7 +6,7 @@ import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
-import io.micronaut.http.client.RxHttpClient
+import io.micronaut.http.client.HttpClient
 import io.micronaut.runtime.server.EmbeddedServer
 import spock.lang.Specification
 
@@ -84,12 +84,12 @@ class FlywayEndpointSpec extends Specification {
             Environment.TEST
         )
         URL server = embeddedServer.getURL()
-        RxHttpClient rxClient = embeddedServer.applicationContext.createBean(RxHttpClient, server)
+        HttpClient client = embeddedServer.applicationContext.createBean(HttpClient, server)
 
         when:
         //datasource must be loaded to show the migrations
         embeddedServer.applicationContext.getBeansOfType(DataSource)
-        HttpResponse<List<Map>> response = rxClient.toBlocking()
+        HttpResponse<List<Map>> response = client.toBlocking()
             .exchange(HttpRequest.GET("/flyway"), Argument.of(List, Map))
 
         then:
@@ -102,7 +102,7 @@ class FlywayEndpointSpec extends Specification {
         result[0].migrations[1].script == 'V2__insert-data-books.sql'
 
         cleanup:
-        rxClient.close()
+        client.close()
         embeddedServer.close()
     }
 
@@ -127,12 +127,12 @@ class FlywayEndpointSpec extends Specification {
             Environment.TEST
         )
         URL server = embeddedServer.getURL()
-        RxHttpClient rxClient = embeddedServer.applicationContext.createBean(RxHttpClient, server)
+        HttpClient client = embeddedServer.applicationContext.createBean(HttpClient, server)
 
         when:
         //datasource must be loaded to show the migrations
         embeddedServer.applicationContext.getBeansOfType(DataSource)
-        HttpResponse<List> response = rxClient.toBlocking()
+        HttpResponse<List> response = client.toBlocking()
             .exchange(HttpRequest.GET("/flyway"), Argument.of(List, Map))
 
         then:
@@ -148,7 +148,7 @@ class FlywayEndpointSpec extends Specification {
         result[1].migrations[0].script == 'V1__create-books-schema.sql'
 
         cleanup:
-        rxClient.close()
+        client.close()
         embeddedServer.close()
     }
 
@@ -167,10 +167,10 @@ class FlywayEndpointSpec extends Specification {
             Environment.TEST
         )
         URL server = embeddedServer.getURL()
-        RxHttpClient rxClient = embeddedServer.applicationContext.createBean(RxHttpClient, server)
+        HttpClient client = embeddedServer.applicationContext.createBean(HttpClient, server)
 
         when:
-        HttpResponse<List> response = rxClient.toBlocking()
+        HttpResponse<List> response = client.toBlocking()
             .exchange(HttpRequest.GET("/flyway"), Argument.of(List, Map))
 
         then:
@@ -179,7 +179,7 @@ class FlywayEndpointSpec extends Specification {
         result.size() == 0
 
         cleanup:
-        rxClient.close()
+        client.close()
         embeddedServer.close()
     }
 }

@@ -17,8 +17,8 @@ package io.micronaut.flyway;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.event.ApplicationEventPublisher;
+import jakarta.inject.Singleton;
 
-import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 /**
@@ -52,6 +52,7 @@ public class FlywayMigrator extends AbstractFlywayMigration {
      * @param config     The {@link FlywayConfigurationProperties}
      * @param dataSource The {@link DataSource}
      */
+    @Override
     public void run(FlywayConfigurationProperties config,
                               DataSource dataSource) {
         super.forceRun(config, dataSource);
