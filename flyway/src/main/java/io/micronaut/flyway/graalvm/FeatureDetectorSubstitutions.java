@@ -81,4 +81,9 @@ final class FeatureDetectorSubstitutions {
         return false;
     }
 
+    @Substitute
+    public static boolean areExperimentalFeaturesEnabled() {
+        return false;
+    }
+
 }
