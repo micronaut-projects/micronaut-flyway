@@ -2,3 +2,5 @@ To use the Micronaut's integration with https://flywaydb.org/[Flyway] you must h
 dependency on your classpath:
 
 dependency:micronaut-flyway[groupId="io.micronaut.flyway"]
+
+You also need dependencies for the JDBC connection pool and the JDBC driver as described in https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc[Configuring a JDBC DataSource].
