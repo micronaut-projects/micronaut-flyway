@@ -9,6 +9,7 @@ import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
 import javax.sql.DataSource
+import java.sql.SQLException
 
 class FlywayMigratorSpec extends Specification {
 
@@ -31,22 +32,11 @@ class FlywayMigratorSpec extends Specification {
     @AutoCleanup
     ApplicationContext applicationContext = ApplicationContext.run(config as Map<String, Object>, Environment.TEST)
 
-    void 'when migrations are disable it is possible to run them using the FlywayMigrator'() {
+    void 'when migrations are disabled it is possible to run them using the FlywayMigrator'() {
         when:
         FlywayMigrator flywayMigrator = applicationContext.getBean(FlywayMigrator)
         DataSource dataSource = applicationContext.getBean(DataSource)
         FlywayConfigurationProperties flywayConfigurationProperties = applicationContext.getBean(FlywayConfigurationProperties)
-
-        then:
-        noExceptionThrown()
-
-        when:
-        flywayMigrator.run(flywayConfigurationProperties, dataSource)
-
-        then:
-        noExceptionThrown()
-
-        when:
         PollingConditions conditions = new PollingConditions(timeout: 5)
         Sql sql = Sql.newInstance(config.get('datasources.default.url'),
                                   config.get('datasources.default.username'),
@@ -54,6 +44,19 @@ class FlywayMigratorSpec extends Specification {
                                   config.get('datasources.default.driverClassName'))
 
         then:
+        noExceptionThrown()
+
+        when:
+        sql.rows('select count(*) from books')
+
+        then: 'the migration was not already run'
+        thrown(SQLException)
+
+        when:
+        flywayMigrator.run(flywayConfigurationProperties, dataSource)
+
+        then:
+        noExceptionThrown()
         conditions.eventually {
             sql.rows('select count(*) from books').get(0)[0] == 2
         }
