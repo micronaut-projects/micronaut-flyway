@@ -19,17 +19,11 @@ dependencies {
     testImplementation "io.micronaut:micronaut-http-client"
     testImplementation "io.micronaut:micronaut-http-server-netty"
     testImplementation "io.micronaut.sql:micronaut-jdbc-hikari"
-    testImplementation "io.micronaut.groovy:micronaut-hibernate-gorm:2.2.0"
+    testImplementation "io.micronaut.groovy:micronaut-hibernate-gorm"
     testImplementation("org.spockframework:spock-core:${spockVersion}") {
         exclude module:'groovy-all'
     }
     testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
-    testImplementation "com.h2database:h2:1.4.199" // Do not upgrade to 1.4.200
+    testImplementation "com.h2database:h2"
     testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
-}
-
-micronautBuild {
-    resolutionStrategy {
-        force "com.h2database:h2:1.4.199"
-    }
 }
