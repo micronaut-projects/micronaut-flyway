@@ -274,12 +274,11 @@ For example:
 <div class="listingblock">
 <div class="title">src/main/resources/db/migration/V1__create-books-schema.sql</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books (
-  id int not null primary key,
-  name varchar(255) not null,
-  constraint id unique (id),
-  constraint name unique (name),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table books(
+    id bigint auto_increment primary key,
+    name varchar(255) not null,
+    constraint UK_name unique (name)
+);</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
