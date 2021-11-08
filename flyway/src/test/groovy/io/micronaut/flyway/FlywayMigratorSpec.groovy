@@ -3,6 +3,7 @@ package io.micronaut.flyway
 import groovy.sql.Sql
 import io.micronaut.context.ApplicationContext
 import io.micronaut.context.env.Environment
+import io.micronaut.inject.qualifiers.Qualifiers
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
@@ -35,7 +36,7 @@ class FlywayMigratorSpec extends Specification {
     void 'when migrations are disabled it is possible to run them using the FlywayMigrator'() {
         when:
         FlywayMigrator flywayMigrator = applicationContext.getBean(FlywayMigrator)
-        DataSource dataSource = applicationContext.getBean(DataSource)
+        DataSource dataSource = applicationContext.getBean(DataSource, Qualifiers.byName("default"))
         FlywayConfigurationProperties flywayConfigurationProperties = applicationContext.getBean(FlywayConfigurationProperties)
         PollingConditions conditions = new PollingConditions(timeout: 5)
         Sql sql = Sql.newInstance(config.get('datasources.default.url'),

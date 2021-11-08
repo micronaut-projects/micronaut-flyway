@@ -67,11 +67,6 @@ final class FeatureDetectorSubstitutions {
     }
 
     @Substitute
-    public boolean isAndroidAvailable() {
-        return false;
-    }
-
-    @Substitute
     public boolean isAwsAvailable() {
         return false;
     }
