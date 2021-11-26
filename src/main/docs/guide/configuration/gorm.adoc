@@ -3,7 +3,7 @@ There is also support for running Flyway migrations when using GORM.
 
 1.- Add the dependency:
 
-dependency:micronaut-hibernate-gorm[groupId="io.micronaut.configuration"]
+dependency:micronaut-hibernate-gorm[groupId="io.micronaut.groovy"]
 
 2.- You also need at least one class annotated with `@grails.gorm.annotation.Entity` to trigger the migrations.
 [source, groovy]
