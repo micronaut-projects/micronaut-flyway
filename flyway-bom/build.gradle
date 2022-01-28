@@ -1,0 +1,10 @@
+plugins {
+    id "io.micronaut.build.internal.bom"
+}
+dependencies {
+    constraints {
+        api("org.flywaydb:flyway-core:$flywayVersion")
+        api("org.flywaydb:flyway-mysql:$flywayVersion")
+        api("org.flywaydb:flyway-sqlserver:$flywayVersion")
+    }
+}
