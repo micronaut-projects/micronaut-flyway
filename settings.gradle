@@ -12,3 +12,4 @@ plugins {
 rootProject.name = 'flyway-parent'
 
 include 'flyway'
+include 'flyway-bom'
