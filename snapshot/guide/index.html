@@ -144,8 +144,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;micronaut-flyway&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>You also need dependencies for the JDBC connection pool and the JDBC driver as described in <a href="https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc">Configuring a JDBC DataSource</a>.</p>
@@ -355,8 +354,7 @@ Starting with Micronaut <code>1.1.3</code> it is not necessary to define the <co
     &lt;artifactId&gt;micronaut-hibernate-gorm&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>2.- You also need at least one class annotated with <code>@grails.gorm.annotation.Entity</code> to trigger the migrations.</p>
@@ -386,7 +384,7 @@ class Book {
   driverClassName: org.h2.Driver
   username: sa
   password: ''
-
+        
 flyway:
   datasources: <i class="conum" data-value="3"></i><b>(3)</b>
     default: <i class="conum" data-value="4"></i><b>(4)</b>
@@ -433,7 +431,7 @@ flyway:
   driverClassName: org.h2.Driver
   username: sa
   password: ''
-
+  
 dataSources:
   books: <i class="conum" data-value="2"></i><b>(2)</b>
     pooled: true
@@ -443,7 +441,7 @@ dataSources:
     driverClassName: org.h2.Driver
     username: sa
     password: ''
-
+        
 flyway:
   datasources:
     default: <i class="conum" data-value="3"></i><b>(3)</b>
@@ -499,7 +497,7 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <p>There are several options available for configuration:</p>
 </div>
 <a id="io.micronaut.flyway.FlywayConfigurationProperties" href="#io.micronaut.flyway.FlywayConfigurationProperties">&#128279;</a>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Configuration Properties for <a href="../api/io/micronaut/flyway/FlywayConfigurationProperties.html">FlywayConfigurationProperties</a></caption>
 <colgroup>
 <col style="width: 33.3333%;">
