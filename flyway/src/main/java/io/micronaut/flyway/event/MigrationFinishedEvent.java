@@ -15,8 +15,8 @@
  */
 package io.micronaut.flyway.event;
 
-import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.context.event.ApplicationEvent;
+import io.micronaut.flyway.FlywayConfigurationProperties;
 
 /**
  * Fired when a Flyway migration has finished.

@@ -27,6 +27,8 @@ import jakarta.inject.Singleton;
 
 import javax.sql.DataSource;
 
+import static io.micronaut.jdbc.DataSourceResolver.DEFAULT;
+
 /**
  * Run migrations when there is a {@link DataSource} defined for it.
  *
@@ -48,7 +50,7 @@ public class DataSourceMigrationRunner extends AbstractFlywayMigration implement
                                      ApplicationEventPublisher eventPublisher,
                                      @Nullable DataSourceResolver dataSourceResolver) {
         super(applicationContext, eventPublisher);
-        this.dataSourceResolver = dataSourceResolver != null ? dataSourceResolver : DataSourceResolver.DEFAULT;
+        this.dataSourceResolver = dataSourceResolver != null ? dataSourceResolver : DEFAULT;
     }
 
     @Override
@@ -56,15 +58,12 @@ public class DataSourceMigrationRunner extends AbstractFlywayMigration implement
         DataSource dataSource = event.getBean();
         if (event.getBeanDefinition() instanceof NameResolver) {
             ((NameResolver) event.getBeanDefinition())
-                    .resolveName()
-                    .ifPresent(name -> {
-                        applicationContext
-                                .findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name))
-                                .ifPresent(flywayConfig -> {
-                                    DataSource unwrappedDataSource = dataSourceResolver.resolve(dataSource);
-                                    run(flywayConfig, unwrappedDataSource);
-                                });
-                    });
+                .resolveName()
+                .flatMap(name -> applicationContext.findBean(FlywayConfigurationProperties.class, Qualifiers.byName(name)))
+                .ifPresent(flywayConfig -> {
+                    DataSource unwrappedDataSource = dataSourceResolver.resolve(dataSource);
+                    run(flywayConfig, unwrappedDataSource);
+                });
         }
         return dataSource;
     }
