@@ -1,6 +1,7 @@
 plugins {
     id "io.micronaut.build.internal.bom"
 }
+
 dependencies {
     constraints {
         api("org.flywaydb:flyway-core:$flywayVersion")
