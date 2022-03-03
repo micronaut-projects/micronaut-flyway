@@ -42,14 +42,15 @@ class AbstractFlywayMigration {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractFlywayMigration.class);
 
-    final ApplicationContext applicationContext;
-    final ApplicationEventPublisher eventPublisher;
+    protected final ApplicationContext applicationContext;
+    private final ApplicationEventPublisher eventPublisher;
 
     /**
      * @param applicationContext The application context
      * @param eventPublisher     The event publisher
      */
-    AbstractFlywayMigration(ApplicationContext applicationContext, ApplicationEventPublisher eventPublisher) {
+    AbstractFlywayMigration(ApplicationContext applicationContext,
+                            ApplicationEventPublisher eventPublisher) {
         this.applicationContext = applicationContext;
         this.eventPublisher = eventPublisher;
     }
@@ -77,7 +78,7 @@ class AbstractFlywayMigration {
         fluentConfiguration.dataSource(dataSource);
 
         Flyway flyway = fluentConfiguration.load();
-        this.applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
+        applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
 
         if (config.isAsync()) {
             runAsync(config, flyway);
@@ -88,15 +89,11 @@ class AbstractFlywayMigration {
 
     private void runFlyway(FlywayConfigurationProperties config, Flyway flyway) {
         if (config.isCleanSchema()) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Cleaning schema for database with qualifier [{}]", config.getNameQualifier());
-            }
+            LOG.info("Cleaning schema for database with qualifier [{}]", config.getNameQualifier());
             flyway.clean();
             eventPublisher.publishEvent(new SchemaCleanedEvent(config));
         }
-        if (LOG.isInfoEnabled()) {
-            LOG.info("Running migrations for database with qualifier [{}]", config.getNameQualifier());
-        }
+        LOG.info("Running migrations for database with qualifier [{}]", config.getNameQualifier());
         flyway.migrate();
         eventPublisher.publishEvent(new MigrationFinishedEvent(config));
     }

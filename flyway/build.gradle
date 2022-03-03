@@ -3,31 +3,27 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-graal"
-    annotationProcessor "io.micronaut.docs:micronaut-docs-asciidoc-config-props:$micronautDocsVersion"
+    annotationProcessor 'io.micronaut:micronaut-graal'
 
-    compileOnly "io.micronaut:micronaut-inject-java"
-    compileOnly "org.graalvm.nativeimage:svm"
+    compileOnly 'io.micronaut:micronaut-inject-java'
+    compileOnly 'org.graalvm.nativeimage:svm'
     compileOnly "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
 
     api "org.flywaydb:flyway-core:$flywayVersion"
-    api "io.micronaut:micronaut-management"
-    api "io.micronaut.sql:micronaut-jdbc"
+    api 'io.micronaut:micronaut-management'
+    api 'io.micronaut.sql:micronaut-jdbc'
 
-    implementation "io.projectreactor:reactor-core"
-    implementation "jakarta.inject:jakarta.inject-api"
+    implementation 'io.projectreactor:reactor-core'
+    implementation 'jakarta.inject:jakarta.inject-api'
 
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+    testAnnotationProcessor 'io.micronaut:micronaut-inject-java'
     testImplementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
-    testImplementation "io.micronaut:micronaut-http-client"
-    testImplementation "io.micronaut:micronaut-http-server-netty"
-    testImplementation "io.micronaut.sql:micronaut-jdbc-hikari"
-    testImplementation "io.micronaut.groovy:micronaut-hibernate-gorm"
-    testImplementation("org.spockframework:spock-core:${spockVersion}") {
-        exclude module:'groovy-all'
-    }
+    testImplementation 'io.micronaut:micronaut-http-client'
+    testImplementation 'io.micronaut:micronaut-http-server-netty'
+    testImplementation 'io.micronaut.sql:micronaut-jdbc-hikari'
+    testImplementation 'io.micronaut.groovy:micronaut-hibernate-gorm'
+    testImplementation "org.spockframework:spock-core:$spockVersion"
     testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
-    testImplementation "com.h2database:h2"
-    testAnnotationProcessor "javax.persistence:javax.persistence-api:2.2"
+    testImplementation 'com.h2database:h2'
+    testAnnotationProcessor 'javax.persistence:javax.persistence-api:2.2'
 }

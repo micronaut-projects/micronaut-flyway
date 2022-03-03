@@ -1,5 +1,9 @@
 package io.micronaut.flyway
 
+import static io.micronaut.flyway.AbstractFlywaySpec.DS_DRIVER
+import static io.micronaut.flyway.AbstractFlywaySpec.DS_PASSWORD
+import static io.micronaut.flyway.AbstractFlywaySpec.DS_USERNAME
+
 trait ConfigurationFixture {
 
     Map<String, Object> getConfiguration() {
@@ -19,15 +23,15 @@ trait ConfigurationFixture {
     }
 
     Map<String, Object> getDataSourceConfiguration(String database,
-                                                   String dataSourceName = 'default',
-                                                   String driverClassName = 'org.h2.Driver',
-                                                   String username = 'sa',
-                                                   String password = '') {
+                                                   String dsName = 'default',
+                                                   String driverClassName = DS_DRIVER,
+                                                   String username = DS_USERNAME,
+                                                   String password = DS_PASSWORD) {
         Map<String, Object> m = [:]
-        m['datasources.' + dataSourceName + '.url'] = driverClassName == 'org.h2.Driver' ? h2JdbcUrl(database) : ''
-        m['datasources.' + dataSourceName + '.username'] = username
-        m['datasources.' + dataSourceName + '.password'] = password
-        m['datasources.' + dataSourceName + '.driverClassName'] = driverClassName
+        m['datasources.' + dsName + '.url'] = driverClassName == DS_DRIVER ? h2JdbcUrl(database) : ''
+        m['datasources.' + dsName + '.username'] = username
+        m['datasources.' + dsName + '.password'] = password
+        m['datasources.' + dsName + '.driverClassName'] = driverClassName
         m
     }
 

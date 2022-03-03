@@ -39,7 +39,7 @@ import javax.sql.DataSource;
 @Singleton
 public class AlternativeMigrationRunner extends AbstractFlywayMigration implements BeanCreatedEventListener<FlywayConfigurationProperties> {
 
-    static final Logger LOG = LoggerFactory.getLogger(Condition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Condition.class);
 
     /**
      * @param applicationContext The application context
@@ -61,9 +61,7 @@ public class AlternativeMigrationRunner extends AbstractFlywayMigration implemen
                 run(config, dataSource);
             } else {
                 if (!applicationContext.containsBean(DataSource.class, Qualifiers.byName(name))) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("* Flyway bean not created for identifier [" + name + "] because no data source was found with a named qualifier of the same name.");
-                    }
+                    LOG.debug("* Flyway bean not created for identifier [{}] because no data source was found with a named qualifier of the same name.", name);
                 }
             }
         }

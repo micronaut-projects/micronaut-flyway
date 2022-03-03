@@ -197,5 +197,4 @@ public class FlywayConfigurationProperties implements Toggleable {
     public FluentConfiguration getFluentConfiguration() {
         return fluentConfiguration;
     }
-
 }

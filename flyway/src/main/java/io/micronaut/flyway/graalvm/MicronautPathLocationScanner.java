@@ -21,13 +21,15 @@ import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.resource.LoadableResource;
 import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.flywaydb.core.internal.scanner.classpath.ResourceAndClassScanner;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * This class is used in order to prevent Flyway from doing classpath scanning which is both slow and won't work in
@@ -41,21 +43,20 @@ import java.util.List;
 @SuppressWarnings("rawtypes")
 @Internal
 final class MicronautPathLocationScanner implements ResourceAndClassScanner {
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Condition.class);
 
+    private static final Logger LOG = LoggerFactory.getLogger(Condition.class);
     private static final String LOCATION_SEPARATOR = "/";
     private static List<String> applicationMigrationFiles;
 
-    private final Collection<LoadableResource> scannedResources;
+    private final Collection<LoadableResource> scannedResources = new ArrayList<>();
 
     public MicronautPathLocationScanner(Collection<Location> locations) {
-        this.scannedResources = new ArrayList<>();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
         for (String migrationFile : applicationMigrationFiles) {
             if (canHandleMigrationFile(locations, migrationFile)) {
                 LOG.debug("Loading %{}", migrationFile);
-                scannedResources.add(new ClassPathResource(null, migrationFile, classLoader, StandardCharsets.UTF_8));
+                scannedResources.add(new ClassPathResource(null, migrationFile, classLoader, UTF_8));
             }
         }
     }
@@ -84,9 +85,9 @@ final class MicronautPathLocationScanner implements ResourceAndClassScanner {
 
             if (migrationFile.startsWith(locationPath)) {
                 return true;
-            } else {
-                LOG.debug("Migration file '{}' will be ignored because it does not start with '{}'", migrationFile, locationPath);
             }
+
+            LOG.debug("Migration file '{}' will be ignored because it does not start with '{}'", migrationFile, locationPath);
         }
 
         return false;

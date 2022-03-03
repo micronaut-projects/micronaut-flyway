@@ -31,10 +31,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,39 +74,35 @@ final class FlywayFeature implements Feature {
     }
 
     private List<String> discoverApplicationMigrations(List<String> locations) throws IOException, URISyntaxException {
-        try {
-            List<String> applicationMigrationResources = new ArrayList<>();
-            // Locations can be a comma separated list
-            for (String location : locations) {
-                // Strip any 'classpath:' protocol prefixes because they are assumed
-                // but not recognized by ClassLoader.getResources()
-                if (location != null && location.startsWith(CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL + ':')) {
-                    location = location.substring(CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL.length() + 1);
-                }
-                Enumeration<URL> migrations = Thread.currentThread().getContextClassLoader().getResources(location);
-                while (migrations.hasMoreElements()) {
-                    URL path = migrations.nextElement();
-                    LOG.debug("Adding application migrations in path '{}' using protocol '{}'", path.getPath(), path.getProtocol());
-                    final Set<String> applicationMigrations;
-                    if (JAR_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
-                        try (FileSystem fileSystem = initFileSystem(path.toURI())) {
-                            applicationMigrations = getApplicationMigrationsFromPath(location, path);
-                        }
-                    } else if (FILE_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
+        List<String> applicationMigrationResources = new ArrayList<>();
+        // Locations can be a comma separated list
+        for (String location : locations) {
+            // Strip any 'classpath:' protocol prefixes because they are assumed
+            // but not recognized by ClassLoader.getResources()
+            if (location != null && location.startsWith(CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL + ':')) {
+                location = location.substring(CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL.length() + 1);
+            }
+            Enumeration<URL> migrations = Thread.currentThread().getContextClassLoader().getResources(location);
+            while (migrations.hasMoreElements()) {
+                URL path = migrations.nextElement();
+                LOG.debug("Adding application migrations in path '{}' using protocol '{}'", path.getPath(), path.getProtocol());
+                final Set<String> applicationMigrations;
+                if (JAR_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
+                    try (FileSystem fileSystem = initFileSystem(path.toURI())) {
                         applicationMigrations = getApplicationMigrationsFromPath(location, path);
-                    } else {
-                        LOG.warn("Unsupported URL protocol '{}' for path '{}'. Migration files will not be discovered.", path.getProtocol(), path.getPath());
-                        applicationMigrations = null;
                     }
-                    if (applicationMigrations != null) {
-                        applicationMigrationResources.addAll(applicationMigrations);
-                    }
+                } else if (FILE_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
+                    applicationMigrations = getApplicationMigrationsFromPath(location, path);
+                } else {
+                    LOG.warn("Unsupported URL protocol '{}' for path '{}'. Migration files will not be discovered.", path.getProtocol(), path.getPath());
+                    applicationMigrations = null;
+                }
+                if (applicationMigrations != null) {
+                    applicationMigrationResources.addAll(applicationMigrations);
                 }
             }
-            return applicationMigrationResources;
-        } catch (IOException | URISyntaxException e) {
-            throw e;
         }
+        return applicationMigrationResources;
     }
 
     private Set<String> getApplicationMigrationsFromPath(final String location, final URL path)
@@ -123,8 +118,6 @@ final class FlywayFeature implements Feature {
     }
 
     private FileSystem initFileSystem(final URI uri) throws IOException {
-        final Map<String, String> env = new HashMap<>();
-        env.put("create", "true");
-        return FileSystems.newFileSystem(uri, env);
+        return FileSystems.newFileSystem(uri, Collections.singletonMap("create", "true"));
     }
 }

@@ -9,7 +9,7 @@ plugins {
     id 'io.micronaut.build.shared.settings' version '5.2.1'
 }
 
-rootProject.name = 'flyway-parent'
+rootProject.name = 'micronaut-flyway'
 
 include 'flyway'
 include 'flyway-bom'

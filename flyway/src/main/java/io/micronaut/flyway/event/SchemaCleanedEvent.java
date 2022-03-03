@@ -15,8 +15,8 @@
  */
 package io.micronaut.flyway.event;
 
-import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.context.event.ApplicationEvent;
+import io.micronaut.flyway.FlywayConfigurationProperties;
 
 /**
  * Fired when a Flyway schema has been cleaned.
@@ -27,7 +27,7 @@ import io.micronaut.context.event.ApplicationEvent;
 public class SchemaCleanedEvent extends ApplicationEvent {
 
     /**
-     * @param config The Flyway configuration that corresponds 
+     * @param config The Flyway configuration that corresponds
      * to the schema that was cleaned
      */
     public SchemaCleanedEvent(FlywayConfigurationProperties config) {

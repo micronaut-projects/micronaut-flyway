@@ -15,8 +15,8 @@
  */
 package io.micronaut.flyway.endpoint;
 
-import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.flyway.FlywayConfigurationProperties;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.management.endpoint.annotation.Endpoint;
 import io.micronaut.management.endpoint.annotation.Read;

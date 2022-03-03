@@ -50,7 +50,7 @@ public class FlywayReport {
      * @return The name of the data source
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**

@@ -13,13 +13,15 @@ class DataSourceMigrationRunnerSpec extends ApplicationContextSpecification {
     String getSpecName() {
         'DataSourceMigrationRunnerSpec'
     }
+
     @Override
     Map<String, Object> getConfiguration() {
         super.configuration +
                 getDataSourceConfiguration('datasourcemigrationrunner') +
                 getJpaConfiguration(['example.micronaut'])
     }
-    void "DataSourceMigrationRunner::onCreated returns wrapped Datasource"() {
+
+    void 'DataSourceMigrationRunner::onCreated returns wrapped Datasource'() {
         when:
         DataSource dataSource = applicationContext.getBean(DataSource)
 
