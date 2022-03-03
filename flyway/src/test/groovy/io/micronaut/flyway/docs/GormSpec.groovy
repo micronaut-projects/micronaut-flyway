@@ -1,17 +1,14 @@
 package io.micronaut.flyway.docs
 
-import groovy.sql.Sql
+import io.micronaut.flyway.AbstractFlywaySpec
 import io.micronaut.flyway.FlywayConfigurationProperties
 import io.micronaut.flyway.GormMigrationRunner
 import io.micronaut.flyway.YamlAsciidocTagCleaner
-import io.micronaut.context.ApplicationContext
-import io.micronaut.context.env.Environment
 import org.flywaydb.core.Flyway
 import org.yaml.snakeyaml.Yaml
 import spock.lang.Shared
-import spock.lang.Specification
 
-class GormSpec extends Specification implements YamlAsciidocTagCleaner {
+class GormSpec extends AbstractFlywaySpec implements YamlAsciidocTagCleaner {
 
     String gormConfig = '''\
 spec.name: GormDocSpec
@@ -24,7 +21,7 @@ dataSource: # <1>
   driverClassName: org.h2.Driver
   username: sa
   password: ''
-        
+
 flyway:
   datasources: # <3>
     default: # <4>
@@ -39,9 +36,9 @@ flyway:
             jmxExport      : true,
             dbCreate       : 'none',
             url            : 'jdbc:h2:mem:GORMDb',
-            driverClassName: 'org.h2.Driver',
-            username       : 'sa',
-            password       : ''
+            driverClassName: DS_DRIVER,
+            username       : DS_USERNAME,
+            password       : DS_PASSWORD
         ],
         flyway     : [
             datasources: [
@@ -54,7 +51,7 @@ flyway:
 
     void 'test flyway migrations are executed with GORM'() {
         given:
-        ApplicationContext applicationContext = ApplicationContext.run(flatten(flywayMap) as Map<String, Object>, Environment.TEST)
+        run(flatten(flywayMap))
 
         when:
         applicationContext.getBean(GormMigrationRunner)
@@ -81,11 +78,7 @@ flyway:
         then:
         m == flywayMap
 
-        when:
-        Map db = [url: 'jdbc:h2:mem:GORMDb', user: 'sa', password: '', driver: 'org.h2.Driver']
-        Sql sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
-
-        then:
-        sql.rows('select count(*) from books').get(0)[0] == 2
+        and:
+        newSql('jdbc:h2:mem:GORMDb').rows('select count(*) from books')[0][0] == 2
     }
 }
