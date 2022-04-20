@@ -3,27 +3,25 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor 'io.micronaut:micronaut-graal'
+    annotationProcessor libs.micronaut.graal
 
-    compileOnly 'io.micronaut:micronaut-inject-java'
-    compileOnly 'org.graalvm.nativeimage:svm'
-    compileOnly "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
+    compileOnly libs.graal
+    compileOnly libs.grails.datastore.gorm.hibernate5
 
-    api "org.flywaydb:flyway-core:$flywayVersion"
-    api 'io.micronaut:micronaut-management'
-    api 'io.micronaut.sql:micronaut-jdbc'
+    api libs.managed.flyway
+    api libs.micronaut.management
+    api libs.micronaut.jdbc
 
-    implementation 'io.projectreactor:reactor-core'
-    implementation 'jakarta.inject:jakarta.inject-api'
+    implementation libs.projectreactor
 
-    testAnnotationProcessor 'io.micronaut:micronaut-inject-java'
-    testImplementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
-    testImplementation 'io.micronaut:micronaut-http-client'
-    testImplementation 'io.micronaut:micronaut-http-server-netty'
-    testImplementation 'io.micronaut.sql:micronaut-jdbc-hikari'
-    testImplementation 'io.micronaut.groovy:micronaut-hibernate-gorm'
-    testImplementation "org.spockframework:spock-core:$spockVersion"
-    testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernateVersion"
-    testImplementation 'com.h2database:h2'
-    testAnnotationProcessor 'javax.persistence:javax.persistence-api:2.2'
+    testAnnotationProcessor libs.micronaut.inject.java
+    testAnnotationProcessor libs.persistence.api
+
+    testImplementation libs.groovy.sql
+    testImplementation libs.micronaut.http.client
+    testImplementation libs.micronaut.http.server.netty
+    testImplementation libs.micronaut.jdbc.hikari
+    testImplementation libs.micronaut.hibernate.gorm
+    testImplementation libs.grails.datastore.gorm.hibernate5
+    testImplementation libs.h2
 }
