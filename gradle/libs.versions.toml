@@ -1,7 +1,7 @@
 [versions]
 managed-flyway = "8.4.4"
 
-gorm-hibernate = "7.2.1"
+gorm-hibernate = "7.2.2"
 persistence-api = '2.2'
 
 [libraries]
