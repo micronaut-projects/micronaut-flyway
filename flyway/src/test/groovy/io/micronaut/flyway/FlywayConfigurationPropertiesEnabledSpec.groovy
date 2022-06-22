@@ -3,6 +3,7 @@ package io.micronaut.flyway
 import io.micronaut.context.exceptions.NoSuchBeanException
 import io.micronaut.inject.qualifiers.Qualifiers
 import org.flywaydb.core.Flyway
+import org.flywaydb.core.api.pattern.ValidatePattern
 
 import javax.sql.DataSource
 
@@ -57,6 +58,29 @@ class FlywayConfigurationPropertiesEnabledSpec extends AbstractFlywaySpec {
 
         then:
         noExceptionThrown()
+    }
+
+    void 'if flyway configuration then ValidatePatternTypeConverter and Flyway beans are created'() {
+        given:
+        run('spec.name'                         : FlywayConfigurationPropertiesEnabledSpec.simpleName,
+                'flyway.datasources.movies.enabled' : true,
+                'flyway.datasources.movies.ignore-migration-patterns' : "*:missing",
+                'datasources.movies.url'            : 'jdbc:h2:mem:flyway2Db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+                'datasources.movies.username'       : DS_USERNAME,
+                'datasources.movies.password'       : DS_PASSWORD,
+                'datasources.movies.driverClassName': DS_DRIVER)
+
+        when:
+        applicationContext.getBean(DataSource, Qualifiers.byName('movies'))
+        applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('movies'))
+        applicationContext.getBean(Flyway, Qualifiers.byName('movies'))
+
+        then:
+        noExceptionThrown()
+
+        expect:
+        applicationContext.getConversionService().canConvert(String.class, ValidatePattern.class)
+
     }
 
     void 'if flyway is disabled, then FlywayConfigurationProperties bean is created but Flyway bean is not'() {
