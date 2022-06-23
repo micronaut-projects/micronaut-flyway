@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2022 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,15 @@
  */
 package io.micronaut.flyway
 
-import io.micronaut.core.convert.ConversionContext
-import io.micronaut.core.convert.ConversionService
-import io.micronaut.core.convert.DefaultConversionService
-import io.micronaut.core.convert.exceptions.ConversionErrorException
-import io.micronaut.core.type.Argument
 import org.flywaydb.core.api.ErrorCode
 import org.flywaydb.core.api.FlywayException
 import org.flywaydb.core.api.MigrationState
 import org.flywaydb.core.api.pattern.ValidatePattern
 import org.flywaydb.core.internal.license.FlywayTeamsUpgradeRequiredException
 import spock.lang.Specification
-import spock.lang.Unroll
-
-import java.nio.charset.Charset
-import java.time.DayOfWeek
 
 /**
- * Created by graemerocher on 12/06/2017.
+ * Created by Nenad Vico on 22/06/2022.
  */
 class ValidatePatternTypeConverterSpec extends Specification {
 
