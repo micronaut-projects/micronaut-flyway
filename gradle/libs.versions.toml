@@ -1,5 +1,5 @@
 [versions]
-managed-flyway = "8.5.11"
+managed-flyway = "8.5.13"
 
 gorm-hibernate = "7.2.2"
 persistence-api = '2.2'
