@@ -3,6 +3,7 @@ package io.micronaut.flyway
 import io.micronaut.context.exceptions.NoSuchBeanException
 import io.micronaut.inject.qualifiers.Qualifiers
 import org.flywaydb.core.Flyway
+import org.flywaydb.core.api.MigrationState
 import org.flywaydb.core.api.pattern.ValidatePattern
 
 import javax.sql.DataSource
@@ -72,15 +73,18 @@ class FlywayConfigurationPropertiesEnabledSpec extends AbstractFlywaySpec {
 
         when:
         applicationContext.getBean(DataSource, Qualifiers.byName('movies'))
-        applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('movies'))
+        def configuration = applicationContext.getBean(FlywayConfigurationProperties, Qualifiers.byName('movies'))
         applicationContext.getBean(Flyway, Qualifiers.byName('movies'))
 
         then:
         noExceptionThrown()
 
+        and:
+        configuration.fluentConfiguration.ignoreMigrationPatterns.length == 1
+        configuration.fluentConfiguration.ignoreMigrationPatterns[0].matchesMigration(false, MigrationState.MISSING_SUCCESS)
+
         expect:
         applicationContext.getConversionService().canConvert(String.class, ValidatePattern.class)
-
     }
 
     void 'if flyway is disabled, then FlywayConfigurationProperties bean is created but Flyway bean is not'() {
