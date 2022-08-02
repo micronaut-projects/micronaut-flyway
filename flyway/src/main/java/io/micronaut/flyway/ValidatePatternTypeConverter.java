@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2022 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import java.util.Optional;
 /**
  * Converts String's to Flyway ValidatePattern required for reading ignore-migration-patterns parameter.
  *
- * @author Burt Beckwith
+ * @author Nenad Vico
  * @see org.flywaydb.core.api.pattern.ValidatePattern
- * @since 5.3.1
+ * @since 5.4.1
  */
 @Singleton
 public class ValidatePatternTypeConverter implements TypeConverter<String, ValidatePattern> {
