@@ -24,4 +24,5 @@ dependencies {
     testImplementation libs.micronaut.hibernate.gorm
     testImplementation libs.grails.datastore.gorm.hibernate5
     testImplementation libs.h2
+    testImplementation mn.snakeyaml
 }
