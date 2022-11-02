@@ -9,21 +9,8 @@ managed-flyway = { module = "org.flywaydb:flyway-core", version.ref = "managed-f
 managed-flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "managed-flyway" }
 managed-flyway-sqlserver = { module = "org.flywaydb:flyway-sqlserver", version.ref = "managed-flyway" }
 
-micronaut-graal = { module = "io.micronaut:micronaut-graal" }
-micronaut-hibernate-gorm = { module = "io.micronaut.groovy:micronaut-hibernate-gorm" }
-micronaut-http-client = { module = "io.micronaut:micronaut-http-client" }
-micronaut-http-server-netty = { module = "io.micronaut:micronaut-http-server-netty" }
-micronaut-inject-java = { module = 'io.micronaut:micronaut-inject-java' }
-micronaut-jdbc = { module = "io.micronaut.sql:micronaut-jdbc" }
-micronaut-jdbc-hikari = { module = "io.micronaut.sql:micronaut-jdbc-hikari" }
-micronaut-management = { module = "io.micronaut:micronaut-management" }
-
-graal = { module = "org.graalvm.nativeimage:svm" }
 grails-datastore-gorm-hibernate5 = { module = "org.grails:grails-datastore-gorm-hibernate5", version.ref = "gorm-hibernate" }
-
-groovy-sql = { module = "org.codehaus.groovy:groovy-sql" }
 
 h2 = { module = "com.h2database:h2" }
 
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
-projectreactor = { module = 'io.projectreactor:reactor-core' }

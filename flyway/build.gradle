@@ -3,25 +3,26 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor libs.micronaut.graal
+    annotationProcessor mn.micronaut.graal
 
-    compileOnly libs.graal
+    compileOnly mn.graal
     compileOnly libs.grails.datastore.gorm.hibernate5
 
     api libs.managed.flyway
-    api libs.micronaut.management
-    api libs.micronaut.jdbc
+    api mn.micronaut.management
+    api mn.micronaut.jdbc
+    api mn.micronaut.jackson.databind
 
-    implementation libs.projectreactor
+    implementation mn.reactor
 
-    testAnnotationProcessor libs.micronaut.inject.java
+    testAnnotationProcessor mn.micronaut.inject.java
     testAnnotationProcessor libs.persistence.api
 
-    testImplementation libs.groovy.sql
-    testImplementation libs.micronaut.http.client
-    testImplementation libs.micronaut.http.server.netty
-    testImplementation libs.micronaut.jdbc.hikari
-    testImplementation libs.micronaut.hibernate.gorm
+    testImplementation mn.groovy.sql
+    testImplementation mn.micronaut.http.client
+    testImplementation mn.micronaut.http.server.netty
+    testImplementation mn.micronaut.jdbc.hikari
+    testImplementation mn.gorm.hibernate
     testImplementation libs.grails.datastore.gorm.hibernate5
     testImplementation libs.h2
     testImplementation mn.snakeyaml
