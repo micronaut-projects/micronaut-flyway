@@ -1,0 +1,87 @@
+[
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Field $ANNOTATION_METADATA",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Constructor io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference()",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.core.annotation.AnnotationSource",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanContextConditional",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.core.annotation.AnnotationMetadataProvider",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.AdvisedBeanType",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanType",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Intercepted$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanDefinitionReference",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Field $ANNOTATION_METADATA",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Constructor io.micronaut.flyway.$GormMigrationRunner$Definition$Reference()",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Implemented interface io.micronaut.core.annotation.AnnotationSource",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanContextConditional",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Implemented interface io.micronaut.core.annotation.AnnotationMetadataProvider",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanType",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.$GormMigrationRunner$Definition$Reference",
+    "member": "Implemented interface io.micronaut.inject.BeanDefinitionReference",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.GormMigrationRunner",
+    "member": "Implemented interface java.util.EventListener",
+    "reason": "Micronaut 4 Bean Definition changes"
+  },
+  {
+    "type": "io.micronaut.flyway.GormMigrationRunner",
+    "member": "Implemented interface io.micronaut.context.event.BeanCreatedEventListener",
+    "reason": "Micronaut 4 Bean Definition changes"
+  }
+]
