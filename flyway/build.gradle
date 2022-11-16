@@ -6,7 +6,6 @@ dependencies {
     annotationProcessor mn.micronaut.graal
 
     compileOnly mn.graal
-    compileOnly libs.grails.datastore.gorm.hibernate5
 
     api libs.managed.flyway
     api mn.micronaut.management
@@ -22,8 +21,6 @@ dependencies {
     testImplementation mn.micronaut.http.client
     testImplementation mn.micronaut.http.server.netty
     testImplementation mn.micronaut.jdbc.hikari
-    testImplementation mn.gorm.hibernate
-    testImplementation libs.grails.datastore.gorm.hibernate5
     testImplementation libs.h2
     testImplementation mn.snakeyaml
 }
