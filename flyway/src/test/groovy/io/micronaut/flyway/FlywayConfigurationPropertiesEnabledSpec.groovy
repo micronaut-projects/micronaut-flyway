@@ -1,5 +1,6 @@
 package io.micronaut.flyway
 
+import io.micronaut.context.exceptions.BeanInstantiationException
 import io.micronaut.context.exceptions.NoSuchBeanException
 import io.micronaut.inject.qualifiers.Qualifiers
 import org.flywaydb.core.Flyway
@@ -109,4 +110,35 @@ class FlywayConfigurationPropertiesEnabledSpec extends AbstractFlywaySpec {
         NoSuchBeanException e = thrown()
         e.message.contains('No bean of type [' + Flyway.name + '] exists')
     }
+
+    void 'if default configuration has datasources.default.schema-generate then ConfigurationException thrown'() {
+        when:
+        run('spec.name'                         : FlywayConfigurationPropertiesEnabledSpec.simpleName,
+                'flyway.datasources.movies.enabled' : true,
+                'datasources.movies.url'            : 'jdbc:h2:mem:flyway2Db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+                'datasources.movies.username'       : DS_USERNAME,
+                'datasources.movies.password'       : DS_PASSWORD,
+                'datasources.movies.driverClassName': DS_DRIVER,
+                'datasources.movies.schema-generate': 'CREATE_DROP')
+
+        then:
+        def ex = thrown BeanInstantiationException
+        ex.message.contains(
+                "Message: Cannot have configuration property 'datasources.movies.schema-generate' if flyway migration is enabled")
+    }
+
+    void 'if default configuration has datasources.default.schema-generate=NONE then ConfigurationException is not thrown'() {
+        when:
+        run('spec.name'                         : FlywayConfigurationPropertiesEnabledSpec.simpleName,
+                'flyway.datasources.movies.enabled' : true,
+                'datasources.movies.url'            : 'jdbc:h2:mem:flyway2Db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+                'datasources.movies.username'       : DS_USERNAME,
+                'datasources.movies.password'       : DS_PASSWORD,
+                'datasources.movies.driverClassName': DS_DRIVER,
+                'datasources.movies.schema-generate': 'NONE')
+
+        then:
+        noExceptionThrown()
+    }
+
 }
