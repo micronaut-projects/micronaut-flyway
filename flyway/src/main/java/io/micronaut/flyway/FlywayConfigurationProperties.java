@@ -19,8 +19,11 @@ import io.micronaut.context.annotation.ConfigurationBuilder;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
+import io.micronaut.context.env.Environment;
+import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
+import jakarta.annotation.PostConstruct;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
@@ -60,6 +63,25 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public FlywayConfigurationProperties(@Parameter String name) {
         this.nameQualifier = name;
+    }
+
+    /**
+     * Datasource configuration cannot include datasources.[nameQualifier].schema-generate=CREATE_DROP
+     * if this configuration is enabled.
+     *
+     * @param environment Micronaut environment
+     * @throws ConfigurationException if schema-generate=CREATE_DROP is present for datasource
+     * configuration and this configuration is enabled.
+     */
+    @PostConstruct
+    void validate(Environment environment) {
+        String badProp = "datasources." + nameQualifier + ".schema-generate";
+        environment.getProperty(badProp, String.class).ifPresent(value -> {
+            if (isEnabled() && !value.equalsIgnoreCase("NONE")) {
+                throw new ConfigurationException(
+                    String.format("Cannot have configuration property '%s' if flyway migration is enabled", badProp));
+            }
+        });
     }
 
     /**
