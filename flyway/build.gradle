@@ -5,11 +5,11 @@ plugins {
 dependencies {
     annotationProcessor mn.micronaut.graal
 
-    compileOnly mn.graal
+    compileOnly libs.graal.svm
 
     api libs.managed.flyway
     api mn.micronaut.management
-    api mn.micronaut.jdbc
+    api mnSql.micronaut.jdbc
     api mn.micronaut.jackson.databind
 
     implementation mn.reactor
@@ -20,7 +20,7 @@ dependencies {
     testImplementation mn.groovy.sql
     testImplementation mn.micronaut.http.client
     testImplementation mn.micronaut.http.server.netty
-    testImplementation mn.micronaut.jdbc.hikari
-    testImplementation libs.h2
+    testImplementation mnSql.micronaut.jdbc.hikari
+    testImplementation mnSql.h2
     testImplementation mn.snakeyaml
 }

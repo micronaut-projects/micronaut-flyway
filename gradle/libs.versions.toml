@@ -2,7 +2,11 @@
 managed-flyway = "8.5.13"
 
 gorm-hibernate = "7.3.0"
+graal-svm = "22.0.0.2"
 persistence-api = '2.2'
+
+micronaut-sql = "5.0.0-SNAPSHOT"
+
 
 [libraries]
 managed-flyway = { module = "org.flywaydb:flyway-core", version.ref = "managed-flyway" }
@@ -10,7 +14,8 @@ managed-flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "ma
 managed-flyway-sqlserver = { module = "org.flywaydb:flyway-sqlserver", version.ref = "managed-flyway" }
 
 grails-datastore-gorm-hibernate5 = { module = "org.grails:grails-datastore-gorm-hibernate5", version.ref = "gorm-hibernate" }
+graal-svm = { module = "org.graalvm.nativeimage:svm", version.ref = "graal-svm" }
 
-h2 = { module = "com.h2database:h2" }
+micronaut-sql = { module = "io.micronaut.sql:micronaut-sql-bom", version.ref = "micronaut-sql" }
 
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
