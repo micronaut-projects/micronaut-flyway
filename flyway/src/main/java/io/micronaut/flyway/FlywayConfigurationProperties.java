@@ -21,7 +21,6 @@ import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
-import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 /**
@@ -44,7 +43,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "", excludes = {"locations", "jdbcProperties"})
+    @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties"})
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
     private final String nameQualifier;
@@ -164,20 +163,6 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * @return The locations for the database migrations
-     */
-    public Location[] getLocations() {
-        return fluentConfiguration.getLocations();
-    }
-
-    /**
-     * @param locations The locations for the migrations
-     */
-    public void setLocations(String... locations) {
-        fluentConfiguration.locations(locations);
     }
 
     /**
