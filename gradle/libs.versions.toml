@@ -1,12 +1,16 @@
 [versions]
+micronaut-docs = "2.0.0"
+micronaut = "4.0.0-SNAPSHOT"
+micronaut-test = "4.0.0-SNAPSHOT"
+micronaut-sql = "5.0.0-SNAPSHOT"
+
 managed-flyway = "8.5.13"
 
 gorm-hibernate = "7.3.0"
 graal-svm = "22.0.0.2"
 persistence-api = '2.2'
-
-micronaut-sql = "5.0.0-SNAPSHOT"
-
+groovy = "4.0.6"
+spock = "2.3-groovy-4.0"
 
 [libraries]
 managed-flyway = { module = "org.flywaydb:flyway-core", version.ref = "managed-flyway" }
