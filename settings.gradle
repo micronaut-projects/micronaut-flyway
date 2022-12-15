@@ -6,10 +6,17 @@ pluginManagement {
 }
 
 plugins {
-    id 'io.micronaut.build.shared.settings' version '6.1.0'
+    id 'io.micronaut.build.shared.settings' version '6.1.1'
 }
 
 rootProject.name = 'flyway-parent'
 
 include 'flyway'
 include 'flyway-bom'
+
+micronautBuild {
+    addSnapshotRepository()
+    importMicronautCatalog()
+    importMicronautCatalog("micronaut-sql")
+}
+

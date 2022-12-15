@@ -4,7 +4,6 @@ releaseHistory: Release History
 configuration:
   title: Configuration
   jpa: JPA/Hibernate
-  gorm: GORM
   additionalConfig: Additional configuration
 graalvm: GraalVM support
 events: Events
