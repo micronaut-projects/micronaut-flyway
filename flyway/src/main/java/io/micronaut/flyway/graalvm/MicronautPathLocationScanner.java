@@ -15,7 +15,6 @@
  */
 package io.micronaut.flyway.graalvm;
 
-import io.micronaut.context.condition.Condition;
 import io.micronaut.core.annotation.Internal;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.resource.LoadableResource;
@@ -44,18 +43,20 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Internal
 final class MicronautPathLocationScanner implements ResourceAndClassScanner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Condition.class);
     private static final String LOCATION_SEPARATOR = "/";
     private static List<String> applicationMigrationFiles;
 
     private final Collection<LoadableResource> scannedResources = new ArrayList<>();
 
     public MicronautPathLocationScanner(Collection<Location> locations) {
+        // initialize logger in runtime only, that's why it's not `private static final`
+        Logger log = LoggerFactory.getLogger(MicronautPathLocationScanner.class);
+
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
         for (String migrationFile : applicationMigrationFiles) {
-            if (canHandleMigrationFile(locations, migrationFile)) {
-                LOG.debug("Loading %{}", migrationFile);
+            if (canHandleMigrationFile(locations, migrationFile, log)) {
+                log.debug("Loading %{}", migrationFile);
                 scannedResources.add(new ClassPathResource(null, migrationFile, classLoader, UTF_8));
             }
         }
@@ -76,7 +77,7 @@ final class MicronautPathLocationScanner implements ResourceAndClassScanner {
         MicronautPathLocationScanner.applicationMigrationFiles = applicationMigrationFiles;
     }
 
-    private boolean canHandleMigrationFile(Collection<Location> locations, String migrationFile) {
+    private boolean canHandleMigrationFile(Collection<Location> locations, String migrationFile, Logger log) {
         for (Location location : locations) {
             String locationPath = location.getPath();
             if (!locationPath.endsWith(LOCATION_SEPARATOR)) {
@@ -87,7 +88,7 @@ final class MicronautPathLocationScanner implements ResourceAndClassScanner {
                 return true;
             }
 
-            LOG.debug("Migration file '{}' will be ignored because it does not start with '{}'", migrationFile, locationPath);
+            log.debug("Migration file '{}' will be ignored because it does not start with '{}'", migrationFile, locationPath);
         }
 
         return false;

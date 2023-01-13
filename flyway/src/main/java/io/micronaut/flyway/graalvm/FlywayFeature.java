@@ -18,8 +18,6 @@ package io.micronaut.flyway.graalvm;
 import com.oracle.svm.core.annotate.AutomaticFeature;
 import io.micronaut.core.annotation.Internal;
 import org.graalvm.nativeimage.hosted.Feature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
@@ -40,7 +38,7 @@ import java.util.stream.Stream;
 
 /**
  * A GraalVM feature that calculates the migration to apply at compile time.
- *
+ * <p>
  * Forked from Quarkus: https://github.com/quarkusio/quarkus/blob/7a5efed2a97d88656484b431b472210e2bb7d2f3/extensions/flyway/deployment/src/main/java/io/quarkus/flyway/FlywayProcessor.java
  *
  * @author Iván López
@@ -49,8 +47,6 @@ import java.util.stream.Stream;
 @Internal
 @AutomaticFeature
 final class FlywayFeature implements Feature {
-
-    private static final Logger LOG = LoggerFactory.getLogger(FlywayFeature.class);
 
     private static final String CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL = "classpath";
     private static final String JAR_APPLICATION_MIGRATIONS_PROTOCOL = "jar";
@@ -69,7 +65,7 @@ final class FlywayFeature implements Feature {
             List<String> migrations = discoverApplicationMigrations(locations);
             MicronautPathLocationScanner.setApplicationMigrationFiles(migrations);
         } catch (IOException | URISyntaxException e) {
-            LOG.error("There was an error discovering the Flyway migrations: {}", e.getMessage());
+            throw new RuntimeException("There was an error discovering the Flyway migrations: " + e.getMessage(), e);
         }
     }
 
@@ -85,7 +81,7 @@ final class FlywayFeature implements Feature {
             Enumeration<URL> migrations = Thread.currentThread().getContextClassLoader().getResources(location);
             while (migrations.hasMoreElements()) {
                 URL path = migrations.nextElement();
-                LOG.debug("Adding application migrations in path '{}' using protocol '{}'", path.getPath(), path.getProtocol());
+                System.out.println("Adding application migrations in path '" + path.getPath() + "' using protocol '" + path.getProtocol() + "'");
                 final Set<String> applicationMigrations;
                 if (JAR_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
                     try (FileSystem fileSystem = initFileSystem(path.toURI())) {
@@ -94,7 +90,7 @@ final class FlywayFeature implements Feature {
                 } else if (FILE_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
                     applicationMigrations = getApplicationMigrationsFromPath(location, path);
                 } else {
-                    LOG.warn("Unsupported URL protocol '{}' for path '{}'. Migration files will not be discovered.", path.getProtocol(), path.getPath());
+                    System.out.println("Unsupported URL protocol '" + path.getProtocol() + "' for path '" + path.getPath() + "'. Migration files will not be discovered.");
                     applicationMigrations = null;
                 }
                 if (applicationMigrations != null) {
@@ -112,7 +108,7 @@ final class FlywayFeature implements Feature {
                     .map(it -> Paths.get(location, it.getFileName().toString()).toString())
                     // we don't want windows paths here since the paths are going to be used as classpath paths anyway
                     .map(it -> it.replace('\\', '/'))
-                    .peek(it -> LOG.trace("Discovered path: {}", it))
+                    .peek(it -> System.out.println("Discovered path: " + it))
                     .collect(Collectors.toSet());
         }
     }
