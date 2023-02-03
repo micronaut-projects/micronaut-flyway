@@ -2,16 +2,15 @@ This configuration also provides a built-in endpoint to expose all the applied m
 
 To enable the endpoint add the following to the configuration:
 
-[source,yaml]
-.resources/application.yml
+[configuration]
 ----
 endpoints:
   flyway:
-    enabled: true # <1>
-    sensitive: false # <2>
+    enabled: true
+    sensitive: false
 ----
-<1> `/flyway` endpoint is enabled (this is the default).
-<2> `/flyway` endpoint is open for unauthenticated access.
+
+- `/flyway` endpoint is enabled (this is the default), and open for unauthenticated access.
 
 [source,bash]
 ----

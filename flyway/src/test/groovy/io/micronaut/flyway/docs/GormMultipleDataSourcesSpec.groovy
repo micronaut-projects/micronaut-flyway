@@ -12,7 +12,7 @@ class GormMultipleDataSourcesSpec extends AbstractFlywaySpec implements YamlAsci
     String gormConfig = '''\
 spec.name: GormDocSpec
 //tag::yamlconfig[]
-dataSource: # <1>
+dataSource:
   pooled: true
   jmxExport: true
   dbCreate: none
@@ -22,7 +22,7 @@ dataSource: # <1>
   password: ''
 
 dataSources:
-  books: # <2>
+  books:
     pooled: true
     jmxExport: true
     dbCreate: none
@@ -33,9 +33,9 @@ dataSources:
 
 flyway:
   datasources:
-    default: # <3>
+    default:
       enabled: true
-    books: # <4>
+    books:
       enabled: true
 '''//end::yamlconfig[]
 
