@@ -18,24 +18,24 @@ class FlywaySpec extends AbstractFlywaySpec implements YamlAsciidocTagCleaner {
     String yamlConfig = '''\
 //tag::yamlconfig[]
 datasources:
-  default: # <3>
+  default:
     url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
     username: 'sa'
     password: ''
     driverClassName: 'org.h2.Driver'
 jpa:
-  default: # <3>
+  default:
     packages-to-scan:
       - 'example.micronaut'
     properties:
       hibernate:
         hbm2ddl:
-          auto: none # <1>
+          auto: none
         show_sql: true
 flyway:
-  datasources: # <2>
-    default: # <3>
-      enabled: true # <4>
+  datasources:
+    default:
+      enabled: true
 '''//end::yamlconfig[]
 
     @Shared

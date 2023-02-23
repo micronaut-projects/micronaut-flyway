@@ -1,31 +1,29 @@
 You can define Flyway configuration for each datasource. The following example demonstrates using it:
 
-[source, yaml]
-.src/main/resources/application.yml
+[configuration]
 ----
 include::{flywaytests}/groovy/io/micronaut/flyway/docs/FlywaySpec.groovy[tag=yamlconfig,indent=0]
 ----
 
-<1> Disable schema DDL creation.
-<2> Define flyway configuration under `flyway.datasources` key.
-<3> Configure flyway configuration for `default` datasource.
-<4> Enable the flyway migrations for the `default` datasource.
+- `hibernate.hbm2ddl.auto` set to `none` disables schema DDL creation.
+- Define flyway configuration under `flyway.datasources`. The default datasource is configured and enabled in this example under `datasources.default`, `jpa.default` and  and `flyway.datasources.default`
 
 NOTE: You need to put the migrations in Flyway default directory `src/main/resources/db/migration`. If you want to
 modify the default directory or add more, you need to set the property `flyway.datasources.default.locations`.
 For example:
 
-[source,yaml]
+[configuration]
 ----
 flyway:
   datasources:
     default:
       enabled: true
       locations:
-        - classpath:databasemigrations # <1>
-        - classpath:other # <1>
+        - classpath:databasemigrations
+        - classpath:other
 ----
-<1> This will configure Flyway to look for migrations in the directories `src/main/resources/databasemigrations` and
+
+- `locations` configures Flyway to look for migrations in the directories `src/main/resources/databasemigrations` and
 `src/main/resources/other`.
 
 
@@ -43,15 +41,15 @@ NOTE: Starting with Micronaut `1.1.3` it is not necessary to define the `jpa` co
 
 If you need more control to decide when the migrations are executed it is possible to configure the application like this:
 
-[source,yaml]
+[configuration]
 ----
 flyway:
-  enabled: true # <1>
+  enabled: true
   datasources:
     default:
-      enabled: false # <2>
+      enabled: false
 ----
-<1> Flyway needs to be enabled
-<2> Disable flyway migrations for your specific datasource
+- `flyway.enabled` needs to be `true`
+- `datasources.*.enabled` set to `false` can disable flyway migrations for specific datasources
 
 Now you can inject the `FlywayMigrator` bean and call manually the method `run` to execute the migrations when you want.

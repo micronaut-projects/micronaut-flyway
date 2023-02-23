@@ -13,19 +13,19 @@ class GormSpec extends AbstractFlywaySpec implements YamlAsciidocTagCleaner {
     String gormConfig = '''\
 spec.name: GormDocSpec
 //tag::yamlconfig[]
-dataSource: # <1>
+dataSource:
   pooled: true
   jmxExport: true
-  dbCreate: none # <2>
+  dbCreate: none
   url: 'jdbc:h2:mem:GORMDb'
   driverClassName: org.h2.Driver
   username: sa
   password: ''
 
 flyway:
-  datasources: # <3>
-    default: # <4>
-      enabled: true # <5>
+  datasources:
+    default:
+      enabled: true
 '''//end::yamlconfig[]
 
     @Shared
