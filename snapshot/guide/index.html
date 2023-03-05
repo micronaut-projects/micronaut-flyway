@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Micronaut Flyway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
     <link rel="stylesheet" href="../css/custom.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
@@ -94,9 +95,7 @@
         
         <div class="toc-item" style="margin-left:10px" id="toc-item-jpa"><a href="#jpa"><strong>3.1</strong><span>JPA/Hibernate</span></a></div>
         
-        <div class="toc-item" style="margin-left:10px" id="toc-item-gorm"><a href="#gorm"><strong>3.2</strong><span>GORM</span></a></div>
-        
-        <div class="toc-item" style="margin-left:10px" id="toc-item-additionalConfig"><a href="#additionalConfig"><strong>3.3</strong><span>Additional configuration</span></a></div>
+        <div class="toc-item" style="margin-left:10px" id="toc-item-additionalConfig"><a href="#additionalConfig"><strong>3.2</strong><span>Additional configuration</span></a></div>
         
         <div class="toc-item" style="margin-left:0px" id="toc-item-graalvm"><a href="#graalvm"><strong>4</strong><span>GraalVM support</span></a></div>
         
@@ -120,7 +119,7 @@
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/introduction.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/introduction.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -153,7 +152,7 @@ dependency on your classpath:</p>
 <h1 id="releaseHistory"><a class="anchor" href="#releaseHistory"></a>2 Release History</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/releaseHistory.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/releaseHistory.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -169,7 +168,7 @@ dependency on your classpath:</p>
 <h1 id="configuration"><a class="anchor" href="#configuration"></a>3 Configuration</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/configuration.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -180,7 +179,7 @@ dependency on your classpath:</p>
 <h2 id="jpa"><a class="anchor" href="#jpa"></a>3.1 JPA/Hibernate</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/configuration/jpa.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/jpa.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -189,178 +188,49 @@ dependency on your classpath:</p>
 <div class="paragraph">
 <p>You can define Flyway configuration for each datasource. The following example demonstrates using it:</p>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">datasources.default.url=jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-datasources.default.username=sa
-datasources.default.password=
-datasources.default.driverClassName=org.h2.Driver
-jpa.default.packages-to-scan[0]=example.micronaut
-jpa.default.properties.hibernate.hbm2ddl.auto=none
-jpa.default.properties.hibernate.show_sql=true
-flyway.datasources.default.enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
+<div class="listingblock">
+<div class="title">src/main/resources/application.yml</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">datasources:
-  default:
+  default: <i class="conum" data-value="3"></i><b>(3)</b>
     url: 'jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
     username: 'sa'
     password: ''
     driverClassName: 'org.h2.Driver'
 jpa:
-  default:
+  default: <i class="conum" data-value="3"></i><b>(3)</b>
     packages-to-scan:
       - 'example.micronaut'
     properties:
       hibernate:
         hbm2ddl:
-          auto: none
+          auto: none <i class="conum" data-value="1"></i><b>(1)</b>
         show_sql: true
 flyway:
-  datasources:
-    default:
-      enabled: true</code></pre>
+  datasources: <i class="conum" data-value="2"></i><b>(2)</b>
+    default: <i class="conum" data-value="3"></i><b>(3)</b>
+      enabled: true <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[datasources]
-  [datasources.default]
-    url="jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-    username="sa"
-    password=""
-    driverClassName="org.h2.Driver"
-[jpa]
-  [jpa.default]
-    packages-to-scan=[
-      "example.micronaut"
-    ]
-    [jpa.default.properties]
-      [jpa.default.properties.hibernate]
-        [jpa.default.properties.hibernate.hbm2ddl]
-          auto="none"
-        show_sql=true
-[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">datasources {
-  'default' {
-    url = "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-    username = "sa"
-    password = ""
-    driverClassName = "org.h2.Driver"
-  }
-}
-jpa {
-  'default' {
-    packagesToScan = ["example.micronaut"]
-    properties {
-      hibernate {
-        hbm2ddl {
-          auto = "none"
-        }
-        show_sql = true
-      }
-    }
-  }
-}
-flyway {
-  datasources {
-    'default' {
-      enabled = true
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  datasources {
-    default {
-      url = "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-      username = "sa"
-      password = ""
-      driverClassName = "org.h2.Driver"
-    }
-  }
-  jpa {
-    default {
-      packages-to-scan = ["example.micronaut"]
-      properties {
-        hibernate {
-          hbm2ddl {
-            auto = "none"
-          }
-          show_sql = true
-        }
-      }
-    }
-  }
-  flyway {
-    datasources {
-      default {
-        enabled = true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "datasources": {
-    "default": {
-      "url": "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
-      "username": "sa",
-      "password": "",
-      "driverClassName": "org.h2.Driver"
-    }
-  },
-  "jpa": {
-    "default": {
-      "packages-to-scan": ["example.micronaut"],
-      "properties": {
-        "hibernate": {
-          "hbm2ddl": {
-            "auto": "none"
-          },
-          "show_sql": true
-        }
-      }
-    }
-  },
-  "flyway": {
-    "datasources": {
-      "default": {
-        "enabled": true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>hibernate.hbm2ddl.auto</code> set to <code>none</code> disables schema DDL creation.</p>
-</li>
-<li>
-<p>Define flyway configuration under <code>flyway.datasources</code>. The default datasource is configured and enabled in this example under <code>datasources.default</code>, <code>jpa.default</code> and  and <code>flyway.datasources.default</code></p>
-</li>
-</ul>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Disable schema DDL creation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define flyway configuration under <code>flyway.datasources</code> key.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Configure flyway configuration for <code>default</code> datasource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Enable the flyway migrations for the <code>default</code> datasource.</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -376,87 +246,25 @@ For example:
 </tr>
 </table>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">flyway.datasources.default.enabled=true
-flyway.datasources.default.locations[0]=classpath:databasemigrations
-flyway.datasources.default.locations[1]=classpath:other</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
+<div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">flyway:
   datasources:
     default:
       enabled: true
       locations:
-        - classpath:databasemigrations
-        - classpath:other</code></pre>
+        - classpath:databasemigrations <i class="conum" data-value="1"></i><b>(1)</b>
+        - classpath:other <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true
-      locations=[
-        "classpath:databasemigrations",
-        "classpath:other"
-      ]</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">flyway {
-  datasources {
-    'default' {
-      enabled = true
-      locations = ["classpath:databasemigrations", "classpath:other"]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  flyway {
-    datasources {
-      default {
-        enabled = true
-        locations = ["classpath:databasemigrations", "classpath:other"]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "flyway": {
-    "datasources": {
-      "default": {
-        "enabled": true,
-        "locations": ["classpath:databasemigrations", "classpath:other"]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>locations</code> configures Flyway to look for migrations in the directories <code>src/main/resources/databasemigrations</code> and
-<code>src/main/resources/other</code>.</p>
-</li>
-</ul>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This will configure Flyway to look for migrations in the directories <code>src/main/resources/databasemigrations</code> and
+<code>src/main/resources/other</code>.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Now, in the migration directory you can include your migrations:</p>
@@ -489,83 +297,26 @@ Starting with Micronaut <code>1.1.3</code> it is not necessary to define the <co
 <div class="paragraph">
 <p>If you need more control to decide when the migrations are executed it is possible to configure the application like this:</p>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">flyway.enabled=true
-flyway.datasources.default.enabled=false</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
+<div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">flyway:
-  enabled: true
+  enabled: true <i class="conum" data-value="1"></i><b>(1)</b>
   datasources:
     default:
-      enabled: false</code></pre>
+      enabled: false <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  enabled=true
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=false</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">flyway {
-  enabled = true
-  datasources {
-    'default' {
-      enabled = false
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  flyway {
-    enabled = true
-    datasources {
-      default {
-        enabled = false
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "flyway": {
-    "enabled": true,
-    "datasources": {
-      "default": {
-        "enabled": false
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>flyway.enabled</code> needs to be <code>true</code></p>
-</li>
-<li>
-<p><code>datasources.*.enabled</code> set to <code>false</code> can disable flyway migrations for specific datasources</p>
-</li>
-</ul>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Flyway needs to be enabled</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Disable flyway migrations for your specific datasource</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Now you can inject the <code>FlywayMigrator</code> bean and call manually the method <code>run</code> to execute the migrations when you want.</p>
@@ -573,402 +324,10 @@ flyway.datasources.default.enabled=false</code></pre>
 </div>
 </div>
 
-<h2 id="gorm"><a class="anchor" href="#gorm"></a>3.2 GORM</h2>
+<h2 id="additionalConfig"><a class="anchor" href="#additionalConfig"></a>3.2 Additional configuration</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/configuration/gorm.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>There is also support for running Flyway migrations when using GORM.</p>
-</div>
-<div class="paragraph">
-<p>1.- Add the dependency:</p>
-</div>
-<div class="paragraph">
-<p>        <div class="listingblock multi-language-sample">
-<div class="title"></div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="gradle">implementation(<span class="hljs-string">"io.micronaut.groovy:micronaut-hibernate-gorm")</span></code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="maven">&lt;dependency&gt;
-    &lt;groupId&gt;io.micronaut.groovy&lt;/groupId&gt;
-    &lt;artifactId&gt;micronaut-hibernate-gorm&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div></p>
-</div>
-<div class="paragraph">
-<p>2.- You also need at least one class annotated with <code>@grails.gorm.annotation.Entity</code> to trigger the migrations.</p>
-</div>
-<div class="listingblock">
-<div class="title">src/main/groovy/example/Book.groovy</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">import grails.gorm.annotation.Entity
-
-@Entity
-class Book {
-    String name
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>3.- Then it is necessary to configure GORM datasource:</p>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">dataSource.pooled=true
-dataSource.jmxExport=true
-dataSource.dbCreate=none
-dataSource.url=jdbc:h2:mem:GORMDb
-dataSource.driverClassName=org.h2.Driver
-dataSource.username=sa
-dataSource.password=
-flyway.datasources.default.enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dataSource:
-  pooled: true
-  jmxExport: true
-  dbCreate: none
-  url: 'jdbc:h2:mem:GORMDb'
-  driverClassName: org.h2.Driver
-  username: sa
-  password: ''
-
-flyway:
-  datasources:
-    default:
-      enabled: true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[dataSource]
-  pooled=true
-  jmxExport=true
-  dbCreate="none"
-  url="jdbc:h2:mem:GORMDb"
-  driverClassName="org.h2.Driver"
-  username="sa"
-  password=""
-[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">dataSource {
-  pooled = true
-  jmxExport = true
-  dbCreate = "none"
-  url = "jdbc:h2:mem:GORMDb"
-  driverClassName = "org.h2.Driver"
-  username = "sa"
-  password = ""
-}
-flyway {
-  datasources {
-    'default' {
-      enabled = true
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  dataSource {
-    pooled = true
-    jmxExport = true
-    dbCreate = "none"
-    url = "jdbc:h2:mem:GORMDb"
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-  }
-  flyway {
-    datasources {
-      default {
-        enabled = true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "dataSource": {
-    "pooled": true,
-    "jmxExport": true,
-    "dbCreate": "none",
-    "url": "jdbc:h2:mem:GORMDb",
-    "driverClassName": "org.h2.Driver",
-    "username": "sa",
-    "password": ""
-  },
-  "flyway": {
-    "datasources": {
-      "default": {
-        "enabled": true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>dataSource</code> defines the first data source in GORM. The name is <code>default</code> and can&#8217;t be changed.</p>
-</li>
-<li>
-<p><code>dbCreate</code> set to <code>none</code> disables schema DDL creation.</p>
-</li>
-<li>
-<p>Define flyway configuration under <code>flyway.datasources</code>. The default datasource is configured and enabled in this example.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_multiple_data_sources">Multiple Data sources</h3>
-<div class="paragraph">
-<p>It is also possible to configure Flyway migrations with multiple data sources when using GORM:</p>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">dataSource.pooled=true
-dataSource.jmxExport=true
-dataSource.dbCreate=none
-dataSource.url=jdbc:h2:mem:flywayGORMDb
-dataSource.driverClassName=org.h2.Driver
-dataSource.username=sa
-dataSource.password=
-dataSources.books.pooled=true
-dataSources.books.jmxExport=true
-dataSources.books.dbCreate=none
-dataSources.books.url=jdbc:h2:mem:flywayBooksDb
-dataSources.books.driverClassName=org.h2.Driver
-dataSources.books.username=sa
-dataSources.books.password=
-flyway.datasources.default.enabled=true
-flyway.datasources.books.enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dataSource:
-  pooled: true
-  jmxExport: true
-  dbCreate: none
-  url: 'jdbc:h2:mem:flywayGORMDb'
-  driverClassName: org.h2.Driver
-  username: sa
-  password: ''
-
-dataSources:
-  books:
-    pooled: true
-    jmxExport: true
-    dbCreate: none
-    url: 'jdbc:h2:mem:flywayBooksDb'
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-
-flyway:
-  datasources:
-    default:
-      enabled: true
-    books:
-      enabled: true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[dataSource]
-  pooled=true
-  jmxExport=true
-  dbCreate="none"
-  url="jdbc:h2:mem:flywayGORMDb"
-  driverClassName="org.h2.Driver"
-  username="sa"
-  password=""
-[dataSources]
-  [dataSources.books]
-    pooled=true
-    jmxExport=true
-    dbCreate="none"
-    url="jdbc:h2:mem:flywayBooksDb"
-    driverClassName="org.h2.Driver"
-    username="sa"
-    password=""
-[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true
-    [flyway.datasources.books]
-      enabled=true</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">dataSource {
-  pooled = true
-  jmxExport = true
-  dbCreate = "none"
-  url = "jdbc:h2:mem:flywayGORMDb"
-  driverClassName = "org.h2.Driver"
-  username = "sa"
-  password = ""
-}
-dataSources {
-  books {
-    pooled = true
-    jmxExport = true
-    dbCreate = "none"
-    url = "jdbc:h2:mem:flywayBooksDb"
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-  }
-}
-flyway {
-  datasources {
-    'default' {
-      enabled = true
-    }
-    books {
-      enabled = true
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  dataSource {
-    pooled = true
-    jmxExport = true
-    dbCreate = "none"
-    url = "jdbc:h2:mem:flywayGORMDb"
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
-  }
-  dataSources {
-    books {
-      pooled = true
-      jmxExport = true
-      dbCreate = "none"
-      url = "jdbc:h2:mem:flywayBooksDb"
-      driverClassName = "org.h2.Driver"
-      username = "sa"
-      password = ""
-    }
-  }
-  flyway {
-    datasources {
-      default {
-        enabled = true
-      }
-      books {
-        enabled = true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "dataSource": {
-    "pooled": true,
-    "jmxExport": true,
-    "dbCreate": "none",
-    "url": "jdbc:h2:mem:flywayGORMDb",
-    "driverClassName": "org.h2.Driver",
-    "username": "sa",
-    "password": ""
-  },
-  "dataSources": {
-    "books": {
-      "pooled": true,
-      "jmxExport": true,
-      "dbCreate": "none",
-      "url": "jdbc:h2:mem:flywayBooksDb",
-      "driverClassName": "org.h2.Driver",
-      "username": "sa",
-      "password": ""
-    }
-  },
-  "flyway": {
-    "datasources": {
-      "default": {
-        "enabled": true
-      },
-      "books": {
-        "enabled": true
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>dataSource</code> defines the first data source in GORM. The name is <code>default</code> and can&#8217;t be changed.</p>
-</li>
-<li>
-<p><code>dataSources.books</code> names an additional data source.</p>
-</li>
-<li>
-<p>Define flyway configurations under <code>flyway.datasources.&lt;name&gt;</code>. Both datasources are configured and enabled in this example.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For more information about how to configure GORM, take a look at the <a href="http://gorm.grails.org/latest/hibernate/manual/index.html">documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-</div>
-
-<h2 id="additionalConfig"><a class="anchor" href="#additionalConfig"></a>3.3 Additional configuration</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/configuration/additionalConfig.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/configuration/additionalConfig.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -993,6 +352,46 @@ For more information about how to configure GORM, take a look at the <a href="ht
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether this flyway configuration is enabled. Default value ().</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.async</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether Flyway will clean the schema before running the migrations. Default value ().</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.user</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username of the database to migrate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.load</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.configuration</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">org.flywaydb.core.api.configuration.Configuration</p></td>
@@ -1051,6 +450,11 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-disabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -1295,7 +699,7 @@ For more information about how to configure GORM, take a look at the <a href="ht
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.load-default-configuration-files</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -1304,49 +708,14 @@ For more information about how to configure GORM, take a look at the <a href="ht
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.fail-on-missing-locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.env-vars</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.fail-on-missing-locations</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether this flyway configuration is enabled. Default value (true).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.async</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether flyway migrations should run asynchronously.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.clean-schema</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set whether Flyway will clean the schema before running the migrations. Default value (false).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.url</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The JDBC url of the database to migrate</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.user</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The user of the database to migrate</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.password</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The password of the database to migrate</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.username</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The username of the database to migrate</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>flyway.datasources.*.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The locations for the migrations</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -1368,7 +737,7 @@ and <code>flyway.datasources.*.password</code>.
 <h1 id="graalvm"><a class="anchor" href="#graalvm"></a>4 GraalVM support</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/graalvm.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/graalvm.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1386,80 +755,23 @@ to look for migrations you need to add an additional parameter to <code>native-i
 <div class="paragraph">
 <p>For example, if you have the following configuration:</p>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">flyway.datasources.default.locations[0]=classpath:databasemigrations
-flyway.datasources.default.locations[1]=classpath:other</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
+<div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">flyway:
   datasources:
     default:
       locations:
-        - classpath:databasemigrations
-        - classpath:other</code></pre>
+        - classpath:databasemigrations <i class="conum" data-value="1"></i><b>(1)</b>
+        - classpath:other <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      locations=[
-        "classpath:databasemigrations",
-        "classpath:other"
-      ]</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">flyway {
-  datasources {
-    'default' {
-      locations = ["classpath:databasemigrations", "classpath:other"]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  flyway {
-    datasources {
-      default {
-        locations = ["classpath:databasemigrations", "classpath:other"]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "flyway": {
-    "datasources": {
-      "default": {
-        "locations": ["classpath:databasemigrations", "classpath:other"]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>locations</code> specifies that Flyway will look for migrations in <code>src/main/resources/databasemigrations</code> and <code>src/main/resources/other</code>.</p>
-</li>
-</ul>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Flyway will look for migrations in <code>src/main/resources/databasemigrations</code> and <code>src/main/resources/other</code>.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>You need to use the parameter <code>flyway.locations</code> with a comma separated list of directories to look for:</p>
@@ -1496,7 +808,7 @@ information.
 <h1 id="events"><a class="anchor" href="#events"></a>5 Events</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/events.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/events.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1519,7 +831,7 @@ information.
 <h1 id="endpoint"><a class="anchor" href="#endpoint"></a>6 Endpoint</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/endpoint.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/endpoint.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1531,72 +843,26 @@ information.
 <div class="paragraph">
 <p>To enable the endpoint add the following to the configuration:</p>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">endpoints.flyway.enabled=true
-endpoints.flyway.sensitive=false</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
+<div class="listingblock">
+<div class="title">resources/application.yml</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">endpoints:
   flyway:
-    enabled: true
-    sensitive: false</code></pre>
+    enabled: true <i class="conum" data-value="1"></i><b>(1)</b>
+    sensitive: false <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[endpoints]
-  [endpoints.flyway]
-    enabled=true
-    sensitive=false</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy-config hljs" data-lang="groovy-config">endpoints {
-  flyway {
-    enabled = true
-    sensitive = false
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hocon hljs" data-lang="hocon">{
-  endpoints {
-    flyway {
-      enabled = true
-      sensitive = false
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock multi-language-sample">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json-config hljs" data-lang="json-config">{
-  "endpoints": {
-    "flyway": {
-      "enabled": true,
-      "sensitive": false
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>/flyway</code> endpoint is enabled (this is the default), and open for unauthenticated access.</p>
-</li>
-</ul>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>/flyway</code> endpoint is enabled (this is the default).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>/flyway</code> endpoint is open for unauthenticated access.</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1651,7 +917,7 @@ user guide for more information.
 <h1 id="repository"><a class="anchor" href="#repository"></a>7 Repository</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/5.5.x/src/main/docs/guide/repository.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/master/src/main/docs/guide/repository.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
