@@ -2,7 +2,7 @@
 micronaut-docs = "2.0.0"
 micronaut = "4.0.0-M1"
 micronaut-test = "4.0.0-SNAPSHOT"
-micronaut-sql = "5.0.0-SNAPSHOT"
+micronaut-sql = "5.0.0-M1"
 
 managed-flyway = "8.5.13"
 
