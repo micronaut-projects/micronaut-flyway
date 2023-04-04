@@ -3,6 +3,7 @@ micronaut-docs = "2.0.0"
 micronaut = "4.0.0-M1"
 micronaut-test = "4.0.0-SNAPSHOT"
 micronaut-sql = "5.0.0-M1"
+micronaut-gradle-plugin = "4.0.0-SNAPSHOT"
 
 managed-flyway = "8.5.13"
 
@@ -21,5 +22,7 @@ grails-datastore-gorm-hibernate5 = { module = "org.grails:grails-datastore-gorm-
 graal-svm = { module = "org.graalvm.nativeimage:svm", version.ref = "graal-svm" }
 
 micronaut-sql = { module = "io.micronaut.sql:micronaut-sql-bom", version.ref = "micronaut-sql" }
+
+gradle-micronaut = { module = "io.micronaut.gradle:micronaut-gradle-plugin", version.ref = "micronaut-gradle-plugin" }
 
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
