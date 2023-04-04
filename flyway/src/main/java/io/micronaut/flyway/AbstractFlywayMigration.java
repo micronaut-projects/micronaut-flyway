@@ -75,6 +75,10 @@ class AbstractFlywayMigration {
      */
     void forceRun(FlywayConfigurationProperties config, DataSource dataSource) {
         FluentConfiguration fluentConfiguration = config.getFluentConfiguration();
+        StaticResourceProvider staticResourceProvider = StaticResourceProvider.get();
+        if (staticResourceProvider != null) {
+            fluentConfiguration.resourceProvider(staticResourceProvider);
+        }
         fluentConfiguration.dataSource(dataSource);
 
         Flyway flyway = fluentConfiguration.load();

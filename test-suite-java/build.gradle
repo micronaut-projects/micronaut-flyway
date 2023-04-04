@@ -1,0 +1,31 @@
+plugins {
+    id "io.micronaut.application"
+    id "io.micronaut.build.internal.flyway-tests"
+}
+
+mainClassName = "helloworld.Application"
+micronaut {
+    version "4.0.0-SNAPSHOT"
+    testRuntime "junit5"
+    enableNativeImage false
+    processing {
+        incremental(true)
+        annotations("helloworld.*")
+    }
+}
+
+configurations.all {
+    resolutionStrategy.dependencySubstitution {
+        substitute module('io.micronaut.flyway:micronaut-flyway') using project(':micronaut-flyway')
+    }
+}
+
+dependencies {
+    implementation "io.micronaut:micronaut-context"
+    implementation project(":micronaut-flyway")
+    implementation "org.yaml:snakeyaml"
+    runtimeOnly "ch.qos.logback:logback-classic"
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("com.h2database:h2")
+}
