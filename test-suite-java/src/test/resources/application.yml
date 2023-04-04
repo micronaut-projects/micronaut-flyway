@@ -14,6 +14,8 @@ flyway:
   datasources:
     default:
       enabled: true
+      baseline-on-migrate: true
+      clean-schema: true
 ---
 endpoints:
   flyway:
