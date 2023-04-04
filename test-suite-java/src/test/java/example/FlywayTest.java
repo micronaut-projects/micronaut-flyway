@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 @MicronautTest
-public class FlywayTest {
+class FlywayTest {
 
     @Test
     void testFlywayMigration(DataSource dataSource) throws SQLException {

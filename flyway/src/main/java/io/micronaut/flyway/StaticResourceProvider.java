@@ -34,12 +34,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.annotation.Internal;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import org.flywaydb.core.api.ResourceProvider;
 import org.flywaydb.core.api.resource.LoadableResource;
@@ -67,8 +69,8 @@ final class StaticResourceProvider implements ResourceProvider {
     }
 
     static void install(ClassLoader classLoader) {
-        StaticResourceProvider staticResourceProvider = create(classLoader);
         if (hasImageSingletons()) {
+            StaticResourceProvider staticResourceProvider = create(classLoader);
             ImageSingletons.add(StaticResourceProvider.class, staticResourceProvider);
         }
     }
@@ -88,33 +90,24 @@ final class StaticResourceProvider implements ResourceProvider {
 
     @Override
     public LoadableResource getResource(String name) {
-        for (StaticLoadableResource resource : resources) {
-            if (resource.getAbsolutePath().equals(name)) {
-                return resource;
-            }
-        }
-        return null;
+        return resources.stream()
+            .filter(resource -> resource.getAbsolutePath().equals(name))
+            .findFirst()
+            .orElse(null);
     }
 
     @Override
     public Collection<LoadableResource> getResources(String prefix, String[] suffixes) {
-        List<LoadableResource> result = new ArrayList<>();
-        for (LoadableResource resource : resources) {
-            String fileName = resource.getFilename();
-            if (StringUtils.startsAndEndsWith(fileName, prefix, suffixes)) {
-                result.add(resource);
-            }
-        }
-        return result;
+        return resources.stream()
+            .filter(resource -> StringUtils.startsAndEndsWith(resource.getFilename(), prefix, suffixes))
+            .map(LoadableResource.class::cast)
+            .toList();
     }
 
     @Nullable
     private static StaticResourceProvider findStaticResourceProvider() {
-        if (hasImageSingletons()) {
-            return ImageSingletons.contains(StaticResourceProvider.class) ? ImageSingletons.lookup(StaticResourceProvider.class) : null;
-        } else {
-            return null;
-        }
+        return hasImageSingletons() && ImageSingletons.contains(StaticResourceProvider.class) ?
+            ImageSingletons.lookup(StaticResourceProvider.class) : null;
     }
 
     @SuppressWarnings("java:S1181")
@@ -140,22 +133,22 @@ final class StaticResourceProvider implements ResourceProvider {
             Enumeration<URL> migrations = classLoader.getResources(location);
             while (migrations.hasMoreElements()) {
                 URL path = migrations.nextElement();
-                final Set<StaticLoadableResource> applicationMigrations;
-                if (JAR_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
-                    try (FileSystem fileSystem = initFileSystem(path.toURI())) {
-                        applicationMigrations = getApplicationMigrationsFromPath(location, path);
-                    }
-                } else if (FILE_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
-                    applicationMigrations = getApplicationMigrationsFromPath(location, path);
-                } else {
-                    applicationMigrations = null;
-                }
-                if (applicationMigrations != null) {
-                    applicationMigrationResources.addAll(applicationMigrations);
-                }
+                applicationMigrations(path, location)
+                    .ifPresent(applicationMigrationResources::addAll);
             }
         }
         return applicationMigrationResources;
+    }
+
+    private static Optional<Set<StaticLoadableResource>> applicationMigrations(@NonNull URL path, String location) throws URISyntaxException, IOException {
+        if (JAR_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
+            try (FileSystem fileSystem = initFileSystem(path.toURI())) {
+                return Optional.of(getApplicationMigrationsFromPath(location, path));
+            }
+        } else if (FILE_APPLICATION_MIGRATIONS_PROTOCOL.equals(path.getProtocol())) {
+            return Optional.of(getApplicationMigrationsFromPath(location, path));
+        }
+        return Optional.empty();
     }
 
     private static Set<StaticLoadableResource> getApplicationMigrationsFromPath(final String location, final URL path)
@@ -204,7 +197,7 @@ final class StaticResourceProvider implements ResourceProvider {
 
         @Override
         public String getAbsolutePathOnDisk() {
-            return absolutePath;
+            return getAbsolutePath();
         }
 
         @Override
