@@ -79,6 +79,7 @@ class AbstractFlywayMigration {
         if (staticResourceProvider != null) {
             fluentConfiguration.resourceProvider(staticResourceProvider);
         }
+        fluentConfiguration.cleanDisabled(!config.isCleanSchema());
         fluentConfiguration.dataSource(dataSource);
 
         Flyway flyway = fluentConfiguration.load();
