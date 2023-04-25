@@ -1,16 +1,16 @@
 [versions]
 micronaut-docs = "2.0.0"
-micronaut = "4.0.0-M1"
-micronaut-test = "4.0.0-SNAPSHOT"
+micronaut = "4.0.0-M2"
+micronaut-test = "4.0.0-M2"
 micronaut-sql = "5.0.0-M1"
-micronaut-gradle-plugin = "4.0.0-SNAPSHOT"
+micronaut-gradle-plugin = "4.0.0-M1"
 
 managed-flyway = "9.16.3"
 
 gorm-hibernate = "7.3.1"
 graal-svm = "22.3.2"
 persistence-api = '2.2'
-groovy = "4.0.9"
+groovy = "4.0.11"
 spock = "2.3-groovy-4.0"
 
 [libraries]
