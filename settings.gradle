@@ -16,7 +16,6 @@ include 'flyway-bom'
 include 'test-suite-java'
 
 micronautBuild {
-    addSnapshotRepository()
     useStandardizedProjectNames = true
     importMicronautCatalog()
     importMicronautCatalog("micronaut-sql")
