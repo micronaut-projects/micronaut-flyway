@@ -1,6 +1,0 @@
-[
-  {
-    "name":"ch.qos.logback.core.ConsoleAppender",
-    "methods":[{"name":"<init>","parameterTypes":[] }]
-  }
-]
