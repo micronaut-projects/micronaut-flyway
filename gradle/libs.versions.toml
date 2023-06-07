@@ -20,6 +20,7 @@ micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'mi
 managed-flyway = { module = "org.flywaydb:flyway-core", version.ref = "managed-flyway" }
 managed-flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "managed-flyway" }
 managed-flyway-sqlserver = { module = "org.flywaydb:flyway-sqlserver", version.ref = "managed-flyway" }
+managed-flyway-oracle = { module = "org.flywaydb:flyway-database-oracle", version.ref = "managed-flyway" }
 
 grails-datastore-gorm-hibernate5 = { module = "org.grails:grails-datastore-gorm-hibernate5", version.ref = "gorm-hibernate" }
 graal-svm = { module = "org.graalvm.nativeimage:svm", version.ref = "graal-svm" }
