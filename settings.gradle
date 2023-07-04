@@ -15,9 +15,13 @@ include 'flyway'
 include 'flyway-bom'
 include 'test-suite-java'
 
+enableFeaturePreview('TYPESAFE_PROJECT_ACCESSORS')
+
 micronautBuild {
     useStandardizedProjectNames = true
+
     importMicronautCatalog()
+    importMicronautCatalog("micronaut-serde")
     importMicronautCatalog("micronaut-sql")
 }
 

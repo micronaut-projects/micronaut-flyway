@@ -4,8 +4,10 @@ plugins {
 
 dependencies {
     annotationProcessor mn.micronaut.graal
+    annotationProcessor mnSerde.micronaut.serde.processor
 
     compileOnly libs.graal.svm
+    compileOnly mnSerde.micronaut.serde.api
 
     api libs.managed.flyway
     api mn.micronaut.management

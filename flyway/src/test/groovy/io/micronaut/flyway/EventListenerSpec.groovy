@@ -24,7 +24,9 @@ class EventListenerSpec extends AbstractFlywaySpec {
             'jpa.default.properties.hibernate.show_sql'    : true,
 
             'flyway.datasources.default.locations'         : 'classpath:moremigrations',
-            'flyway.datasources.default.clean-schema'      : true)
+            'flyway.datasources.default.clean-disabled'    : false,
+            'flyway.datasources.default.clean-schema'      : true
+        )
 
         when: 'running the migrations'
         applicationContext.getBean(DataSource)
