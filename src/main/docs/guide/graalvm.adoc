@@ -8,16 +8,16 @@ to look for migrations you need to add an additional parameter to `native-image`
 
 For example, if you have the following configuration:
 
-[source,yaml]
+[configuration]
 ----
 flyway:
   datasources:
     default:
       locations:
-        - classpath:databasemigrations # <1>
-        - classpath:other # <1>
+        - classpath:databasemigrations
+        - classpath:other
 ----
-<1> Flyway will look for migrations in `src/main/resources/databasemigrations` and `src/main/resources/other`.
+- The `locations` properties configure Flyway to look for migrations in the directories `src/main/resources/databasemigrations` and `src/main/resources/other`.
 
 You need to use the parameter `flyway.locations` with a comma separated list of directories to look for:
 
