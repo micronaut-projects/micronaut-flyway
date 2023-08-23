@@ -11,7 +11,7 @@ micronaut-gradle-plugin = "4.0.2"
 managed-flyway = "9.20.1"
 
 gorm-hibernate = "7.3.1"
-graal-svm = "23.0.0"
+graal-svm = "23.0.1"
 persistence-api = '2.2'
 groovy = "4.0.11"
 spock = "2.3-groovy-4.0"
