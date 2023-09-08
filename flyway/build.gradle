@@ -25,4 +25,13 @@ dependencies {
     testImplementation mnSql.micronaut.jdbc.hikari
     testImplementation mnSql.h2
     testImplementation mn.snakeyaml
+
+    // Test Containers
+    testImplementation libs.test.containers
+    testImplementation libs.test.containers.spock
+    testImplementation libs.test.containers.postgresql
+
+    // Database
+    testImplementation libs.postgresql.driver
+
 }

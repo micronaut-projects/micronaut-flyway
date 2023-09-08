@@ -19,9 +19,13 @@ import io.micronaut.context.annotation.ConfigurationBuilder;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
+import io.micronaut.core.convert.format.MapFormat;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
+
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Create a Flyway Configuration for each sub-property of flyway.*.
@@ -53,6 +57,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String url;
     private String user;
     private String password;
+    private Map<String, String> properties = new Hashtable<>();
 
     /**
      * @param name The name qualifier.
@@ -181,5 +186,25 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public FluentConfiguration getFluentConfiguration() {
         return fluentConfiguration;
+    }
+
+    /**
+     * Sets extra properties to be applied on configuration.
+     * WARNING: This may override any existing configurations
+     *
+     * @param properties The properties to be set
+     */
+    public void setProperties(@MapFormat(transformation = MapFormat.MapTransformation.FLAT) Map<String, String> properties) {
+        this.properties = properties;
+    }
+
+    /**
+     * Gets the extra set properties to be passed to flyway. Example: for plugins.
+     * WARNING: This may override any existing configurations
+     *
+     * @return The extra custom properties
+     */
+    public Map<String, String> getProperties() {
+        return properties;
     }
 }
