@@ -6,7 +6,7 @@ micronaut-test = "4.0.1"
 micronaut-serde = "2.2.4"
 micronaut-sql = "5.0.1"
 
-micronaut-gradle-plugin = "4.0.2"
+micronaut-gradle-plugin = "4.1.0"
 
 managed-flyway = "9.21.2"
 
