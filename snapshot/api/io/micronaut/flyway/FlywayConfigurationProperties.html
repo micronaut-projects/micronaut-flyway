@@ -153,13 +153,19 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPassword()" class="member-name-link">getPassword</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The password of the database to migrate.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUrl()" class="member-name-link">getUrl</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The JDBC url of the database to migrate.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUser()" class="member-name-link">getUser</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The user of the database to migrate.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAlternativeDatabaseConfiguration()" class="member-name-link">hasAlternativeDatabaseConfiguration</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -167,7 +173,9 @@ implements io.micronaut.core.util.Toggleable</span></div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAsync()" class="member-name-link">isAsync</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Whether the flyway migrations should run asynchronously.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCleanSchema()" class="member-name-link">isCleanSchema</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -324,6 +332,7 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <section class="detail" id="isAsync()">
 <h3>isAsync</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isAsync</span>()</div>
+<div class="block">Whether the flyway migrations should run asynchronously. Default value: <a href="#DEFAULT_ASYNC">false</a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>Whether the flyway migrations should run asynchronously</dd>
@@ -367,6 +376,7 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <section class="detail" id="getUrl()">
 <h3>getUrl</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getUrl</span>()</div>
+<div class="block">The JDBC url of the database to migrate.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>JDBC url of the database to migrate</dd>
@@ -387,6 +397,7 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <section class="detail" id="getUser()">
 <h3>getUser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getUser</span>()</div>
+<div class="block">The user of the database to migrate.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>The user of the database to migrate</dd>
@@ -417,6 +428,7 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <section class="detail" id="getPassword()">
 <h3>getPassword</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPassword</span>()</div>
+<div class="block">The password of the database to migrate.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>The password of the database to migrate</dd>
@@ -437,9 +449,9 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <section class="detail" id="hasAlternativeDatabaseConfiguration()">
 <h3>hasAlternativeDatabaseConfiguration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAlternativeDatabaseConfiguration</span>()</div>
-<div class="block">Whether there is an alternative database configuration for the migration. By default Micronaut will use the
+<div class="block">Whether there is an alternative database configuration for the migration. By default, Micronaut framework will use the
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/javax/sql/DataSource.html" title="class or interface in javax.sql" class="external-link"><code>DataSource</code></a> defined for the application but if both <code>url</code> and <code>user</code> are defined,
- then those will be use for Flyway.</div>
+ then those will be used for Flyway.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if there is an alternative database configuration</dd>
