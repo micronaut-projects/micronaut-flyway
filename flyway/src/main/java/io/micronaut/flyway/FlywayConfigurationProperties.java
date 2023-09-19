@@ -88,6 +88,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * Whether the flyway migrations should run asynchronously. Default value: {@value #DEFAULT_ASYNC}.
      * @return Whether the flyway migrations should run asynchronously
      */
     public boolean isAsync() {
@@ -122,6 +123,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * The JDBC url of the database to migrate.
      * @return JDBC url of the database to migrate
      */
     public String getUrl() {
@@ -136,6 +138,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * The user of the database to migrate.
      * @return The user of the database to migrate
      */
     public String getUser() {
@@ -157,6 +160,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
+     * The password of the database to migrate.
      * @return The password of the database to migrate
      */
     public String getPassword() {
@@ -171,9 +175,9 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
-     * Whether there is an alternative database configuration for the migration. By default Micronaut will use the
+     * Whether there is an alternative database configuration for the migration. By default, Micronaut framework will use the
      * {@link javax.sql.DataSource} defined for the application but if both {@code url} and {@code user} are defined,
-     * then those will be use for Flyway.
+     * then those will be used for Flyway.
      *
      * @return true if there is an alternative database configuration
      */
