@@ -188,8 +188,10 @@ public class FlywayConfigurationProperties implements Toggleable {
         return fluentConfiguration;
     }
 
+
     /**
-     * Sets extra properties to be applied on configuration.
+     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * Sets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
      * WARNING: This may override any existing configurations
      *
      * @param properties The properties to be set
@@ -199,7 +201,8 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
-     * Gets the extra set properties to be passed to flyway. Example: for plugins.
+     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * Gets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
      * WARNING: This may override any existing configurations
      *
      * @return The extra custom properties
