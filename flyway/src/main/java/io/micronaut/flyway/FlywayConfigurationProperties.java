@@ -24,7 +24,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -57,7 +57,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String url;
     private String user;
     private String password;
-    private Map<String, String> properties = new Hashtable<>();
+    private Map<String, String> properties = new HashMap<>();
 
     /**
      * @param name The name qualifier.
