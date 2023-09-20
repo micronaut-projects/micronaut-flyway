@@ -81,6 +81,7 @@ class AbstractFlywayMigration {
         }
         fluentConfiguration.cleanDisabled(!config.isCleanSchema());
         fluentConfiguration.dataSource(dataSource);
+        fluentConfiguration.configuration(config.getProperties());
 
         Flyway flyway = fluentConfiguration.load();
         applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);

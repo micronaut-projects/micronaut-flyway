@@ -6,3 +6,12 @@ include::{includedir}configurationProperties/io.micronaut.flyway.FlywayConfigura
 NOTE: By default Micronaut will configure Flyway to use the datasources defined under `datasources` configuration key. If
 you want to use a different datasource you need to define the properties `+flyway.datasources.*.url+`, `+flyway.datasources.*.user+`
 and `+flyway.datasources.*.password+`.
+
+=== Flyway Parameters
+
+You can setup https://documentation.red-gate.com/fd/parameters-184127474.html[flyway parameters]. For example, you can setup https://documentation.red-gate.com/fd/postgresql-transactional-lock-184127530.html[PostgreSQL Transactional Lock]:
+
+[configuration]
+----
+include::{flywaytests}/groovy/io/micronaut/flyway/postgresql/TransactionLockSpec.groovy[tag=yaml,indent=0]
+----

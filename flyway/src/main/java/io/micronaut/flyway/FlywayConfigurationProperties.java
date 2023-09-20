@@ -19,9 +19,13 @@ import io.micronaut.context.annotation.ConfigurationBuilder;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
+import io.micronaut.core.convert.format.MapFormat;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Create a Flyway Configuration for each sub-property of flyway.*.
@@ -43,7 +47,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties"})
+    @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties", "configuration"})
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
     private final String nameQualifier;
@@ -53,6 +57,7 @@ public class FlywayConfigurationProperties implements Toggleable {
     private String url;
     private String user;
     private String password;
+    private Map<String, String> properties = new HashMap<>();
 
     /**
      * @param name The name qualifier.
@@ -185,5 +190,28 @@ public class FlywayConfigurationProperties implements Toggleable {
      */
     public FluentConfiguration getFluentConfiguration() {
         return fluentConfiguration;
+    }
+
+
+    /**
+     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * Sets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
+     * WARNING: This may override any existing configurations
+     *
+     * @param properties The properties to be set
+     */
+    public void setProperties(@MapFormat(transformation = MapFormat.MapTransformation.FLAT) Map<String, String> properties) {
+        this.properties = properties;
+    }
+
+    /**
+     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * Gets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
+     * WARNING: This may override any existing configurations
+     *
+     * @return The extra custom properties
+     */
+    public Map<String, String> getProperties() {
+        return properties;
     }
 }
