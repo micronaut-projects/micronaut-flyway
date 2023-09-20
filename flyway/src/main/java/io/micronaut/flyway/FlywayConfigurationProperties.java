@@ -192,7 +192,6 @@ public class FlywayConfigurationProperties implements Toggleable {
         return fluentConfiguration;
     }
 
-
     /**
      * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
      * Sets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
