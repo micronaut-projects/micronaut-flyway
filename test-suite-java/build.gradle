@@ -5,7 +5,7 @@ plugins {
 
 mainClassName = "helloworld.Application"
 micronaut {
-    version "4.0.0-M2"
+    version libs.versions.micronaut.platform.get()
     testRuntime "junit5"
     enableNativeImage false
     processing {
