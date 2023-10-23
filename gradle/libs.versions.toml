@@ -2,6 +2,7 @@
 micronaut-docs = "2.0.0"
 
 micronaut = "4.1.5"
+micronaut-logging = "1.1.2"
 micronaut-platform = "4.1.5"
 micronaut-test = "4.0.1"
 micronaut-serde = "2.2.4"
@@ -9,7 +10,7 @@ micronaut-sql = "5.0.1"
 
 micronaut-gradle-plugin = "4.1.0"
 
-managed-flyway = "9.22.1"
+managed-flyway = "9.22.3"
 
 gorm-hibernate = "8.0.0"
 graal-svm = "23.0.1"
