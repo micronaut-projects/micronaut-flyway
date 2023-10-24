@@ -34,4 +34,8 @@ dependencies {
     // Database
     testImplementation libs.postgresql.driver
 
+    // for FlywayLoggingSpec test for logging
+    testImplementation mnLogging.logback.classic
+    compileOnly mnLogging.log4j
+
 }
