@@ -10,7 +10,7 @@ micronaut-sql = "5.0.3"
 
 micronaut-gradle-plugin = "4.1.2"
 
-managed-flyway = "9.22.3"
+managed-flyway = "10.0.0"
 
 gorm-hibernate = "8.0.1"
 graal-svm = "23.1.1"
