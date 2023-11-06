@@ -38,4 +38,6 @@ dependencies {
     testImplementation mnLogging.logback.classic
     compileOnly mnLogging.log4j
 
+    // flyway postgresql support
+    testRuntimeOnly libs.managed.flyway.postgresql
 }
