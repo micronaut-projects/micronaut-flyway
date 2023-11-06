@@ -4,7 +4,7 @@ import org.flywaydb.core.api.ErrorCode
 import org.flywaydb.core.api.FlywayException
 import org.flywaydb.core.api.MigrationState
 import org.flywaydb.core.api.pattern.ValidatePattern
-import org.flywaydb.core.internal.license.FlywayTeamsUpgradeRequiredException
+import org.flywaydb.core.internal.license.FlywayRedgateEditionRequiredException
 import spock.lang.Specification
 
 /**
@@ -51,10 +51,10 @@ class ValidatePatternTypeConverterSpec extends Specification {
         validatePatternTypeConverter.convert("repeatable:*", ValidatePattern.class)
 
         then:
-        def e = thrown(FlywayTeamsUpgradeRequiredException)
+        def e = thrown(FlywayRedgateEditionRequiredException)
         e.errorCode == ErrorCode.ERROR
-        e.message == 'Flyway Teams Edition upgrade required: ignoreMigrationPattern with type \'repeatable\' is not supported by Flyway Community Edition\n' +
-                'Try Flyway Teams Edition for free: https://rd.gt/2VzHpkY'
+        e.message == 'Flyway Redgate Edition Required: ignoreMigrationPattern with type \'repeatable\' is not supported by OSS Edition\n' +
+                'Download Redgate Edition for free: https://rd.gt/2VzHpkY'
     }
 
     void "test versioned string conversion"() {
@@ -65,10 +65,10 @@ class ValidatePatternTypeConverterSpec extends Specification {
         validatePatternTypeConverter.convert("versioned:missing", ValidatePattern.class)
 
         then:
-        def e = thrown(FlywayTeamsUpgradeRequiredException)
+        def e = thrown(FlywayRedgateEditionRequiredException)
         e.errorCode == ErrorCode.ERROR
-        e.message == 'Flyway Teams Edition upgrade required: ignoreMigrationPattern with type \'versioned\' is not supported by Flyway Community Edition\n' +
-                'Try Flyway Teams Edition for free: https://rd.gt/2VzHpkY'
+        e.message == 'Flyway Redgate Edition Required: ignoreMigrationPattern with type \'versioned\' is not supported by OSS Edition\n' +
+                'Download Redgate Edition for free: https://rd.gt/2VzHpkY'
     }
 
     void "test missing string conversion"() {
