@@ -20,6 +20,7 @@ import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.EachProperty;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.core.convert.format.MapFormat;
+import io.micronaut.core.naming.conventions.StringConvention;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
@@ -193,20 +194,19 @@ public class FlywayConfigurationProperties implements Toggleable {
     }
 
     /**
-     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * @see <a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters">Flyway parameters</a>.
      * Sets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
-     * WARNING: This may override any existing configurations
+     * WARNING: This will override any existing configuration properties with the same names.
      *
      * @param properties The properties to be set
      */
-    public void setProperties(@MapFormat(transformation = MapFormat.MapTransformation.FLAT) Map<String, String> properties) {
+    public void setProperties(@MapFormat(transformation = MapFormat.MapTransformation.FLAT, keyFormat = StringConvention.CAMEL_CASE) Map<String, String> properties) {
         this.properties = properties;
     }
 
     /**
-     * @see <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+     * @see <a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters">Flyway parameters</a>.
      * Gets the extra flyway parameters to be passed to {@link FluentConfiguration#configuration(Map)}.
-     * WARNING: This may override any existing configurations
      *
      * @return The extra custom properties
      */
