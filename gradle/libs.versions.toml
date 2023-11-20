@@ -1,14 +1,14 @@
 [versions]
 micronaut-docs = "2.0.0"
 
-micronaut = "4.1.11"
+micronaut = "4.2.0"
 micronaut-logging = "1.1.2"
 micronaut-platform = "4.1.5"
 micronaut-test = "4.0.1"
-micronaut-serde = "2.2.6"
+micronaut-serde = "2.4.0"
 micronaut-sql = "5.2.0"
 
-micronaut-gradle-plugin = "4.1.2"
+micronaut-gradle-plugin = "4.2.0"
 
 managed-flyway = "10.0.0"
 
@@ -18,7 +18,7 @@ persistence-api = '2.2'
 groovy = "4.0.13"
 spock = "2.3-groovy-4.0"
 
-testcontainers = "1.19.1"
+testcontainers = "1.19.2"
 postgresql = "42.6.0"
 
 [libraries]
