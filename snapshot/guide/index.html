@@ -984,9 +984,9 @@ and <code>flyway.datasources.*.password</code>.
 </table>
 </div>
 <div class="sect2">
-<h3 id="_flyway_parameters">Flyway Parameters</h3>
+<h3 id="_flyway_configuration_parameters">Flyway Configuration Parameters</h3>
 <div class="paragraph">
-<p>You can setup <a href="https://documentation.red-gate.com/fd/parameters-184127474.html">flyway parameters</a>. For example, you can setup <a href="https://documentation.red-gate.com/fd/postgresql-transactional-lock-184127530.html">PostgreSQL Transactional Lock</a>:</p>
+<p>You can set <a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters">flyway configuration parameters</a>. For example, you can setup <a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters/flyway/postgresql-transactional-lock">PostgreSQL Transactional Lock</a>:</p>
 </div>
 <div class="openblock">
 <div class="content">
@@ -1081,6 +1081,9 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>Note that setting configuration this way will override any matching properties set via the known configuration keys in the tables above.</p>
 </div>
 </div>
 

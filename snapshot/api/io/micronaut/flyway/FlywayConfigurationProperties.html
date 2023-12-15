@@ -477,7 +477,7 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <li>
 <section class="detail" id="setProperties(java.util.Map)">
 <h3>setProperties</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setProperties</span><wbr><span class="parameters">(@MapFormat(transformation=FLAT)
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setProperties</span><wbr><span class="parameters">(@MapFormat(transformation=FLAT,keyFormat=CAMEL_CASE)
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;properties)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -485,9 +485,9 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list-long">
-<li><a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
+<li><a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters">Flyway parameters</a>.
  Sets the extra flyway parameters to be passed to FluentConfiguration#configuration(Map).
- WARNING: This may override any existing configurations</li>
+ WARNING: This will override any existing configuration properties with the same names.</li>
 </ul>
 </dd>
 </dl>
@@ -503,9 +503,8 @@ implements io.micronaut.core.util.Toggleable</span></div>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list-long">
-<li><a href="https://documentation.red-gate.com/fd/parameters-184127474.html">Flyway parameters</a>.
- Gets the extra flyway parameters to be passed to FluentConfiguration#configuration(Map).
- WARNING: This may override any existing configurations</li>
+<li><a href="https://documentation.red-gate.com/fd/flyway-cli-and-api/configuration/parameters">Flyway parameters</a>.
+ Gets the extra flyway parameters to be passed to FluentConfiguration#configuration(Map).</li>
 </ul>
 </dd>
 </dl>
