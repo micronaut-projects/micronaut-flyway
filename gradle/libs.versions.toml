@@ -19,7 +19,7 @@ groovy = "4.0.13"
 spock = "2.3-groovy-4.0"
 
 testcontainers = "1.19.3"
-postgresql = "42.6.0"
+postgresql = "42.7.1"
 
 [libraries]
 # Core
