@@ -1,0 +1,58 @@
+[
+  {
+    "name": "org.flywaydb.core.api.migration.baseline.BaselineMigrationConfigurationExtension",
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+
+        ]
+      },
+      {
+        "name": "getBaselineMigrationPrefix",
+        "parameterTypes": [
+
+        ]
+      },
+      {
+        "name": "setBaselineMigrationPrefix",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.flywaydb.core.extensibility.ConfigurationExtension",
+    "queryAllDeclaredMethods": true
+  },
+  {
+    "name": "org.flywaydb.core.internal.command.clean.CleanModeConfigurationExtension",
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+
+        ]
+      },
+      {
+        "name": "getClean",
+        "parameterTypes": [
+
+        ]
+      },
+      {
+        "name": "setClean",
+        "parameterTypes": [
+          "org.flywaydb.core.internal.command.clean.CleanModel"
+        ]
+      }
+    ]
+  }
+]
