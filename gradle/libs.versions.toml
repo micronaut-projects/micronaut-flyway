@@ -4,7 +4,7 @@ micronaut = "4.2.3"
 micronaut-logging = "1.1.2"
 micronaut-platform = "4.2.3"
 micronaut-test = "4.1.1"
-micronaut-serde = "2.7.0"
+micronaut-serde = "2.7.1"
 micronaut-sql = "5.4.1"
 
 micronaut-gradle-plugin = "4.2.1"
