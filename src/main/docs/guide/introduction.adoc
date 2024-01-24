@@ -3,4 +3,14 @@ dependency on your classpath:
 
 dependency:micronaut-flyway[groupId="io.micronaut.flyway"]
 
-You also need dependencies for the JDBC connection pool and the JDBC driver as described in https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc[Configuring a JDBC DataSource].
+In addition to the base Flyway dependency that will be included automatically with the above, some databases require an additional database-specific Flyway library. Include one of the following dependencies as needed for your database:
+
+dependency:flyway-mysql[groupId="org.flywaydb", gradleScope="runtimeOnly"]
+
+dependency:flyway-database-oracle[groupId="org.flywaydb", gradleScope="runtimeOnly"]
+
+dependency:flyway-database-postgresql[groupId="org.flywaydb", gradleScope="runtimeOnly"]
+
+dependency:flyway-sqlserver[groupId="org.flywaydb", gradleScope="runtimeOnly"]
+
+You also need dependencies for the JDBC connection pool and the JDBC driver specific to your database as described in https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc[Configuring a JDBC DataSource].
