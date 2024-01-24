@@ -54,7 +54,7 @@ class ValidatePatternTypeConverterSpec extends Specification {
         def e = thrown(FlywayRedgateEditionRequiredException)
         e.errorCode == ErrorCode.ERROR
         e.message == 'Flyway Redgate Edition Required: ignoreMigrationPattern with type \'repeatable\' is not supported by OSS Edition\n' +
-                'Download Redgate Edition for free: https://rd.gt/2VzHpkY'
+                'Download Redgate Edition for free: https://rd.gt/3GGIXhh'
     }
 
     void "test versioned string conversion"() {
@@ -68,7 +68,7 @@ class ValidatePatternTypeConverterSpec extends Specification {
         def e = thrown(FlywayRedgateEditionRequiredException)
         e.errorCode == ErrorCode.ERROR
         e.message == 'Flyway Redgate Edition Required: ignoreMigrationPattern with type \'versioned\' is not supported by OSS Edition\n' +
-                'Download Redgate Edition for free: https://rd.gt/2VzHpkY'
+                'Download Redgate Edition for free: https://rd.gt/3GGIXhh'
     }
 
     void "test missing string conversion"() {
