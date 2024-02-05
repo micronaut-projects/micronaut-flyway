@@ -6,6 +6,7 @@ micronaut-platform = "4.2.3"
 micronaut-test = "4.1.1"
 micronaut-serde = "2.7.1"
 micronaut-sql = "5.4.1"
+micronaut-test-resources="2.3.2"
 
 micronaut-gradle-plugin = "4.2.1"
 
@@ -17,7 +18,6 @@ persistence-api = '2.2'
 groovy = "4.0.17"
 spock = "2.3-groovy-4.0"
 
-testcontainers = "1.19.3"
 postgresql = "42.7.1"
 
 [libraries]
@@ -35,14 +35,12 @@ graal-svm = { module = "org.graalvm.nativeimage:svm", version.ref = "graal-svm" 
 
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serde" }
 micronaut-sql = { module = "io.micronaut.sql:micronaut-sql-bom", version.ref = "micronaut-sql" }
+micronaut-test-resources = { module = "io.micronaut.testresources:micronaut-test-resources-bom", version.ref = "micronaut-test-resources" }
 
 gradle-micronaut = { module = "io.micronaut.gradle:micronaut-gradle-plugin", version.ref = "micronaut-gradle-plugin" }
 
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
 
-test-containers-postgresql = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }
-test-containers-junit-jupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
-test-containers-spock = { module = "org.testcontainers:spock", version.ref = "testcontainers" }
-test-containers = { module = "org.testcontainers:testcontainers", version.ref = "testcontainers" }
+test-containers-spock = { module = "org.testcontainers:spock" }
 
 postgresql-driver = { module = "org.postgresql:postgresql", version.ref = "postgresql" }

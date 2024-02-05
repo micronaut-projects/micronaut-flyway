@@ -23,5 +23,6 @@ micronautBuild {
     importMicronautCatalog()
     importMicronautCatalog("micronaut-serde")
     importMicronautCatalog("micronaut-sql")
+    importMicronautCatalog("micronaut-test-resources")
 }
 
