@@ -10,7 +10,7 @@ micronaut-test-resources="2.3.2"
 
 micronaut-gradle-plugin = "4.2.1"
 
-managed-flyway = "10.6.0"
+managed-flyway = "10.8.1"
 
 gorm-hibernate = "8.0.3"
 graal-svm = "23.1.2"
