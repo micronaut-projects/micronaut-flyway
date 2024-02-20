@@ -18,7 +18,7 @@ persistence-api = '2.2'
 groovy = "4.0.17"
 spock = "2.3-groovy-4.0"
 
-postgresql = "42.7.1"
+postgresql = "42.7.2"
 
 [libraries]
 # Core
