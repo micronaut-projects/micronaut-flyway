@@ -18,8 +18,6 @@ persistence-api = '2.2'
 groovy = "4.0.17"
 spock = "2.3-groovy-4.0"
 
-postgresql = "42.7.2"
-
 [libraries]
 # Core
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
@@ -42,5 +40,3 @@ gradle-micronaut = { module = "io.micronaut.gradle:micronaut-gradle-plugin", ver
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
 
 test-containers-spock = { module = "org.testcontainers:spock" }
-
-postgresql-driver = { module = "org.postgresql:postgresql", version.ref = "postgresql" }

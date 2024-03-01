@@ -32,7 +32,7 @@ dependencies {
     testImplementation(mnTestResources.testcontainers.postgres)
 
     // Database
-    testImplementation libs.postgresql.driver
+    testImplementation mnSql.postgresql
 
     // for FlywayLoggingSpec test for logging
     testImplementation mnLogging.logback.classic
