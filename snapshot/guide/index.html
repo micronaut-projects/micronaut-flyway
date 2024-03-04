@@ -117,7 +117,7 @@
         <h1>Micronaut Flyway</h1>
         <p></p>
         <p>Integration between Micronaut and Flyway</p>
-        <p><strong>Version:</strong> <select style='max-width: 200px' onChange='window.document.location.href=this.options[this.selectedIndex].value;'><option selected='selected' value='https://micronaut-projects.github.io/micronaut-flyway/snapshot/guide/index.html'>SNAPSHOT</option><option value='https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html'>LATEST</option></select> </p>
+        <p><strong>Version:</strong> 7.2.0-SNAPSHOT </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
@@ -312,9 +312,9 @@ flyway:
     ]
     [jpa.default.properties]
       [jpa.default.properties.hibernate]
+        show_sql=true
         [jpa.default.properties.hibernate.hbm2ddl]
           auto="none"
-        show_sql=true
 [flyway]
   [flyway.datasources]
     [flyway.datasources.default]
