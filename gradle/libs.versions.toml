@@ -8,7 +8,7 @@ micronaut-serde = "2.8.1"
 micronaut-sql = "5.5.1"
 micronaut-test-resources="2.3.3"
 
-micronaut-gradle-plugin = "4.3.3"
+micronaut-gradle-plugin = "4.3.4"
 
 managed-flyway = "10.8.1"
 
