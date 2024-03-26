@@ -17,7 +17,6 @@ package io.micronaut.flyway;
 
 import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.TypeConverter;
-import jakarta.inject.Singleton;
 import org.flywaydb.core.api.pattern.ValidatePattern;
 
 import java.util.Optional;
