@@ -22,7 +22,7 @@ class FlywayConfigurationOverloadedPropertiesSpec extends AbstractFlywaySpec {
                 'flyway.datasources.movies.locations': 'classpath:db/migration,classpath:othermigrations',
                 'flyway.datasources.movies.encoding': 'utf-8',
                 'flyway.datasources.movies.target': '1',
-                'flyway.datasources.movies.baseLineVersion': '1'
+                'flyway.datasources.movies.baseline-version': '2'
         )
 
         when:
