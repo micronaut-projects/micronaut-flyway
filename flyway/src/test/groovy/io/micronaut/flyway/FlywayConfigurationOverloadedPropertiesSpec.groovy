@@ -37,7 +37,7 @@ class FlywayConfigurationOverloadedPropertiesSpec extends AbstractFlywaySpec {
         configuration.locations.toString() == '[classpath:db/migration, classpath:othermigrations]'
         configuration.encoding.toString() == 'UTF-8'
         configuration.target.toString() == '1'
-        configuration.baselineVersion.toString() == '1'
+        configuration.baselineVersion.toString() == '2'
     }
 
     void 'overloaded team edition properties throw an exception'() {
