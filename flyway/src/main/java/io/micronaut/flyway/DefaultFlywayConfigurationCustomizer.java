@@ -36,7 +36,7 @@ import org.flywaydb.core.api.resolver.MigrationResolver;
  *   <li>{@link MigrationResolver}[]</li>
  *   <li>{@link ResourceProvider}</li>
  *   <li>{@link ClassProvider}</li>
- * <ul/>
+ * </ul>
  *
  * @author Jeremy Grelle
  * @since 7.2.0
