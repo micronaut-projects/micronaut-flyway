@@ -8,12 +8,10 @@ import io.micronaut.context.annotation.Requires
 import io.micronaut.core.type.Argument
 import io.micronaut.flyway.AbstractFlywaySpec
 import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.HttpClient
 import io.micronaut.runtime.server.EmbeddedServer
 import org.slf4j.LoggerFactory
 import spock.lang.Issue
-import spock.util.concurrent.PollingConditions
 
 import javax.sql.DataSource
 
@@ -23,12 +21,12 @@ class FlywayLoggingSpec extends AbstractFlywaySpec {
     void 'test flyway debug logging for sqlscript'() {
         given:
         MemoryAppender appender = new MemoryAppender()
-        Logger l = (Logger) LoggerFactory.getLogger('org.flywaydb.core.internal.sqlscript.ParserSqlScript')
+        Logger l = (Logger) LoggerFactory.getLogger('org.flywaydb.core.internal.sqlscript')
         l.setLevel(Level.DEBUG)
         l.addAppender(appender)
-
-        when:
         appender.start()
+
+        and:
         EmbeddedServer embeddedServer = runServer(
                 'spec.name'                                    : 'FlywayLoggingSpec',
                 'jpa.default.packages-to-scan'                 : 'example.micronaut',
@@ -36,25 +34,28 @@ class FlywayLoggingSpec extends AbstractFlywaySpec {
                 'jpa.default.properties.hibernate.show_sql'    : true,
                 'flyway.datasources.default.locations'         : 'classpath:db/migration',
                 'endpoints.flyway.sensitive'                   : false,
-                'datasources.default.url'                      : 'jdbc:h2:mem:flywayDb1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
+                'datasources.default.url'                      : 'jdbc:h2:mem:FlywayLoggingSpec;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE',
                 'datasources.default.username'                 : DS_USERNAME,
                 'datasources.default.password'                 : DS_PASSWORD,
                 'datasources.default.driver-class-name'        : DS_DRIVER)
         HttpClient client = applicationContext.createBean(HttpClient, embeddedServer.URL)
 
+        when:
         applicationContext.getBeansOfType(DataSource)
-        HttpResponse<List<Map>> response = client.toBlocking()
-                .exchange(HttpRequest.GET('/flyway'), Argument.of(List, Map))
-        PollingConditions conditions = new PollingConditions(timeout: 7)
+        client.toBlocking().exchange(HttpRequest.GET('/flyway'), Argument.of(List, Map))
 
         then:
         conditions.eventually {
             !appender.events.isEmpty()
         }
+
+        cleanup:
+        appender.stop()
     }
 
     @Requires(property = 'spec.name', value = 'FlywayLoggingSpec')
     class MemoryAppender extends AppenderBase<ILoggingEvent> {
+
         List<String> events = []
 
         @Override
