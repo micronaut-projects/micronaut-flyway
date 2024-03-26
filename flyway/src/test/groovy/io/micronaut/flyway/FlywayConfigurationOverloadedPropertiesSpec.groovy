@@ -18,7 +18,7 @@ class FlywayConfigurationOverloadedPropertiesSpec extends AbstractFlywaySpec {
                 'datasources.movies.username': DS_USERNAME,
                 'datasources.movies.password': DS_PASSWORD,
                 'datasources.movies.driverClassName': DS_DRIVER,
-                'flyway.datasources.movies.ignoreMigrationPatterns': '*:*',
+                'flyway.datasources.movies.ignore-migration-patterns': '*:*',
                 'flyway.datasources.movies.locations': 'classpath:db/migration,classpath:othermigrations',
                 'flyway.datasources.movies.encoding': 'utf-8',
                 'flyway.datasources.movies.target': '1',
