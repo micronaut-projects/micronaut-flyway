@@ -17,7 +17,6 @@ package io.micronaut.flyway;
 
 import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.TypeConverter;
-import jakarta.inject.Singleton;
 import org.flywaydb.core.api.pattern.ValidatePattern;
 
 import java.util.Optional;
@@ -28,8 +27,11 @@ import java.util.Optional;
  * @author Nenad Vico
  * @see org.flywaydb.core.api.pattern.ValidatePattern
  * @since 5.4.1
+ * @deprecated This converter is no longer necessary in conjunction with enhancements to
+ * {@link FlywayConfigurationProperties} that ensure that {@link org.flywaydb.core.api.configuration.FluentConfiguration#ignoreMigrationPatterns(String...)}
+ * will always be used to set ignore-migration-patterns, letting Flyway perform its own type conversion.
  */
-@Singleton
+@Deprecated(since = "7.2.0")
 public class ValidatePatternTypeConverter implements TypeConverter<String, ValidatePattern> {
 
     @Override

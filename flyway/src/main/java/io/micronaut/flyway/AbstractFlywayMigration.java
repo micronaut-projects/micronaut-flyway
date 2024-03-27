@@ -82,6 +82,7 @@ class AbstractFlywayMigration {
         fluentConfiguration.cleanDisabled(!config.isCleanSchema());
         fluentConfiguration.dataSource(dataSource);
         fluentConfiguration.configuration(config.getProperties());
+        customizeConfiguration(config.getNameQualifier(), fluentConfiguration);
 
         Flyway flyway = fluentConfiguration.load();
         applicationContext.registerSingleton(Flyway.class, flyway, Qualifiers.byName(config.getNameQualifier()), false);
@@ -91,6 +92,12 @@ class AbstractFlywayMigration {
         } else {
             runFlyway(config, flyway);
         }
+    }
+
+    private void customizeConfiguration(String nameQualifier, FluentConfiguration fluentConfiguration) {
+        applicationContext.findBean(FlywayConfigurationCustomizer.class, Qualifiers.byName(nameQualifier))
+            .orElse(new DefaultFlywayConfigurationCustomizer(applicationContext, nameQualifier))
+            .customizeFluentConfiguration(fluentConfiguration);
     }
 
     private void runFlyway(FlywayConfigurationProperties config, Flyway flyway) {
@@ -114,4 +121,5 @@ class AbstractFlywayMigration {
     void runAsync(FlywayConfigurationProperties config, Flyway flyway) {
         runFlyway(config, flyway);
     }
+
 }
