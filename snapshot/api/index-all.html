@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <li>Package</li>
 <li>Class</li>
 <li><a href="overview-tree.html">Tree</a></li>
+<li><a href="deprecated-list.html">Deprecated</a></li>
 <li class="nav-bar-cell1-rev">Index</li>
 <li><a href="help-doc.html#index">Help</a></li>
 </ul>
@@ -70,7 +71,16 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="io/micronaut/flyway/ValidatePatternTypeConverter.html#convert(java.lang.String,java.lang.Class,io.micronaut.core.convert.ConversionContext)" class="member-name-link">convert(String, Class&lt;ValidatePattern&gt;, ConversionContext)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/ValidatePatternTypeConverter.html" title="class in io.micronaut.flyway">ValidatePatternTypeConverter</a></dt>
+<dd>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</dd>
+<dt><a href="io/micronaut/flyway/DefaultFlywayConfigurationCustomizer.html#customizeFluentConfiguration(org.flywaydb.core.api.configuration.FluentConfiguration)" class="member-name-link">customizeFluentConfiguration(FluentConfiguration)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/DefaultFlywayConfigurationCustomizer.html" title="class in io.micronaut.flyway">DefaultFlywayConfigurationCustomizer</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationCustomizer.html#customizeFluentConfiguration(org.flywaydb.core.api.configuration.FluentConfiguration)" class="member-name-link">customizeFluentConfiguration(FluentConfiguration)</a> - Method in interface io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationCustomizer.html" title="interface in io.micronaut.flyway">FlywayConfigurationCustomizer</a></dt>
+<dd>
+<div class="block">A callback for customizing Flyway configuration by setting properties on the
+ <code>FluentConfiguration</code> builder prior to execution of migrations.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
@@ -86,9 +96,17 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#DEFAULT_ENABLED" class="member-name-link">DEFAULT_ENABLED</a> - Static variable in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/flyway/DefaultFlywayConfigurationCustomizer.html" class="type-name-link" title="class in io.micronaut.flyway">DefaultFlywayConfigurationCustomizer</a> - Class in <a href="io/micronaut/flyway/package-summary.html">io.micronaut.flyway</a></dt>
+<dd>
+<div class="block">Default implementation of <a href="io/micronaut/flyway/FlywayConfigurationCustomizer.html" title="interface in io.micronaut.flyway"><code>FlywayConfigurationCustomizer</code></a>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
+<dt><a href="io/micronaut/flyway/FlywayConfigurationCustomizer.html" class="type-name-link" title="interface in io.micronaut.flyway">FlywayConfigurationCustomizer</a> - Interface in <a href="io/micronaut/flyway/package-summary.html">io.micronaut.flyway</a></dt>
+<dd>
+<div class="block">Interface for customizing Flyway configuration.</div>
+</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html" class="type-name-link" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a> - Class in <a href="io/micronaut/flyway/package-summary.html">io.micronaut.flyway</a></dt>
 <dd>
 <div class="block">Create a Flyway Configuration for each sub-property of flyway.*.</div>
@@ -119,6 +137,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#getFluentConfiguration()" class="member-name-link">getFluentConfiguration()</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/flyway/endpoint/FlywayReport.html#getMigrations()" class="member-name-link">getMigrations()</a> - Method in class io.micronaut.flyway.endpoint.<a href="io/micronaut/flyway/endpoint/FlywayReport.html" title="class in io.micronaut.flyway.endpoint">FlywayReport</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/micronaut/flyway/DefaultFlywayConfigurationCustomizer.html#getName()" class="member-name-link">getName()</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/DefaultFlywayConfigurationCustomizer.html" title="class in io.micronaut.flyway">DefaultFlywayConfigurationCustomizer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/flyway/endpoint/FlywayReport.html#getName()" class="member-name-link">getName()</a> - Method in class io.micronaut.flyway.endpoint.<a href="io/micronaut/flyway/endpoint/FlywayReport.html" title="class in io.micronaut.flyway.endpoint">FlywayReport</a></dt>
 <dd>&nbsp;</dd>
@@ -209,18 +229,42 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Whether flyway migrations should run asynchronously.</div>
 </dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setBaselineVersion(java.lang.String)" class="member-name-link">setBaselineVersion(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">The version to tag an existing schema with when executing baseline.</div>
+</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setCleanSchema(boolean)" class="member-name-link">setCleanSchema(boolean)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>
 <div class="block">Set whether Flyway will clean the schema before running the migrations.</div>
+</dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setDryRunOutput(java.lang.String)" class="member-name-link">setDryRunOutput(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">Sets the dry run output filename.</div>
 </dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setEnabled(boolean)" class="member-name-link">setEnabled(boolean)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>
 <div class="block">Set whether this flyway configuration is enabled.</div>
 </dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setEncoding(java.lang.String)" class="member-name-link">setEncoding(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">Sets the encoding of SQL migrations.</div>
+</dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setIgnoreMigrationPatterns(java.lang.String...)" class="member-name-link">setIgnoreMigrationPatterns(String...)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">Sets the migration patterns to ignore.</div>
+</dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setLocations(java.lang.String...)" class="member-name-link">setLocations(String...)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">Sets the locations to scan recursively for migrations.</div>
+</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setPassword(java.lang.String)" class="member-name-link">setPassword(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setProperties(java.util.Map)" class="member-name-link">setProperties(Map&lt;String, String&gt;)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setTarget(java.lang.String)" class="member-name-link">setTarget(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
+<dd>
+<div class="block">Sets the target version up to which Flyway should consider migrations.</div>
+</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setUrl(java.lang.String)" class="member-name-link">setUrl(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/micronaut/flyway/FlywayConfigurationProperties.html#setUser(java.lang.String)" class="member-name-link">setUser(String)</a> - Method in class io.micronaut.flyway.<a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway">FlywayConfigurationProperties</a></dt>
@@ -238,10 +282,16 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="io/micronaut/flyway/ValidatePatternTypeConverter.html" class="type-name-link" title="class in io.micronaut.flyway">ValidatePatternTypeConverter</a> - Class in <a href="io/micronaut/flyway/package-summary.html">io.micronaut.flyway</a></dt>
 <dd>
-<div class="block">Converts String's to Flyway ValidatePattern required for reading ignore-migration-patterns parameter.</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">This converter is no longer necessary in conjunction with enhancements to
+ <a href="io/micronaut/flyway/FlywayConfigurationProperties.html" title="class in io.micronaut.flyway"><code>FlywayConfigurationProperties</code></a> that ensure that <code>FluentConfiguration.ignoreMigrationPatterns(String...)</code>
+ will always be used to set ignore-migration-patterns, letting Flyway perform its own type conversion.</div>
+</div>
 </dd>
 <dt><a href="io/micronaut/flyway/ValidatePatternTypeConverter.html#%3Cinit%3E()" class="member-name-link">ValidatePatternTypeConverter()</a> - Constructor for class io.micronaut.flyway.<a href="io/micronaut/flyway/ValidatePatternTypeConverter.html" title="class in io.micronaut.flyway">ValidatePatternTypeConverter</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</dd>
 </dl>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="constant-values.html">Constant&nbsp;Field&nbsp;Values</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
 </div>
