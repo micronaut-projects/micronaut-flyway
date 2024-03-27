@@ -12,7 +12,7 @@ dependencies {
     api libs.managed.flyway
     api mn.micronaut.management
     api mnSql.micronaut.jdbc
-    api mn.micronaut.jackson.databind
+    testImplementation(mn.micronaut.jackson.databind)
 
     implementation mn.reactor
 
