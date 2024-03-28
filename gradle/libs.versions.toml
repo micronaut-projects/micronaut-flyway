@@ -12,7 +12,6 @@ micronaut-gradle-plugin = "4.3.5"
 
 managed-flyway = "10.9.0"
 
-gorm-hibernate = "8.1.0"
 graal-svm = "23.1.2"
 persistence-api = '2.2'
 groovy = "4.0.17"
@@ -28,7 +27,6 @@ managed-flyway-sqlserver = { module = "org.flywaydb:flyway-sqlserver", version.r
 managed-flyway-oracle = { module = "org.flywaydb:flyway-database-oracle", version.ref = "managed-flyway" }
 managed-flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "managed-flyway" }
 
-grails-datastore-gorm-hibernate5 = { module = "org.grails:grails-datastore-gorm-hibernate5", version.ref = "gorm-hibernate" }
 graal-svm = { module = "org.graalvm.nativeimage:svm", version.ref = "graal-svm" }
 
 micronaut-serde = { module = "io.micronaut.serde:micronaut-serde-bom", version.ref = "micronaut-serde" }
