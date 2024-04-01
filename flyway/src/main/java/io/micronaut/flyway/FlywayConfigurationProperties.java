@@ -48,7 +48,15 @@ public class FlywayConfigurationProperties implements Toggleable {
     @SuppressWarnings("WeakerAccess")
     public static final boolean DEFAULT_CLEAN_SCHEMA = false;
 
-    @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties", "configuration"})
+    // NOTE - Some of the ignored properties (javaMigrations, callbacks, resolvers, resourceProvider, javaMigrationClassProvider)
+    // are custom Flyway types and implementations are meant to be provided by the user through an implementation of
+    // FlywayConfigurationCustomizer if needed.
+    // Most of the other ignored properties have overloaded methods in FluentConfiguration, making it non-deterministic as to which
+    // of the methods would be selected for setting the builder property, thus explicit property setters are provided here instead
+    // that pass the value through to the builder.
+    @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties", "configuration", "dryRunOutput",
+        "ignoreMigrationPatterns", "locations", "encoding", "target", "javaMigrations", "dataSource",
+        "baselineVersion", "callbacks", "resolvers", "resourceProvider", "javaMigrationClassProvider"})
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
     private final String nameQualifier;
@@ -213,4 +221,70 @@ public class FlywayConfigurationProperties implements Toggleable {
     public Map<String, String> getProperties() {
         return properties;
     }
-}
+
+    //Pass-through properties for overloaded FluentConfiguration methods
+
+    /**
+     * Sets the dry run output filename.
+     *
+     * @see FluentConfiguration#dryRunOutput(String)
+     *
+     * @param dryRunOutputFileName The dry run output filename
+     */
+    public void setDryRunOutput(String dryRunOutputFileName) {
+        fluentConfiguration.dryRunOutput(dryRunOutputFileName);
+    }
+
+    /**
+     * Sets the migration patterns to ignore.
+     *
+     * @see FluentConfiguration#ignoreMigrationPatterns(String...)
+     *
+     * @param ignoreMigrationPatterns The migration patterns to ignore
+     */
+    public void setIgnoreMigrationPatterns(String... ignoreMigrationPatterns) {
+        fluentConfiguration.ignoreMigrationPatterns(ignoreMigrationPatterns);
+    }
+
+    /**
+     * Sets the locations to scan recursively for migrations.
+     *
+     * @see FluentConfiguration#locations(String...)
+     *
+     * @param locations The locations to scan for migrations
+     */
+    public void setLocations(String... locations) {
+        fluentConfiguration.locations(locations);
+    }
+
+    /**
+     * Sets the encoding of SQL migrations.
+     *
+     * @see FluentConfiguration#encoding(String)
+     *
+     * @param encoding The encoding of SQL migrations
+     */
+    public void setEncoding(String encoding) {
+        fluentConfiguration.encoding(encoding);
+    }
+
+    /**
+     * Sets the target version up to which Flyway should consider migrations.
+     *
+     * @see FluentConfiguration#target(String)
+     *
+     * @param target The target version
+     */
+    public void setTarget(String target) {
+        fluentConfiguration.target(target);
+    }
+
+    /**
+     * The version to tag an existing schema with when executing baseline. Passes through to {@link FluentConfiguration#baselineVersion(String)}
+     * @param baselineVersion The version to tag an existing schema with when executing baseline.
+     */
+    public void setBaselineVersion(String baselineVersion) {
+        fluentConfiguration.baselineVersion(baselineVersion);
+    }
+
+ }

@@ -17,3 +17,53 @@ include::{flywaytests}/groovy/io/micronaut/flyway/postgresql/TransactionLockSpec
 ----
 
 Note that setting configuration this way will override any matching properties set via the known configuration keys in the tables above.
+
+=== Configuring Custom Flyway Type Implementations
+
+It is possible to inject implementations of certain Flyway type interfaces as beans. The following types are currently supported:
+
+|===
+|Type |Description
+
+|link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/migration/JavaMigration.html[JavaMigration]`[]`
+|Java-based migrations.
+
+|link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/callback/Callback.html[Callback]`[]`
+|Callbacks for lifecycle notifications.
+
+|link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/resolver/MigrationResolver.html[MigrationResolver]`[]`
+|`MigrationResolvers` to be used in addition to the built-in ones for resolving Migrations to apply.
+
+|link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/ResourceProvider.html[ResourceProvider]
+|`ResourceProvider` to be used to look up resources.
+
+|link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/ClassProvider.html[ClassProvider<JavaMigration>]
+|ClassProvider to be used to look up `JavaMigration` classes.
+
+|===
+
+
+
+The provided implementation must have a `@Named` qualifier that matches the name of the Flyway configuration name. For example, an array of link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/migration/JavaMigration.html[JavaMigrations] can be provided as in the following example:
+
+[source, java]
+----
+include::{flywaytests}/groovy/io/micronaut/flyway/FlywayConfigurationCustomizerSpec.groovy[tags="typesfactorystart,migrations,javamigration,typesfactoryend"]
+----
+<1> The factory method has a `@Named` qualifier
+<2> A new `JavaMigration` instance is created
+<3> The returned class follows Flyway's naming conventions for `JavaMigrations`
+
+=== Customizing Flyway Configuration
+
+Further customization of Flyway configuration can be done by providing a `@Named` implementation of api:flyway.FlywayConfigurationCustomizer[]. This allows you to directly set properties on Flyway's link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/configuration/FluentConfiguration.html[FluentConfiguration] builder before the migrations are executed. For example, you might want to set a property that is not yet supported in api:flyway.FlywayConfigurationProperties[], or you might want to override a configuration value based on some runtime calculation.
+
+[source, java]
+----
+include::{flywaytests}/groovy/io/micronaut/flyway/FlywayConfigurationCustomizerSpec.groovy[tags="customizer"]
+----
+<1> The bean implements `FlywayConfigurationCustomizer`
+<2> A `JavaMigration` array is injected via a `@Named` qualifier
+<3> The migrations are set on the builder
+
+NOTE: Providing your own implementation of api:flyway.FlywayConfigurationCustomizer[] will override the default implementation which is used for the configuration of custom Flyway type implementations above. If you need to provide such types along with customizing the configuration, it must be done by your `FlywayConfigurationCustomizer` implementation. Your implementation may extend api:flyway.DefaultFlywayConfigurationCustomizer[] in order to retain the built-in behavior and augment it with further configuration adjustments of your own.
