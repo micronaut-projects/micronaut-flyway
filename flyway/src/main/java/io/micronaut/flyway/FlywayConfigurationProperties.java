@@ -51,12 +51,17 @@ public class FlywayConfigurationProperties implements Toggleable {
     // NOTE - Some of the ignored properties (javaMigrations, callbacks, resolvers, resourceProvider, javaMigrationClassProvider)
     // are custom Flyway types and implementations are meant to be provided by the user through an implementation of
     // FlywayConfigurationCustomizer if needed.
+    //
     // Most of the other ignored properties have overloaded methods in FluentConfiguration, making it non-deterministic as to which
     // of the methods would be selected for setting the builder property, thus explicit property setters are provided here instead
     // that pass the value through to the builder.
+    //
+    // allEnvironments and environmentProvisionMode were added to the builder in 10.10.0, are undocumented, and were breaking things,
+    // so added to the ignore list without a pass-through setter
     @ConfigurationBuilder(prefixes = "", excludes = {"jdbcProperties", "configuration", "dryRunOutput",
         "ignoreMigrationPatterns", "locations", "encoding", "target", "javaMigrations", "dataSource",
-        "baselineVersion", "callbacks", "resolvers", "resourceProvider", "javaMigrationClassProvider"})
+        "baselineVersion", "callbacks", "resolvers", "resourceProvider", "javaMigrationClassProvider",
+        "allEnvironments", "environmentProvisionMode"})
     FluentConfiguration fluentConfiguration = new FluentConfiguration();
 
     private final String nameQualifier;
