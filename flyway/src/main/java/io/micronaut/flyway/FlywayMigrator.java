@@ -36,7 +36,7 @@ import javax.sql.DataSource;
  * @author Iván López
  * @since 3.6.0
  */
-@TypeHint(PublishingConfigurationExtension.class)
+@TypeHint(value = PublishingConfigurationExtension.class, accessType = TypeHint.AccessType.ALL_PUBLIC_METHODS)
 @Singleton
 public class FlywayMigrator extends AbstractFlywayMigration {
 
