@@ -4,8 +4,10 @@ package io.micronaut.flyway.postgresql
 import io.micronaut.flyway.AbstractFlywaySpec
 import io.micronaut.flyway.FlywayConfigurationProperties
 import org.flywaydb.core.Flyway
+import org.testcontainers.DockerClientFactory
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.spock.Testcontainers
+import spock.lang.Requires
 import spock.lang.Shared
 import spock.lang.Timeout
 
@@ -13,6 +15,7 @@ import javax.sql.DataSource
 import java.util.concurrent.TimeUnit
 
 @Testcontainers
+@Requires({ DockerClientFactory.instance().isDockerAvailable() })
 class TransactionLockSpec extends AbstractFlywaySpec {
 
     String yaml = """\
