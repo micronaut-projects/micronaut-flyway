@@ -1,12 +1,11 @@
 plugins {
-    id "io.micronaut.build.internal.flyway-base"
-    id 'org.graalvm.buildtools.native'
+    id("io.micronaut.build.internal.flyway-base")
+    id("org.graalvm.buildtools.native")
 }
 
 tasks.named("test") {
     useJUnitPlatform()
 }
-
 graalvmNative {
     toolchainDetection = false
     metadataRepository {
