@@ -16,6 +16,7 @@ graal-svm = "23.1.5"
 persistence-api = '2.2'
 groovy = "4.0.17"
 spock = "2.3-groovy-4.0"
+sonatype-scan = "3.0.0"
 
 [libraries]
 # Core
@@ -38,3 +39,4 @@ gradle-micronaut = { module = "io.micronaut.gradle:micronaut-gradle-plugin", ver
 persistence-api = { module = 'javax.persistence:javax.persistence-api', version.ref = 'persistence-api'}
 
 test-containers-spock = { module = "org.testcontainers:spock" }
+sonatype-scan = { module = "org.sonatype.gradle.plugins:scan-gradle-plugin", version.ref = "sonatype-scan" }
