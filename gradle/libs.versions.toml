@@ -14,7 +14,7 @@ managed-flyway = "10.22.0"
 
 graal-svm = "23.1.6"
 persistence-api = '2.2'
-groovy = "4.0.17"
+groovy = "4.0.24"
 spock = "2.3-groovy-4.0"
 sonatype-scan = "3.0.0"
 
