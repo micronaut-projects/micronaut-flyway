@@ -16,7 +16,7 @@ graal-svm = "23.1.7"
 persistence-api = '2.2'
 groovy = "4.0.24"
 spock = "2.3-groovy-4.0"
-sonatype-scan = "3.0.0"
+sonatype-scan = "3.1.1"
 
 [libraries]
 # Core
