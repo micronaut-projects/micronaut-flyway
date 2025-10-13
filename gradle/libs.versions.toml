@@ -1,7 +1,7 @@
 [versions]
 micronaut-docs = "2.0.0"
-micronaut-logging = "1.7.0"
 micronaut = "4.10.4"
+micronaut-logging = "1.7.1"
 micronaut-platform = "4.2.3"
 micronaut-test = "4.7.0"
 micronaut-serde = "2.15.1"
