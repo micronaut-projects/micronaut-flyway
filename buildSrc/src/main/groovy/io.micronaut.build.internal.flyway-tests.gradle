@@ -1,6 +1,15 @@
 plugins {
     id("io.micronaut.build.internal.flyway-base")
+    id("io.micronaut.build.internal.java-base")
     id("org.graalvm.buildtools.native")
+}
+
+dependencies {
+    testAnnotationProcessor(mn.micronaut.inject.java)
+    testImplementation(mnTest.micronaut.test.junit5)
+    testRuntimeOnly(mnLogging.logback.classic)
+    testImplementation(mnTest.junit.jupiter.engine)
+    testRuntimeOnly(mnTest.junit.platform.launcher)
 }
 
 tasks.named("test") {

@@ -24,6 +24,5 @@ dependencies {
     implementation project(":micronaut-flyway")
     implementation "org.yaml:snakeyaml"
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.h2database:h2")
 }
