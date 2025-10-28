@@ -3,7 +3,6 @@ plugins {
     id "io.micronaut.build.internal.flyway-tests"
 }
 
-mainClassName = "helloworld.Application"
 micronaut {
     version libs.versions.micronaut.platform.get()
     testRuntime "junit5"
