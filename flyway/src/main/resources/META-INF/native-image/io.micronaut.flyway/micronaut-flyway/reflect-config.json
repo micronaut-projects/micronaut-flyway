@@ -1,0 +1,6 @@
+[
+  {
+    "name": "org.flywaydb.database.oracle.OracleConfigurationExtension",
+    "allPublicMethods": true
+  }
+]
