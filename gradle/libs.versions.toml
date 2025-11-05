@@ -12,7 +12,7 @@ micronaut-test-resources = "2.10.1"
 micronaut-gradle-plugin = "4.6.1"
 managed-flyway = "11.9.1"
 
-graal-svm = "23.1.8"
+graal-svm = "23.1.9"
 persistence-api = '2.2'
 groovy = "4.0.24"
 spock = "2.3-groovy-4.0"
