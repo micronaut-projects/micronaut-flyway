@@ -15,7 +15,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <link rel="stylesheet" href="../css/multi-language-sample.css"/>
     <script src="../js/docs.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
     <script type="text/javascript">
         function addJsClass(el) {
             var classes = document.body.className.split(" ");
@@ -117,13 +117,13 @@
         <h1>Micronaut Flyway</h1>
         <p></p>
         <p>Integration between Micronaut and Flyway</p>
-        <p><strong>Version:</strong> 8.0.0-SNAPSHOT </p>
+        <p><strong>Version:</strong> 7.9.2-SNAPSHOT </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/introduction.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/introduction.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -147,8 +147,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;micronaut-flyway&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>In addition to the base Flyway dependency that will be included automatically with the above, some databases require an additional database-specific Flyway library. Include one of the following dependencies as needed for your database:</p>
@@ -167,8 +166,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;flyway-mysql&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>        <div class="listingblock multi-language-sample">
@@ -184,8 +182,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;flyway-database-oracle&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>        <div class="listingblock multi-language-sample">
@@ -201,8 +198,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;flyway-database-postgresql&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>        <div class="listingblock multi-language-sample">
@@ -218,8 +214,7 @@ dependency on your classpath:</p>
     &lt;artifactId&gt;flyway-sqlserver&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
-</div>
-</p>
+</div></p>
 </div>
 <div class="paragraph">
 <p>You also need dependencies for the JDBC connection pool and the JDBC driver specific to your database as described in <a href="https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc">Configuring a JDBC DataSource</a>.</p>
@@ -228,7 +223,7 @@ dependency on your classpath:</p>
 <h1 id="releaseHistory"><a class="anchor" href="#releaseHistory"></a>2 Release History</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/releaseHistory.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/releaseHistory.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -244,7 +239,7 @@ dependency on your classpath:</p>
 <h1 id="configuration"><a class="anchor" href="#configuration"></a>3 Configuration</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/configuration.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -255,7 +250,7 @@ dependency on your classpath:</p>
 <h2 id="jpa"><a class="anchor" href="#jpa"></a>3.1 JPA/Hibernate</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration/jpa.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/configuration/jpa.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -654,7 +649,7 @@ flyway.datasources.default.enabled=false</code></pre>
 <h2 id="additionalConfig"><a class="anchor" href="#additionalConfig"></a>3.2 Additional configuration</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration/additionalConfig.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/configuration/additionalConfig.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1028,7 +1023,7 @@ Providing your own implementation of <a href="../api/io/micronaut/flyway/FlywayC
 <h1 id="graalvm"><a class="anchor" href="#graalvm"></a>4 GraalVM support</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/graalvm.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/graalvm.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1156,7 +1151,7 @@ information.
 <h1 id="events"><a class="anchor" href="#events"></a>5 Events</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/events.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/events.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1179,7 +1174,7 @@ information.
 <h1 id="endpoint"><a class="anchor" href="#endpoint"></a>6 Endpoint</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/endpoint.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/endpoint.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1312,7 +1307,7 @@ user guide for more information.
 <h1 id="flywayGuides"><a class="anchor" href="#flywayGuides"></a>7 Guides</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/flywayGuides.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/flywayGuides.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1325,7 +1320,7 @@ user guide for more information.
 <h1 id="repository"><a class="anchor" href="#repository"></a>8 Repository</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/repository.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/native-init-build-time/src/main/docs/guide/repository.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
