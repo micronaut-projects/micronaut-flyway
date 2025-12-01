@@ -16,8 +16,8 @@
 package io.micronaut.flyway;
 
 import io.micronaut.context.ApplicationContext;
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.type.Argument;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.inject.qualifiers.Qualifiers;
 import org.flywaydb.core.api.ClassProvider;
 import org.flywaydb.core.api.ResourceProvider;
