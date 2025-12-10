@@ -12,7 +12,6 @@ managed-flyway = "11.9.1"
 
 graal-svm = "25.0.1"
 persistence-api = '2.2'
-groovy = "4.0.24"
 spock = "2.3-groovy-4.0"
 
 [libraries]
