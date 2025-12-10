@@ -41,8 +41,8 @@ import java.util.stream.Stream;
 
 import io.micronaut.context.exceptions.ConfigurationException;
 import io.micronaut.core.annotation.Internal;
-import io.micronaut.core.annotation.NonNull;
-import io.micronaut.core.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.flywaydb.core.api.ResourceProvider;
 import org.flywaydb.core.api.resource.LoadableResource;
 import org.flywaydb.core.internal.util.StringUtils;

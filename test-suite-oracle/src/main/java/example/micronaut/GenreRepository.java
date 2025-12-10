@@ -15,7 +15,7 @@
  */
 package example.micronaut;
 
-import io.micronaut.core.annotation.NonNull;
+import org.jspecify.annotations.NonNull;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.jdbc.annotation.JdbcRepository;
