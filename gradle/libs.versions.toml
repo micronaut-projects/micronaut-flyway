@@ -1,5 +1,5 @@
 [versions]
-micronaut = "5.0.0-M2"
+micronaut = "5.0.0-M6"
 micronaut-logging = "1.7.1"
 micronaut-platform = "4.10.0"
 micronaut-serde = "3.0.0-M1"
