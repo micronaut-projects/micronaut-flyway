@@ -27,6 +27,5 @@ micronautBuild {
     importMicronautCatalog("micronaut-data")
     importMicronautCatalog("micronaut-validation")
     importMicronautCatalog("micronaut-sql")
-    importMicronautCatalog("micronaut-test-resources")
 }
 

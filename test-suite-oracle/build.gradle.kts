@@ -1,6 +1,5 @@
 plugins {
     id("io.micronaut.application")
-    id("io.micronaut.test-resources")
 }
 repositories {
     mavenCentral()
@@ -23,6 +22,8 @@ dependencies {
     testImplementation(mnTest.micronaut.test.junit5)
     testImplementation(mn.micronaut.http.client)
     testRuntimeOnly(mnTest.junit.platform.launcher)
+    testImplementation(platform(mnTest.boms.testcontainers))
+    testImplementation(libs.testcontainers.oracle.free)
 }
 micronaut {
     version(libs.versions.micronaut.platform.get())
