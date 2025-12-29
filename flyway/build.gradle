@@ -27,9 +27,9 @@ dependencies {
     testImplementation mn.snakeyaml
 
     // Test Containers
-    testImplementation(platform(mnTestResources.boms.testcontainers))
-    testImplementation libs.test.containers.spock
-    testImplementation(mnTestResources.testcontainers.postgres)
+    testImplementation(platform(mnTest.boms.testcontainers))
+    testImplementation(libs.test.containers.spock)
+    testImplementation(libs.testcontainers.postgresql)
 
     // Database
     testImplementation mnSql.postgresql

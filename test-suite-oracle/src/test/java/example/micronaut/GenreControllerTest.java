@@ -15,6 +15,7 @@
  */
 package example.micronaut;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpRequest;
@@ -26,11 +27,14 @@ import io.micronaut.http.client.annotation.Client;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import io.micronaut.test.support.TestPropertyProvider;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @MicronautTest
-class GenreControllerTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class GenreControllerTest implements TestPropertyProvider {
+
+    @Override
+    public @NonNull Map<String, String> getProperties() {
+        return OracleFree.getProperties();
+    }
+
     private static final String PATH_GENRES = "/genres";
     private static final String PATH_GENRES_LIST = "/genres/list";
     private static final Function<Long, String> FUNCTION_GENRES_ID = id ->
