@@ -21,7 +21,7 @@ class FlywayLoggingSpec extends AbstractFlywaySpec {
     void 'test flyway debug logging for sqlscript'() {
         given:
         MemoryAppender appender = new MemoryAppender()
-        Logger l = (Logger) LoggerFactory.getLogger('org.flywaydb.core.internal.sqlscript')
+        Logger l = (Logger) LoggerFactory.getLogger('org.flywaydb.core')
         l.setLevel(Level.DEBUG)
         l.addAppender(appender)
         appender.start()
