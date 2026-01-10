@@ -8,7 +8,7 @@ micronaut-data = "4.14.2"
 micronaut-sql = "7.0.0"
 micronaut-validation = "5.0.0-M1"
 micronaut-gradle-plugin = "4.6.1"
-managed-flyway = "11.20.0"
+managed-flyway = "11.20.1"
 
 graal-svm = "25.0.1"
 persistence-api = '2.2'
