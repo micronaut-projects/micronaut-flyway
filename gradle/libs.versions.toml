@@ -10,7 +10,7 @@ micronaut-validation = "5.0.0-M1"
 micronaut-gradle-plugin = "4.6.1"
 managed-flyway = "11.20.2"
 
-graal-svm = "25.0.1"
+graal-svm = "25.0.2"
 persistence-api = '2.2'
 
 [libraries]
