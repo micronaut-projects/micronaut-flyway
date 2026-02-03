@@ -1,0 +1,22 @@
+{
+  "reflection": [
+    {
+      "type": "com.zaxxer.hikari.HikariConfig",
+      "methods": [
+        {
+          "name": "getCredentialsProvider",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.zaxxer.hikari.HikariConfig",
+      "methods": [
+        {
+          "name": "getCredentialsProviderClassName",
+          "parameterTypes": []
+        }
+      ]
+    }
+  ]
+}
