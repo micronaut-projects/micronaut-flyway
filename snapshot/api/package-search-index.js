@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.micronaut.flyway"},{"l":"io.micronaut.flyway.endpoint"},{"l":"io.micronaut.flyway.event"},{"l":"io.micronaut.flyway.info"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"io.micronaut.flyway"},{"l":"io.micronaut.flyway.endpoint"},{"l":"io.micronaut.flyway.event"},{"l":"io.micronaut.flyway.info"}];updateSearchResults();
