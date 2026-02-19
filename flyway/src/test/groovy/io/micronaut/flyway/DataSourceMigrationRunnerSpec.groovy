@@ -1,6 +1,5 @@
 package io.micronaut.flyway
 
-import io.micronaut.context.annotation.Primary
 import io.micronaut.context.annotation.Requires
 import io.micronaut.jdbc.DataSourceResolver
 import jakarta.inject.Singleton
@@ -29,7 +28,6 @@ class DataSourceMigrationRunnerSpec extends ApplicationContextSpecification {
         !(dataSource instanceof ReturnedByDataSourceResolver)
     }
 
-    @Primary
     @Requires(property = 'spec.name', value = 'DataSourceMigrationRunnerSpec')
     @Singleton
     static class MockDataSourceResolver implements DataSourceResolver {
