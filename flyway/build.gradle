@@ -17,7 +17,7 @@ dependencies {
     implementation mn.reactor
 
     testAnnotationProcessor mn.micronaut.inject.java
-    testAnnotationProcessor libs.persistence.api
+    testAnnotationProcessor(mnData.javax.persistence.api)
 
     testImplementation mn.groovy.sql
     testImplementation mn.micronaut.http.client
