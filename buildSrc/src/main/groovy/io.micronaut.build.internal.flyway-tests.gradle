@@ -18,7 +18,7 @@ tasks.named("test") {
 graalvmNative {
     toolchainDetection = false
     metadataRepository {
-        version = "0.3.12"
+        version = "0.3.34"
         enabled = true
     }
     binaries {
