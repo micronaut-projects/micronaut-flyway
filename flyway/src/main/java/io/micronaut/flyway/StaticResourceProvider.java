@@ -64,7 +64,7 @@ final class StaticResourceProvider implements ResourceProvider {
         this.resources = resources;
     }
 
-    static StaticResourceProvider get() {
+    static @Nullable StaticResourceProvider get() {
         return findStaticResourceProvider();
     }
 
@@ -89,7 +89,7 @@ final class StaticResourceProvider implements ResourceProvider {
     }
 
     @Override
-    public LoadableResource getResource(String name) {
+    public @Nullable LoadableResource getResource(String name) {
         return resources.stream()
             .filter(resource -> resource.getAbsolutePath().equals(name))
             .findFirst()
