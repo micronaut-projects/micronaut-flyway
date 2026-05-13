@@ -23,6 +23,7 @@ import io.micronaut.core.convert.format.MapFormat;
 import io.micronaut.core.naming.conventions.StringConvention;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.core.util.Toggleable;
+import org.jspecify.annotations.Nullable;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 import java.util.HashMap;
@@ -68,9 +69,9 @@ public class FlywayConfigurationProperties implements Toggleable {
     private boolean enabled = DEFAULT_ENABLED;
     private boolean async = DEFAULT_ASYNC;
     private boolean cleanSchema = DEFAULT_CLEAN_SCHEMA;
-    private String url;
-    private String user;
-    private String password;
+    private @Nullable String url;
+    private @Nullable String user;
+    private @Nullable String password;
     private Map<String, String> properties = new HashMap<>();
 
     /**
@@ -140,14 +141,14 @@ public class FlywayConfigurationProperties implements Toggleable {
      * The JDBC url of the database to migrate.
      * @return JDBC url of the database to migrate
      */
-    public String getUrl() {
+    public @Nullable String getUrl() {
         return url;
     }
 
     /**
      * @param url The JDBC url of the database to migrate
      */
-    public void setUrl(String url) {
+    public void setUrl(@Nullable String url) {
         this.url = url;
     }
 
@@ -155,21 +156,21 @@ public class FlywayConfigurationProperties implements Toggleable {
      * The user of the database to migrate.
      * @return The user of the database to migrate
      */
-    public String getUser() {
+    public @Nullable String getUser() {
         return user;
     }
 
     /**
      * @param user The user of the database to migrate
      */
-    public void setUser(String user) {
+    public void setUser(@Nullable String user) {
         this.user = user;
     }
 
     /**
      * @param username The username of the database to migrate
      */
-    public void setUsername(String username) {
+    public void setUsername(@Nullable String username) {
         this.user = username;
     }
 
@@ -177,14 +178,14 @@ public class FlywayConfigurationProperties implements Toggleable {
      * The password of the database to migrate.
      * @return The password of the database to migrate
      */
-    public String getPassword() {
+    public @Nullable String getPassword() {
         return password;
     }
 
     /**
      * @param password The password of the database to migrate
      */
-    public void setPassword(String password) {
+    public void setPassword(@Nullable String password) {
         this.password = password;
     }
 
