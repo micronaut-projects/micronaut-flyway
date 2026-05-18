@@ -1,11 +1,11 @@
 [versions]
 micronaut = "5.0.0"
-micronaut-test = "5.0.0-RC1"
+micronaut-test = "5.0.0"
 micronaut-logging = "2.0.0"
 micronaut-platform = "5.0.0-RC1"
 micronaut-serde = "3.0.0"
 micronaut-data = "5.0.0-RC1"
-micronaut-sql = "7.0.0-RC1"
+micronaut-sql = "7.0.1"
 micronaut-validation = "5.0.0"
 micronaut-gradle-plugin = "5.0.0-M1"
 managed-flyway = "12.6.1"
