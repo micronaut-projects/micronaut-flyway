@@ -119,13 +119,13 @@
         <h1>Micronaut Flyway</h1>
         <p></p>
         <p>Integration between Micronaut and Flyway</p>
-        <p><strong>Version:</strong> 8.0.1-SNAPSHOT </p>
+        <p><strong>Version:</strong> 8.1.0-SNAPSHOT </p>
     </div>
     
 <h1 id="introduction"><a class="anchor" href="#introduction"></a>1 Introduction</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/introduction.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/introduction.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -230,7 +230,7 @@ dependency on your classpath:</p>
 <h1 id="releaseHistory"><a class="anchor" href="#releaseHistory"></a>2 Release History</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/releaseHistory.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/releaseHistory.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -246,7 +246,7 @@ dependency on your classpath:</p>
 <h1 id="configuration"><a class="anchor" href="#configuration"></a>3 Configuration</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/configuration.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -257,7 +257,7 @@ dependency on your classpath:</p>
 <h2 id="jpa"><a class="anchor" href="#jpa"></a>3.1 JPA/Hibernate</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration/jpa.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/configuration/jpa.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -306,26 +306,9 @@ flyway:
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[datasources]
-  [datasources.default]
-    url="jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-    username="sa"
-    password=""
-    driverClassName="org.h2.Driver"
-[jpa]
-  [jpa.default]
-    packages-to-scan=[
-      "example.micronaut"
-    ]
-    [jpa.default.properties]
-      [jpa.default.properties.hibernate]
-        show_sql=true
-        [jpa.default.properties.hibernate.hbm2ddl]
-          auto="none"
-[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">datasources = {default = {url = "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE", username = "sa", password = "", driverClassName = "org.h2.Driver"}}
+jpa = {default = {packages-to-scan = ["example.micronaut"], properties = {hibernate = {hbm2ddl = {auto = "none"}, show_sql = true}}}}
+flyway = {datasources = {default = {enabled = true}}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -482,14 +465,7 @@ flyway.datasources.default.locations[1]=classpath:other</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=true
-      locations=[
-        "classpath:databasemigrations",
-        "classpath:other"
-      ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {enabled = true, locations = ["classpath:databasemigrations", "classpath:other"]}}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -591,11 +567,7 @@ flyway.datasources.default.enabled=false</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  enabled=true
-  [flyway.datasources]
-    [flyway.datasources.default]
-      enabled=false</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {enabled = true, datasources = {default = {enabled = false}}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -656,7 +628,7 @@ flyway.datasources.default.enabled=false</code></pre>
 <h2 id="additionalConfig"><a class="anchor" href="#additionalConfig"></a>3.2 Additional configuration</h2>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/configuration/additionalConfig.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/configuration/additionalConfig.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -809,14 +781,7 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      [flyway.datasources.default.properties]
-        [flyway.datasources.default.properties.flyway]
-          [flyway.datasources.default.properties.flyway.postgresql]
-            [flyway.datasources.default.properties.flyway.postgresql.transactional]
-              lock=false</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {properties = {flyway = {postgresql = {transactional = {lock = false}}}}}}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -1030,7 +995,7 @@ Providing your own implementation of <a href="../api/io/micronaut/flyway/FlywayC
 <h1 id="graalvm"><a class="anchor" href="#graalvm"></a>4 GraalVM support</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/graalvm.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/graalvm.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1068,13 +1033,7 @@ flyway.datasources.default.locations[1]=classpath:other</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
-  [flyway.datasources]
-    [flyway.datasources.default]
-      locations=[
-        "classpath:databasemigrations",
-        "classpath:other"
-      ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {locations = ["classpath:databasemigrations", "classpath:other"]}}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -1158,7 +1117,7 @@ information.
 <h1 id="events"><a class="anchor" href="#events"></a>5 Events</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/events.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/events.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1181,7 +1140,7 @@ information.
 <h1 id="endpoint"><a class="anchor" href="#endpoint"></a>6 Endpoint</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/endpoint.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/endpoint.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1212,10 +1171,7 @@ endpoints.flyway.sensitive=false</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[endpoints]
-  [endpoints.flyway]
-    enabled=true
-    sensitive=false</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">endpoints = {flyway = {enabled = true, sensitive = false}}</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -1314,7 +1270,7 @@ user guide for more information.
 <h1 id="flywayGuides"><a class="anchor" href="#flywayGuides"></a>7 Guides</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/flywayGuides.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/flywayGuides.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
@@ -1327,7 +1283,7 @@ user guide for more information.
 <h1 id="repository"><a class="anchor" href="#repository"></a>8 Repository</h1>
 
 <div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.0.x/src/main/docs/guide/repository.adoc"'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/micronaut-projects/micronaut-flyway/edit/8.1.x/src/main/docs/guide/repository.adoc"'>
         <i class='fa fa-pencil-square-o'></i> Improve this doc
     </button>
 </div>
