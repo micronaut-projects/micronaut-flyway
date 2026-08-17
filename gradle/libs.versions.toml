@@ -1,10 +1,10 @@
 [versions]
-micronaut = "5.1.6"
+micronaut = "5.1.11"
 micronaut-test = "5.0.0"
 micronaut-logging = "2.0.0"
-micronaut-platform = "5.0.5"
+micronaut-platform = "5.1.0"
 micronaut-serde = "3.1.0"
-micronaut-data = "5.1.0"
+micronaut-data = "5.1.1"
 micronaut-sql = "7.1.0"
 micronaut-validation = "5.1.0"
 micronaut-gradle-plugin = "5.0.2"
