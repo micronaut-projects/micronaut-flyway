@@ -53,6 +53,7 @@ import org.graalvm.nativeimage.ImageSingletons;
  */
 @Internal
 final class StaticResourceProvider implements ResourceProvider {
+    private static final String GRAALVM_IMAGESINGLETONS_ENABLED = "micronaut.graalvm.imagesingletons.enabled";
     private static final String FLYWAY_LOCATIONS = "flyway.locations";
     private static final String DEFAULT_FLYWAY_LOCATIONS = "classpath:db/migration";
     private static final String CLASSPATH_APPLICATION_MIGRATIONS_PROTOCOL = "classpath";
@@ -112,6 +113,9 @@ final class StaticResourceProvider implements ResourceProvider {
 
     @SuppressWarnings("java:S1181")
     private static boolean hasImageSingletons() {
+        if ("false".equalsIgnoreCase(System.getProperty(GRAALVM_IMAGESINGLETONS_ENABLED))) {
+            return false;
+        }
         try {
             //noinspection ConstantValue
             return ImageSingletons.class != null;
