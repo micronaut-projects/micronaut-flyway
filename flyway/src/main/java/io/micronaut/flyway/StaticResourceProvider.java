@@ -15,6 +15,8 @@
  */
 package io.micronaut.flyway;
 
+import static io.micronaut.core.util.StringUtils.FALSE;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -113,7 +115,7 @@ final class StaticResourceProvider implements ResourceProvider {
 
     @SuppressWarnings("java:S1181")
     private static boolean hasImageSingletons() {
-        if ("false".equalsIgnoreCase(System.getProperty(GRAALVM_IMAGESINGLETONS_ENABLED))) {
+        if (FALSE.equalsIgnoreCase(System.getProperty(GRAALVM_IMAGESINGLETONS_ENABLED))) {
             return false;
         }
         try {
