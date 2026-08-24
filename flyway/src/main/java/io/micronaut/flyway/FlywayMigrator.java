@@ -17,9 +17,7 @@ package io.micronaut.flyway;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.event.ApplicationEventPublisher;
-import io.micronaut.core.annotation.TypeHint;
 import jakarta.inject.Singleton;
-import org.flywaydb.core.internal.publishing.PublishingConfigurationExtension;
 
 import javax.sql.DataSource;
 
@@ -36,7 +34,6 @@ import javax.sql.DataSource;
  * @author Iván López
  * @since 3.6.0
  */
-@TypeHint(value = PublishingConfigurationExtension.class, accessType = TypeHint.AccessType.ALL_PUBLIC_METHODS)
 @Singleton
 public class FlywayMigrator extends AbstractFlywayMigration {
 
