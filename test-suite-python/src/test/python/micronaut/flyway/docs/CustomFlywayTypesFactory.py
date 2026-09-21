@@ -3,8 +3,7 @@ from micronaut.context.annotation import Requires
 # tag::imports[]
 from jakarta.inject import Named, Singleton
 from micronaut.context.annotation import Factory
-from org.flywaydb.core.api import MigrationVersion
-from org.flywaydb.core.api.migration import Context, JavaMigration
+from org.flywaydb.core.api.migration import BaseJavaMigration, Context, JavaMigration
 # end::imports[]
 
 
@@ -19,19 +18,7 @@ class CustomFlywayTypesFactory:
         return [V3__Migrate_books()]  # <2>
 
 
-class V3__Migrate_books(JavaMigration):  # <3>
-
-    def getVersion(self) -> MigrationVersion:
-        return MigrationVersion.fromVersion("3")
-
-    def getDescription(self) -> str:
-        return "Migrate books"
-
-    def getChecksum(self) -> int | None:
-        return None
-
-    def canExecuteInTransaction(self) -> bool:
-        return True
+class V3__Migrate_books(BaseJavaMigration):  # <3>
 
     def migrate(self, context: Context) -> None:
         pass  # Execute migration

@@ -1,18 +1,16 @@
 from typing import Annotated
 
-import java
 from jakarta.inject import Inject, Named
 from javax.sql import DataSource
 from micronaut.context import ApplicationContext
 from micronaut.context.annotation import Property
+from micronaut.flyway import FlywayConfigurationCustomizer
 from micronaut.inject.qualifiers import Qualifiers
 from micronaut.test.extensions.junit5.annotation import MicronautTest
 from org.flywaydb.core import Flyway
 from org.junit.jupiter.api import Test
 
-# TODO(python): only java.type(...) aliases can be used as runtime type arguments of getBean / isinstance
-FlywayConfigurationCustomizer = java.type("io.micronaut.flyway.FlywayConfigurationCustomizer")
-BooksFlywayConfigurationCustomizer = java.type("micronaut.flyway.docs.BooksFlywayConfigurationCustomizer")
+from .BooksFlywayConfigurationCustomizer import BooksFlywayConfigurationCustomizer
 
 
 @Property(name="spec.name", value="BooksFlywayConfigurationCustomizerTest")

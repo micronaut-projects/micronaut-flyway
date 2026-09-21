@@ -53,7 +53,7 @@ snippet::io.micronaut.flyway.docs.CustomFlywayTypesFactory[project-base="test-su
 <3> The returned class follows Flyway's naming conventions for `JavaMigrations`
 
 [.lang-python]
-NOTE: A Python class cannot extend Flyway's `BaseJavaMigration`, so the migration implements the `JavaMigration` interface and returns its version and description explicitly. The Python compiler bridges the `list[JavaMigration]` return type as a `java.util.List` bean rather than the `JavaMigration[]` array bean the default configuration customizer looks up, so the migrations of a Python factory are applied through a custom api:flyway.FlywayConfigurationCustomizer[] as shown in the next section.
+NOTE: The Python compiler bridges the `list[JavaMigration]` return type as a `java.util.List` bean rather than the `JavaMigration[]` array bean the default configuration customizer looks up, so the migrations of a Python factory are applied through a custom api:flyway.FlywayConfigurationCustomizer[] as shown in the next section.
 
 === Customizing Flyway Configuration
 
