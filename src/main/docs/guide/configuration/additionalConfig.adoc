@@ -46,22 +46,21 @@ It is possible to inject implementations of certain Flyway type interfaces as be
 
 The provided implementation must have a `@Named` qualifier that matches the name of the Flyway configuration name. For example, an array of link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/migration/JavaMigration.html[JavaMigrations] can be provided as in the following example:
 
-[source, java]
-----
-include::{flywaytests}/groovy/io/micronaut/flyway/FlywayConfigurationCustomizerSpec.groovy[tags="typesfactorystart,migrations,javamigration,typesfactoryend"]
-----
+snippet::io.micronaut.flyway.docs.CustomFlywayTypesFactory[project-base="test-suite", tags="imports,clazz"]
+
 <1> The factory method has a `@Named` qualifier
 <2> A new `JavaMigration` instance is created
 <3> The returned class follows Flyway's naming conventions for `JavaMigrations`
+
+[.lang-python]
+NOTE: The Python compiler bridges the `list[JavaMigration]` return type as a `java.util.List` bean rather than the `JavaMigration[]` array bean the default configuration customizer looks up, so the migrations of a Python factory are applied through a custom api:flyway.FlywayConfigurationCustomizer[] as shown in the next section.
 
 === Customizing Flyway Configuration
 
 Further customization of Flyway configuration can be done by providing a `@Named` implementation of api:flyway.FlywayConfigurationCustomizer[]. This allows you to directly set properties on Flyway's link:https://javadoc.io/doc/org.flywaydb/flyway-core/latest/org/flywaydb/core/api/configuration/FluentConfiguration.html[FluentConfiguration] builder before the migrations are executed. For example, you might want to set a property that is not yet supported in api:flyway.FlywayConfigurationProperties[], or you might want to override a configuration value based on some runtime calculation.
 
-[source, java]
-----
-include::{flywaytests}/groovy/io/micronaut/flyway/FlywayConfigurationCustomizerSpec.groovy[tags="customizer"]
-----
+snippet::io.micronaut.flyway.docs.BooksFlywayConfigurationCustomizer[project-base="test-suite", tags="imports,clazz"]
+
 <1> The bean implements `FlywayConfigurationCustomizer`
 <2> A `JavaMigration` array is injected via a `@Named` qualifier
 <3> The migrations are set on the builder
