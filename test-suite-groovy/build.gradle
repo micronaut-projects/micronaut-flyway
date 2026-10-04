@@ -1,0 +1,24 @@
+plugins {
+    id 'groovy'
+    id 'io.micronaut.build.internal.flyway-base'
+}
+
+// The examples of the guide, in Groovy (Spock). The Groovy compiler picks up the Micronaut AST transformations
+// from the compile classpath.
+dependencies {
+    testCompileOnly mn.micronaut.inject.groovy
+
+    testImplementation projects.micronautFlyway
+    testImplementation mnSql.micronaut.jdbc.hikari
+    testImplementation mn.groovy.sql
+    testImplementation mnTest.micronaut.test.spock
+
+    testRuntimeOnly mnSql.h2
+    testRuntimeOnly mn.snakeyaml
+    testRuntimeOnly mnTest.junit.platform.launcher
+    testRuntimeOnly mnLogging.logback.classic
+}
+
+test {
+    useJUnitPlatform()
+}
