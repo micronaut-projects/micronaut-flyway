@@ -1,15 +1,15 @@
 [versions]
-micronaut = "5.2.2"
+micronaut = "5.2.13"
 micronaut-test = "5.0.0"
 micronaut-logging = "2.0.0"
-micronaut-platform = "5.1.5"
-micronaut-serde = "3.1.1"
-micronaut-data = "5.1.4"
-micronaut-sql = "7.1.2"
-micronaut-validation = "5.1.0"
+micronaut-platform = "5.2.1"
+micronaut-serde = "3.2.4"
+micronaut-data = "5.2.0"
+micronaut-sql = "7.2.0"
+micronaut-validation = "5.2.1"
 micronaut-gradle-plugin = "5.0.2"
 managed-flyway = "12.11.0"
-graal-svm = "25.0.4.1"
+graal-svm = "25.0.4.1.1"
 
 [libraries]
 # Core
