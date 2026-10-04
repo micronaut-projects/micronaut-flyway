@@ -150,6 +150,15 @@ dependency on your classpath:</p>
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
+<div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="pyronaut">[tool.pyronaut.dependencies]
+runtime = [
+    <span class="hljs-string">"io.micronaut.flyway:micronaut-flyway"</span>,
+]</code></pre>
+</div>
+</div>
 </p>
 </div>
 <div class="paragraph">
@@ -170,6 +179,15 @@ dependency on your classpath:</p>
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
+<div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="pyronaut">[tool.pyronaut.dependencies]
+runtime = [
+    <span class="hljs-string">"org.flywaydb:flyway-mysql"</span>,
+]</code></pre>
+</div>
+</div>
 </p>
 </div>
 <div class="paragraph">
@@ -185,6 +203,15 @@ dependency on your classpath:</p>
     &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
     &lt;artifactId&gt;flyway-database-oracle&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="pyronaut">[tool.pyronaut.dependencies]
+runtime = [
+    <span class="hljs-string">"org.flywaydb:flyway-database-oracle"</span>,
+]</code></pre>
 </div>
 </div>
 </p>
@@ -204,6 +231,15 @@ dependency on your classpath:</p>
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
+<div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="pyronaut">[tool.pyronaut.dependencies]
+runtime = [
+    <span class="hljs-string">"org.flywaydb:flyway-database-postgresql"</span>,
+]</code></pre>
+</div>
+</div>
 </p>
 </div>
 <div class="paragraph">
@@ -219,6 +255,15 @@ dependency on your classpath:</p>
     &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
     &lt;artifactId&gt;flyway-sqlserver&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock multi-language-sample">
+<div class="title"></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="pyronaut">[tool.pyronaut.dependencies]
+runtime = [
+    <span class="hljs-string">"org.flywaydb:flyway-sqlserver"</span>,
+]</code></pre>
 </div>
 </div>
 </p>
@@ -306,9 +351,23 @@ flyway:
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">datasources = {default = {url = "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE", username = "sa", password = "", driverClassName = "org.h2.Driver"}}
-jpa = {default = {packages-to-scan = ["example.micronaut"], properties = {hibernate = {hbm2ddl = {auto = "none"}, show_sql = true}}}}
-flyway = {datasources = {default = {enabled = true}}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[datasources.default]
+url = "jdbc:h2:mem:flywayDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+username = "sa"
+password = ""
+driverClassName = "org.h2.Driver"
+
+[jpa.default]
+packages-to-scan = ["example.micronaut"]
+
+[jpa.default.properties.hibernate]
+show_sql = true
+
+[jpa.default.properties.hibernate.hbm2ddl]
+auto = "none"
+
+[flyway.datasources.default]
+enabled = true</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -465,7 +524,9 @@ flyway.datasources.default.locations[1]=classpath:other</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {enabled = true, locations = ["classpath:databasemigrations", "classpath:other"]}}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway.datasources.default]
+enabled = true
+locations = ["classpath:databasemigrations", "classpath:other"]</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -567,7 +628,11 @@ flyway.datasources.default.enabled=false</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {enabled = true, datasources = {default = {enabled = false}}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway]
+enabled = true
+
+[flyway.datasources.default]
+enabled = false</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -781,7 +846,8 @@ and <code>flyway.datasources.*.password</code>.
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {properties = {flyway = {postgresql = {transactional = {lock = false}}}}}}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway.datasources.default.properties.flyway.postgresql.transactional]
+lock = false</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -1033,7 +1099,8 @@ flyway.datasources.default.locations[1]=classpath:other</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">flyway = {datasources = {default = {locations = ["classpath:databasemigrations", "classpath:other"]}}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[flyway.datasources.default]
+locations = ["classpath:databasemigrations", "classpath:other"]</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
@@ -1171,7 +1238,9 @@ endpoints.flyway.sensitive=false</code></pre>
 </div>
 <div class="listingblock multi-language-sample">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">endpoints = {flyway = {enabled = true, sensitive = false}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[endpoints.flyway]
+enabled = true
+sensitive = false</code></pre>
 </div>
 </div>
 <div class="listingblock multi-language-sample">
