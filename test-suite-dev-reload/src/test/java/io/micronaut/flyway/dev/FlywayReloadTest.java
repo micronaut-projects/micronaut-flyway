@@ -285,6 +285,26 @@ class FlywayReloadTest {
     }
 
     @Test
+    void aDataSourceMigratedAsynchronouslyHoldsNoRestartBack() throws Exception {
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            database(harness, "other", otherUrl);
+            harness.property("flyway.datasources.default.async", "true");
+            harness.resource(V1, V1_SQL);
+            harness.start();
+            awaitApplied(url, "1");
+
+            execute(url, "UPDATE \"flyway_schema_history\" SET \"checksum\" = 1 WHERE \"version\" = '1'");
+            harness.resource(V2, V2_SQL);
+            harness.reload();
+            awaitGeneration(harness, 2);
+
+            assertFalse(harness.runtime().isStartFailed());
+            assertTrue(columnExists(otherUrl, "OWNERS", "NICK"));
+        }
+    }
+
+    @Test
     void anEditedMigrationWithCleaningOnlyAllowedByACustomizerIsStillRefused() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
@@ -594,6 +614,14 @@ class FlywayReloadTest {
         harness.runtime().whenReady().join();
         assertEquals(generation, harness.generation());
         assertFalse(harness.runtime().isStartFailed());
+    }
+
+    private static void awaitApplied(String url, String version) throws SQLException, InterruptedException {
+        long deadline = System.nanoTime() + TIMEOUT.toNanos();
+        while (!tableExists(url, "flyway_schema_history") || !appliedVersions(url).contains(version)) {
+            assertTrue(System.nanoTime() < deadline, "version " + version + " was not applied");
+            Thread.sleep(20);
+        }
     }
 
     private static boolean columnExists(String url, String table, String column) throws SQLException {

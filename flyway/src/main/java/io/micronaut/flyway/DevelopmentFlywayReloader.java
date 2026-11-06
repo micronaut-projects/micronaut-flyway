@@ -179,7 +179,7 @@ final class DevelopmentFlywayReloader {
             if (properties.isEnabled()) {
                 // no data source of the name, no Flyway: a restart would apply nothing
                 context.findBean(Flyway.class, Qualifiers.byName(properties.getNameQualifier()))
-                    .ifPresent(flyway -> dataSources.add(new DataSourceMigrations(flyway.getConfiguration(), properties.isCleanSchema())));
+                    .ifPresent(flyway -> dataSources.add(new DataSourceMigrations(flyway.getConfiguration(), properties.isCleanSchema(), properties.isAsync())));
             }
         }
         return dataSources;
@@ -218,7 +218,8 @@ final class DevelopmentFlywayReloader {
         for (DataSourceMigrations migrations : enabledDataSources()) {
             StartOutcome outcome = migrations.whatAStartWouldDo();
             applies |= outcome == StartOutcome.APPLY;
-            refused |= outcome == StartOutcome.REFUSE;
+            // what an asynchronous migration refuses is logged, and fails no start
+            refused |= outcome == StartOutcome.REFUSE && !migrations.async();
         }
         return applies && !refused;
     }
@@ -235,8 +236,9 @@ final class DevelopmentFlywayReloader {
      *
      * @param configuration The configuration of its {@link Flyway}
      * @param cleanSchema Whether a start cleans the schema first
+     * @param async Whether its migrations run apart from the start
      */
-    private record DataSourceMigrations(Configuration configuration, boolean cleanSchema) {
+    private record DataSourceMigrations(Configuration configuration, boolean cleanSchema, boolean async) {
 
         /**
          * Asks a {@link Flyway} of its own with plugins of its own, since the plugin that scans the class path keeps what
