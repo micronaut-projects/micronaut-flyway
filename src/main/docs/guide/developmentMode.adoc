@@ -1,0 +1,12 @@
+In https://docs.micronaut.io/latest/guide/#devMode[development mode] Flyway still runs as the application starts, and a change of a migration restarts the application so that it runs. The migration needs no edit of a class to go with it, and an edit that changes a class as well restarts once.
+
+The locations of each enabled data source are watched, as `flyway.datasources.*.locations` configures them:
+
+* A `classpath:` location is matched below every resource root of the project, such as `src/main/resources`, or the `config` directory and the additional resources of a Python project. Development mode reads these directories directly, so the new file needs no build.
+* A `filesystem:` location is watched with the application's file watcher, whether or not it lies under a resource root. It must exist when the application starts.
+
+A file in a location only restarts the application when a start would apply something. A save of the same content, or a file that is not a migration, restarts nothing. A change of the configuration under `flyway` restarts the application too.
+
+Flyway refuses an applied migration that was edited, as it does outside development mode: its checksum no longer matches. A restart could only fail, so the error is logged and the application goes on with the schema it has. Undo the edit, and put the change in a new migration. If something else restarts the application in the meantime, such as an edit of a class, the start fails on the same error, and the next change starts it again. Nothing runs `repair` or `clean` for you. To apply edited migrations from scratch during development, enable `clean-schema` for the data source, for example in `application-dev.yml`; the schema is then cleaned at every start, and an edit restarts the application.
+
+Nothing of this exists outside development mode, and `micronaut-flyway` adds no dependency for it.

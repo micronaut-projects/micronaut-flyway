@@ -12,6 +12,9 @@ dependencies {
     api libs.managed.flyway
     api mn.micronaut.management
     api mnSql.micronaut.jdbc
+
+    // development mode: the reloader is a bean only when the runtime that restarts the application is there
+    compileOnly mn.micronaut.dev
     testImplementation(mn.micronaut.jackson.databind)
 
     implementation mn.reactor
