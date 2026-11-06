@@ -44,9 +44,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -114,7 +112,7 @@ final class DevelopmentFlywayReloader {
                 if (location.isFileSystem()) {
                     Path directory = Path.of(location.getRootPath()).toAbsolutePath().normalize();
                     if (Files.isDirectory(directory)) {
-                        fileWatcher.directory(directory).watch(batch -> filesChanged(batch, location, migrations));
+                        fileWatcher.directory(directory).watch(batch -> filesChanged(batch, location));
                     } else {
                         LOG.debug("The Flyway location {} is no directory: it is not watched", location);
                     }
@@ -129,23 +127,20 @@ final class DevelopmentFlywayReloader {
         }
         List<Path> files = new ArrayList<>(change.changed());
         files.addAll(change.removed());
-        Set<DataSourceMigrations> affected = new LinkedHashSet<>();
         for (DataSourceMigrations migrations : enabledDataSources()) {
             for (Location location : migrations.configuration().getLocations()) {
                 if (location.isClassPath() && anyUnderClassPathLocation(location, change.roots(), files)) {
-                    affected.add(migrations);
+                    restartOnceTheBatchIsDone();
+                    return;
                 }
             }
         }
-        if (!affected.isEmpty()) {
-            restartOnceTheBatchIsDone(affected);
-        }
     }
 
-    private void filesChanged(FileChangeBatch batch, Location location, DataSourceMigrations migrations) {
+    private void filesChanged(FileChangeBatch batch, Location location) {
         for (Path file : batch.paths()) {
             if (matches(location, location.getRootPath() + '/' + resourceName(batch.root().relativize(file)))) {
-                restartOnceTheBatchIsDone(Set.of(migrations));
+                restartOnceTheBatchIsDone();
                 return;
             }
         }
@@ -194,7 +189,7 @@ final class DevelopmentFlywayReloader {
      * A resource watch is told in the middle of a batch, on the runtime's thread, which a restart waits for, and before
      * the batch knows whether a class changed. So the decision is left to a thread of its own, when the batch is done.
      */
-    private void restartOnceTheBatchIsDone(Set<DataSourceMigrations> affected) {
+    private void restartOnceTheBatchIsDone() {
         Thread.ofPlatform().daemon().name("micronaut-flyway-reload").start(() -> {
             try {
                 while (runtime.isReloading()) {
@@ -202,7 +197,7 @@ final class DevelopmentFlywayReloader {
                 }
                 // a batch that restarted the application, whichever one it was, ran Flyway with what the change left
                 if (context.equals(runtime.context().orElse(null)) && !runtime.isStartFailed()
-                    && startWouldApply(affected) && restarting.compareAndSet(false, true)) {
+                    && startWouldApply() && restarting.compareAndSet(false, true)) {
                     LOG.info("Restarting the application for the Flyway migrations that changed");
                     runtime.restart();
                 }
@@ -214,12 +209,13 @@ final class DevelopmentFlywayReloader {
     }
 
     /**
-     * Whether a start would apply something and not fail: one data source that Flyway refuses fails the whole start.
+     * Whether a start would apply something and not fail: one data source that Flyway refuses fails the whole start, so
+     * every data source is asked, whichever one the change was for.
      */
-    private static boolean startWouldApply(Set<DataSourceMigrations> affected) {
+    private boolean startWouldApply() {
         boolean applies = false;
         boolean refused = false;
-        for (DataSourceMigrations migrations : affected) {
+        for (DataSourceMigrations migrations : enabledDataSources()) {
             StartOutcome outcome = migrations.whatAStartWouldDo();
             applies |= outcome == StartOutcome.APPLY;
             refused |= outcome == StartOutcome.REFUSE;

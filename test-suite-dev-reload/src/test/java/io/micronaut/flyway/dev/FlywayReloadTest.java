@@ -266,6 +266,25 @@ class FlywayReloadTest {
     }
 
     @Test
+    void oneDataSourceRefusedOfTwoSharingAFileSystemLocationHoldsTheRestartBack() throws Exception {
+        Path migrations = Files.createDirectories(outside.resolve("shared"));
+        Files.writeString(migrations.resolve("V1__owners.sql"), V1_SQL);
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            database(harness, "other", otherUrl);
+            harness.property("flyway.datasources.default.locations", "filesystem:" + migrations.toRealPath());
+            harness.property("flyway.datasources.other.locations", "filesystem:" + migrations.toRealPath());
+            harness.start();
+
+            execute(url, "UPDATE \"flyway_schema_history\" SET \"checksum\" = 1 WHERE \"version\" = '1'");
+            Files.writeString(migrations.resolve("V2__owner_nick.sql"), V2_SQL);
+
+            assertStaysAtGeneration(harness, 1);
+            assertFalse(columnExists(otherUrl, "OWNERS", "NICK"));
+        }
+    }
+
+    @Test
     void anEditedMigrationWithCleaningOnlyAllowedByACustomizerIsStillRefused() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
