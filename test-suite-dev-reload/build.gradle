@@ -1,0 +1,22 @@
+plugins {
+    id 'java-library'
+    id 'io.micronaut.build.internal.flyway-base'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation platform(mn.micronaut.core.bom)
+    testImplementation projects.micronautFlyway
+    testImplementation mnSql.micronaut.jdbc.hikari
+    testImplementation mn.micronaut.dev.tck
+    // the reload harness compiles the application under test with the processors on the test classpath
+    testImplementation mn.micronaut.inject.java
+    testImplementation mnTest.junit.jupiter.api
+    testRuntimeOnly mnTest.junit.jupiter.engine
+    testRuntimeOnly mnTest.junit.platform.launcher
+    testImplementation mnSql.h2
+    testRuntimeOnly mnLogging.logback.classic
+}

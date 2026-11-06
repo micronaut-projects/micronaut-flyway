@@ -41,6 +41,7 @@ include 'flyway-bom'
 include 'test-suite-oracle'
 include 'test-suite-java'
 include 'test-suite-serde'
+include 'test-suite-dev-reload'
 
 enableFeaturePreview('TYPESAFE_PROJECT_ACCESSORS')
 

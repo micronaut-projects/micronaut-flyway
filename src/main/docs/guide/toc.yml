@@ -8,5 +8,6 @@ configuration:
 graalvm: GraalVM support
 events: Events
 endpoint: Endpoint
+developmentMode: Development Mode
 flywayGuides: Guides
 repository: Repository
