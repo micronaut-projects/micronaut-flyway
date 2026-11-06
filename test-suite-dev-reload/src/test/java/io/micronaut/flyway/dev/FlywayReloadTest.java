@@ -15,13 +15,17 @@
  */
 package io.micronaut.flyway.dev;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
 import io.micronaut.context.ApplicationContext;
-import io.micronaut.dev.DevRuntime;
 import io.micronaut.dev.tck.ReloadHarness;
 import io.micronaut.dev.tck.ReloadTck;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Runs an application with Flyway through the development runtime: a migration added, edited or removed under a
- * location of an enabled data source restarts the application, whose start runs Flyway. The database is H2 in memory,
+ * location of an enabled data source restarts the application, whose start runs Flyway, unless Flyway would refuse it. The database is H2 in memory,
  * kept by {@code DB_CLOSE_DELAY} across the restarts, whether or not the pool is retained.
  */
 class FlywayReloadTest {
@@ -132,19 +136,48 @@ class FlywayReloadTest {
     }
 
     @Test
-    void anAppliedMigrationEditedFailsTheStartAndRecoversOnceItIsRestored() throws Exception {
+    void anAppliedMigrationEditedIsReportedAndTheApplicationKeepsRunning() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
             harness.resource(V1, V1_SQL);
             harness.start();
             String checksum = checksums(url).get(0);
+            ListAppender<ILoggingEvent> log = reloaderLog();
 
             harness.resource(V1, V1_SQL + "ALTER TABLE OWNERS ADD COLUMN EDITED INT;\n");
             harness.reload();
-            awaitStartFailed(harness.runtime());
+            assertStaysAtGeneration(harness, 1);
 
+            assertTrue(log.list.stream().anyMatch(event -> event.getLevel() == Level.ERROR && event.getFormattedMessage().contains("checksum mismatch")),
+                "the error is reported");
+            assertTrue(harness.context().isRunning());
             assertEquals(List.of(checksum), checksums(url), "neither repaired nor applied again");
             assertFalse(columnExists(url, "OWNERS", "EDITED"));
+
+            log.list.clear();
+            harness.resource(V1, V1_SQL);
+            harness.reload();
+
+            assertStaysAtGeneration(harness, 1);
+            assertTrue(log.list.isEmpty(), "put back, nothing is wrong");
+            assertEquals(List.of(checksum), checksums(url));
+        }
+    }
+
+    @Test
+    void aRestartWithAnAppliedMigrationEditedFailsTheStartAndTheNextChangeRecovers() throws Exception {
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            harness.resource(V1, V1_SQL);
+            harness.source("example.Owners", owners("one"));
+            harness.start();
+            String checksum = checksums(url).get(0);
+
+            harness.resource(V1, V1_SQL + "ALTER TABLE OWNERS ADD COLUMN EDITED INT;\n");
+            harness.source("example.Owners", owners("two"));
+            assertThrows(IllegalStateException.class, harness::reload);
+            assertTrue(harness.runtime().isStartFailed());
+            assertEquals(List.of(checksum), checksums(url), "neither repaired nor applied again");
 
             harness.resource(V1, V1_SQL);
             harness.reload();
@@ -156,7 +189,7 @@ class FlywayReloadTest {
     }
 
     @Test
-    void anAppliedMigrationEditedRecoversWithANewMigrationAfterTheEditIsUndone() throws Exception {
+    void anAppliedMigrationEditedThenPutBackWithANewMigrationAppliesTheNewOne() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
             harness.resource(V1, V1_SQL);
@@ -164,16 +197,36 @@ class FlywayReloadTest {
 
             harness.resource(V1, V1_SQL + "ALTER TABLE OWNERS ADD COLUMN NICK VARCHAR(30);\n");
             harness.reload();
-            awaitStartFailed(harness.runtime());
+            assertStaysAtGeneration(harness, 1);
 
             // the fix a developer makes: the change moves to a migration of its own
             harness.resource(V1, V1_SQL);
             harness.resource(V2, V2_SQL);
             harness.reload();
+            awaitGeneration(harness, 2);
 
-            assertFalse(harness.runtime().isStartFailed());
             assertTrue(columnExists(url, "OWNERS", "NICK"));
             assertEquals(List.of("1", "2"), appliedVersions(url));
+        }
+    }
+
+    @Test
+    void aNewMigrationBesideAnEditedOneIsNotAppliedUntilTheEditIsPutBack() throws Exception {
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            harness.resource(V1, V1_SQL);
+            harness.start();
+
+            harness.resource(V1, V1_SQL + "ALTER TABLE OWNERS ADD COLUMN EDITED INT;\n");
+            harness.resource(V2, V2_SQL);
+            harness.reload();
+            assertStaysAtGeneration(harness, 1);
+            assertFalse(columnExists(url, "OWNERS", "NICK"));
+
+            harness.resource(V1, V1_SQL);
+            harness.reload();
+            awaitGeneration(harness, 2);
+            assertTrue(columnExists(url, "OWNERS", "NICK"));
         }
     }
 
@@ -230,7 +283,7 @@ class FlywayReloadTest {
     }
 
     @Test
-    void aMigrationRemovedRestartsOnlyWhenFlywayWouldRefuseIt() throws Exception {
+    void aMigrationRemovedIsReportedOnlyWhenFlywayWouldRefuseIt() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
             harness.resource(V1, V1_SQL);
@@ -238,20 +291,26 @@ class FlywayReloadTest {
             harness.start();
             assertEquals(List.of("1", "2"), appliedVersions(url));
 
-            // a migration never applied is gone, and nothing would notice
+            // a migration never applied is gone, and nothing would notice; nor would Flyway of the highest applied one,
+            // which it takes for a future version
             harness.resource("db/migration/V4__note.sql", "ALTER TABLE OWNERS ADD COLUMN NOTE VARCHAR(30);\n");
             harness.reload();
             awaitGeneration(harness, 2);
+            ListAppender<ILoggingEvent> log = reloaderLog();
             remove(harness, "db/migration/V4__note.sql");
-            // the highest applied one is one Flyway takes for a future version, which it leaves alone
             assertStaysAtGeneration(harness, 2);
+            assertTrue(log.list.isEmpty());
 
             remove(harness, V1);
-            awaitStartFailed(harness.runtime());
+            assertStaysAtGeneration(harness, 2);
+            assertTrue(log.list.stream().anyMatch(event -> event.getLevel() == Level.ERROR), "the error is reported");
+            assertTrue(harness.context().isRunning());
 
+            log.list.clear();
             harness.resource(V1, V1_SQL);
             harness.reload();
-            assertFalse(harness.runtime().isStartFailed());
+            assertStaysAtGeneration(harness, 2);
+            assertTrue(log.list.isEmpty());
         }
     }
 
@@ -436,6 +495,13 @@ class FlywayReloadTest {
         harness.property("flyway.datasources." + name + ".enabled", "true");
     }
 
+    private static ListAppender<ILoggingEvent> reloaderLog() {
+        ListAppender<ILoggingEvent> appender = new ListAppender<>();
+        appender.start();
+        ((Logger) LoggerFactory.getLogger("io.micronaut.flyway.DevelopmentFlywayReloader")).addAppender(appender);
+        return appender;
+    }
+
     private static void remove(ReloadHarness harness, String resource) throws IOException {
         Path file = harness.projectDirectory().resolve("src/main/resources").resolve(resource);
         Files.delete(file);
@@ -461,15 +527,6 @@ class FlywayReloadTest {
         harness.runtime().whenReady().join();
         assertEquals(generation, harness.generation());
         assertFalse(harness.runtime().isStartFailed());
-    }
-
-    private static void awaitStartFailed(DevRuntime runtime) throws InterruptedException {
-        long deadline = System.nanoTime() + TIMEOUT.toNanos();
-        while (!runtime.isStartFailed()) {
-            assertTrue(System.nanoTime() < deadline, "the start did not fail");
-            Thread.sleep(20);
-        }
-        runtime.whenReady().join();
     }
 
     private static boolean columnExists(String url, String table, String column) throws SQLException {

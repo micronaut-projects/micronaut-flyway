@@ -34,6 +34,8 @@ import org.flywaydb.core.api.FlywayException;
 import org.flywaydb.core.api.Location;
 import org.flywaydb.core.api.configuration.ClassicConfiguration;
 import org.flywaydb.core.api.configuration.Configuration;
+import org.flywaydb.core.api.output.ValidateResult;
+import org.flywaydb.core.api.pattern.ValidatePattern;
 import org.flywaydb.core.internal.plugin.PluginRegister;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
@@ -53,12 +55,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <p>
  * It watches the locations of the enabled data sources: a {@code classpath:} location through the resources below every
  * resource root of the runtime, and a {@code filesystem:} location through the file watcher. A file changed there is
- * only a reason to ask: what Flyway finds to apply, or to refuse, decides whether the application restarts. A note kept
- * beside the migrations, a save of the same content or a migration that a restart applied already restarts nothing.
+ * only a reason to ask: the application restarts when a start would apply something. A note kept beside the migrations,
+ * a save of the same content or a migration that a restart applied already restarts nothing.
  * <p>
- * Flyway refuses an applied migration that was edited or removed, and is left to: the start of the next generation
- * fails, which the runtime reports, and the next change starts one again. Nothing here repairs the schema history or
- * cleans the schema; {@code clean-schema} applies as at any start.
+ * An applied migration that was edited or removed is one Flyway would refuse, so a start could only fail: the error is
+ * logged and the application goes on with the schema it has, until the file is put back. A restart for another reason
+ * fails on it, which the runtime reports, and the next change starts a generation again. Nothing here repairs the schema
+ * history or cleans the schema; with {@code clean-schema} a start cleans first and so can apply the edit, and restarts.
  * <p>
  * The restart comes after the batch that reported the change, and only if the batch did not restart the application
  * itself, as it does for a class edited with the migration: that one generation applies the migration.
@@ -199,7 +202,7 @@ final class DevelopmentFlywayReloader {
                 }
                 // a batch that restarted the application, whichever one it was, ran Flyway with what the change left
                 if (context.equals(runtime.context().orElse(null)) && !runtime.isStartFailed()
-                    && affected.stream().anyMatch(DevelopmentFlywayReloader::flywayHasWork) && restarting.compareAndSet(false, true)) {
+                    && affected.stream().anyMatch(DevelopmentFlywayReloader::startWouldApply) && restarting.compareAndSet(false, true)) {
                     LOG.info("Restarting the application for the Flyway migrations that changed");
                     runtime.restart();
                 }
@@ -211,15 +214,31 @@ final class DevelopmentFlywayReloader {
     }
 
     /**
-     * Whether a start would run a migration, or fail on one. It asks a {@link Flyway} of its own with plugins of its own,
-     * since the plugin that scans the class path keeps what it found, and configurations copied from one another share it.
+     * Whether a start would apply something, which logs what Flyway refuses instead. It asks a {@link Flyway} of its own
+     * with plugins of its own, since the plugin that scans the class path keeps what it found, and configurations copied
+     * from one another share it. Pending migrations are no failure, as they are none to a start.
      */
-    private static boolean flywayHasWork(Configuration configuration) {
+    private static boolean startWouldApply(Configuration configuration) {
         try {
             ClassicConfiguration fresh = new ClassicConfiguration(configuration);
             fresh.setPluginRegister(new PluginRegister());
+            List<ValidatePattern> ignored = new ArrayList<>(List.of(configuration.getIgnoreMigrationPatterns()));
+            ignored.add(ValidatePattern.fromPattern("*:pending"));
+            fresh.setIgnoreMigrationPatterns(ignored.toArray(ValidatePattern[]::new));
             Flyway flyway = new Flyway(fresh);
-            return flyway.info().pending().length > 0 || !flyway.validateWithResult().validationSuccessful;
+            ValidateResult validation = flyway.validateWithResult();
+            if (!validation.validationSuccessful) {
+                if (!configuration.isCleanDisabled()) {
+                    // clean-schema: a start cleans the schema first, and applies the migrations as they are now
+                    return true;
+                }
+                if (configuration.isValidateOnMigrate()) {
+                    LOG.error("Flyway refuses the migrations as they are now, so the application keeps running and is not restarted. Put the applied migration back, and make the change in a new one: {}",
+                        validation.getAllErrorMessages());
+                    return false;
+                }
+            }
+            return flyway.info().pending().length > 0;
         } catch (FlywayException e) {
             LOG.debug("Flyway cannot tell what changed, which a start reports: {}", e.getMessage(), e);
             return true;

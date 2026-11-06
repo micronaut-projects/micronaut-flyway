@@ -18,5 +18,5 @@ dependencies {
     testRuntimeOnly mnTest.junit.jupiter.engine
     testRuntimeOnly mnTest.junit.platform.launcher
     testImplementation mnSql.h2
-    testRuntimeOnly mnLogging.logback.classic
+    testImplementation mnLogging.logback.classic
 }
