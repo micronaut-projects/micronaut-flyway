@@ -109,12 +109,12 @@ final class DevelopmentFlywayReloader {
         if (fileWatcher == null) {
             return;
         }
-        for (Configuration configuration : enabledConfigurations()) {
-            for (Location location : configuration.getLocations()) {
+        for (DataSourceMigrations migrations : enabledDataSources()) {
+            for (Location location : migrations.configuration().getLocations()) {
                 if (location.isFileSystem()) {
                     Path directory = Path.of(location.getRootPath()).toAbsolutePath().normalize();
                     if (Files.isDirectory(directory)) {
-                        fileWatcher.directory(directory).watch(batch -> filesChanged(batch, location, configuration));
+                        fileWatcher.directory(directory).watch(batch -> filesChanged(batch, location, migrations));
                     } else {
                         LOG.debug("The Flyway location {} is no directory: it is not watched", location);
                     }
@@ -129,11 +129,11 @@ final class DevelopmentFlywayReloader {
         }
         List<Path> files = new ArrayList<>(change.changed());
         files.addAll(change.removed());
-        Set<Configuration> affected = new LinkedHashSet<>();
-        for (Configuration configuration : enabledConfigurations()) {
-            for (Location location : configuration.getLocations()) {
+        Set<DataSourceMigrations> affected = new LinkedHashSet<>();
+        for (DataSourceMigrations migrations : enabledDataSources()) {
+            for (Location location : migrations.configuration().getLocations()) {
                 if (location.isClassPath() && anyUnderClassPathLocation(location, change.roots(), files)) {
-                    affected.add(configuration);
+                    affected.add(migrations);
                 }
             }
         }
@@ -142,10 +142,10 @@ final class DevelopmentFlywayReloader {
         }
     }
 
-    private void filesChanged(FileChangeBatch batch, Location location, Configuration configuration) {
+    private void filesChanged(FileChangeBatch batch, Location location, DataSourceMigrations migrations) {
         for (Path file : batch.paths()) {
             if (matches(location, location.getRootPath() + '/' + resourceName(batch.root().relativize(file)))) {
-                restartOnceTheBatchIsDone(Set.of(configuration));
+                restartOnceTheBatchIsDone(Set.of(migrations));
                 return;
             }
         }
@@ -178,23 +178,23 @@ final class DevelopmentFlywayReloader {
         return name.toString();
     }
 
-    private List<Configuration> enabledConfigurations() {
-        List<Configuration> configurations = new ArrayList<>();
+    private List<DataSourceMigrations> enabledDataSources() {
+        List<DataSourceMigrations> dataSources = new ArrayList<>();
         for (FlywayConfigurationProperties properties : context.getBeansOfType(FlywayConfigurationProperties.class)) {
             if (properties.isEnabled()) {
                 // no data source of the name, no Flyway: a restart would apply nothing
                 context.findBean(Flyway.class, Qualifiers.byName(properties.getNameQualifier()))
-                    .ifPresent(flyway -> configurations.add(flyway.getConfiguration()));
+                    .ifPresent(flyway -> dataSources.add(new DataSourceMigrations(flyway.getConfiguration(), properties.isCleanSchema())));
             }
         }
-        return configurations;
+        return dataSources;
     }
 
     /**
      * A resource watch is told in the middle of a batch, on the runtime's thread, which a restart waits for, and before
      * the batch knows whether a class changed. So the decision is left to a thread of its own, when the batch is done.
      */
-    private void restartOnceTheBatchIsDone(Set<Configuration> affected) {
+    private void restartOnceTheBatchIsDone(Set<DataSourceMigrations> affected) {
         Thread.ofPlatform().daemon().name("micronaut-flyway-reload").start(() -> {
             try {
                 while (runtime.isReloading()) {
@@ -202,7 +202,7 @@ final class DevelopmentFlywayReloader {
                 }
                 // a batch that restarted the application, whichever one it was, ran Flyway with what the change left
                 if (context.equals(runtime.context().orElse(null)) && !runtime.isStartFailed()
-                    && affected.stream().anyMatch(DevelopmentFlywayReloader::startWouldApply) && restarting.compareAndSet(false, true)) {
+                    && startWouldApply(affected) && restarting.compareAndSet(false, true)) {
                     LOG.info("Restarting the application for the Flyway migrations that changed");
                     runtime.restart();
                 }
@@ -214,34 +214,64 @@ final class DevelopmentFlywayReloader {
     }
 
     /**
-     * Whether a start would apply something, which logs what Flyway refuses instead. It asks a {@link Flyway} of its own
-     * with plugins of its own, since the plugin that scans the class path keeps what it found, and configurations copied
-     * from one another share it. Pending migrations are no failure, as they are none to a start.
+     * Whether a start would apply something and not fail: one data source that Flyway refuses fails the whole start.
      */
-    private static boolean startWouldApply(Configuration configuration) {
-        try {
-            ClassicConfiguration fresh = new ClassicConfiguration(configuration);
-            fresh.setPluginRegister(new PluginRegister());
-            List<ValidatePattern> ignored = new ArrayList<>(List.of(configuration.getIgnoreMigrationPatterns()));
-            ignored.add(ValidatePattern.fromPattern("*:pending"));
-            fresh.setIgnoreMigrationPatterns(ignored.toArray(ValidatePattern[]::new));
-            Flyway flyway = new Flyway(fresh);
-            ValidateResult validation = flyway.validateWithResult();
-            if (!validation.validationSuccessful) {
-                if (!configuration.isCleanDisabled()) {
-                    // clean-schema: a start cleans the schema first, and applies the migrations as they are now
-                    return true;
+    private static boolean startWouldApply(Set<DataSourceMigrations> affected) {
+        boolean applies = false;
+        boolean refused = false;
+        for (DataSourceMigrations migrations : affected) {
+            StartOutcome outcome = migrations.whatAStartWouldDo();
+            applies |= outcome == StartOutcome.APPLY;
+            refused |= outcome == StartOutcome.REFUSE;
+        }
+        return applies && !refused;
+    }
+
+    /**
+     * What a start would do for a data source.
+     */
+    private enum StartOutcome {
+        NOTHING, APPLY, REFUSE
+    }
+
+    /**
+     * The migrations of an enabled data source.
+     *
+     * @param configuration The configuration of its {@link Flyway}
+     * @param cleanSchema Whether a start cleans the schema first
+     */
+    private record DataSourceMigrations(Configuration configuration, boolean cleanSchema) {
+
+        /**
+         * Asks a {@link Flyway} of its own with plugins of its own, since the plugin that scans the class path keeps what
+         * it found, and configurations copied from one another share it. Pending migrations are no failure, as they are
+         * none to a start. What Flyway refuses is logged.
+         */
+        StartOutcome whatAStartWouldDo() {
+            try {
+                ClassicConfiguration fresh = new ClassicConfiguration(configuration);
+                fresh.setPluginRegister(new PluginRegister());
+                List<ValidatePattern> ignored = new ArrayList<>(List.of(configuration.getIgnoreMigrationPatterns()));
+                ignored.add(ValidatePattern.fromPattern("*:pending"));
+                fresh.setIgnoreMigrationPatterns(ignored.toArray(ValidatePattern[]::new));
+                Flyway flyway = new Flyway(fresh);
+                ValidateResult validation = flyway.validateWithResult();
+                if (!validation.validationSuccessful) {
+                    if (cleanSchema) {
+                        // a start cleans the schema first, and applies the migrations as they are now
+                        return StartOutcome.APPLY;
+                    }
+                    if (configuration.isValidateOnMigrate()) {
+                        LOG.error("Flyway refuses the migrations as they are now, so the application keeps running and is not restarted. Put the applied migration back, and make the change in a new one: {}",
+                            validation.getAllErrorMessages());
+                        return StartOutcome.REFUSE;
+                    }
                 }
-                if (configuration.isValidateOnMigrate()) {
-                    LOG.error("Flyway refuses the migrations as they are now, so the application keeps running and is not restarted. Put the applied migration back, and make the change in a new one: {}",
-                        validation.getAllErrorMessages());
-                    return false;
-                }
+                return flyway.info().pending().length > 0 ? StartOutcome.APPLY : StartOutcome.NOTHING;
+            } catch (FlywayException e) {
+                LOG.debug("Flyway cannot tell what changed, which a start reports: {}", e.getMessage(), e);
+                return StartOutcome.APPLY;
             }
-            return flyway.info().pending().length > 0;
-        } catch (FlywayException e) {
-            LOG.debug("Flyway cannot tell what changed, which a start reports: {}", e.getMessage(), e);
-            return true;
         }
     }
 }

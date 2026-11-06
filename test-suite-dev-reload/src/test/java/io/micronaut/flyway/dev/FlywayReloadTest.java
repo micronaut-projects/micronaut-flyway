@@ -248,6 +248,54 @@ class FlywayReloadTest {
     }
 
     @Test
+    void oneDataSourceRefusedOfTwoSharingALocationHoldsTheRestartBack() throws Exception {
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            database(harness, "other", otherUrl);
+            harness.resource(V1, V1_SQL);
+            harness.start();
+
+            // the default data source refuses what the other applies
+            execute(url, "UPDATE \"flyway_schema_history\" SET \"checksum\" = 1 WHERE \"version\" = '1'");
+            harness.resource(V2, V2_SQL);
+            harness.reload();
+
+            assertStaysAtGeneration(harness, 1);
+            assertFalse(columnExists(otherUrl, "OWNERS", "NICK"));
+        }
+    }
+
+    @Test
+    void anEditedMigrationWithCleaningOnlyAllowedByACustomizerIsStillRefused() throws Exception {
+        try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
+            database(harness, "default", url);
+            harness.source("example.AllowClean", """
+                package example;
+                @jakarta.inject.Singleton
+                @jakarta.inject.Named("default")
+                public class AllowClean implements io.micronaut.flyway.FlywayConfigurationCustomizer {
+                    @Override
+                    public String getName() {
+                        return "default";
+                    }
+                    @Override
+                    public void customizeFluentConfiguration(org.flywaydb.core.api.configuration.FluentConfiguration configuration) {
+                        configuration.cleanDisabled(false);
+                    }
+                }
+                """);
+            harness.resource(V1, V1_SQL);
+            harness.start();
+
+            harness.resource(V1, V1_SQL + "ALTER TABLE OWNERS ADD COLUMN EDITED INT;\n");
+            harness.reload();
+
+            assertStaysAtGeneration(harness, 1);
+            assertFalse(columnExists(url, "OWNERS", "EDITED"));
+        }
+    }
+
+    @Test
     void aRepeatableMigrationEditedRestartsAndIsAppliedAgain() throws Exception {
         try (ReloadHarness harness = ReloadHarness.inDirectory(project)) {
             database(harness, "default", url);
@@ -543,6 +591,13 @@ class FlywayReloadTest {
 
     private static List<String> checksums(String url) throws SQLException {
         return query(url, "SELECT \"checksum\" FROM \"flyway_schema_history\" WHERE \"version\" IS NOT NULL ORDER BY \"installed_rank\"");
+    }
+
+    private static void execute(String url, String sql) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(url, "sa", "");
+             Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        }
     }
 
     private static List<String> query(String url, String sql) throws SQLException {
