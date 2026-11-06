@@ -260,7 +260,7 @@ final class DevelopmentFlywayReloader {
                         return StartOutcome.APPLY;
                     }
                     if (configuration.isValidateOnMigrate()) {
-                        LOG.error("Flyway refuses the migrations as they are now, so the application keeps running and is not restarted. Put the applied migration back, and make the change in a new one: {}",
+                        LOG.error("Flyway refuses the migrations as they are now. Put the applied migration back, and make the change in a new one: {}",
                             validation.getAllErrorMessages());
                         return StartOutcome.REFUSE;
                     }
