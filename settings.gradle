@@ -28,3 +28,4 @@ micronautBuild {
     importMicronautCatalog("micronaut-validation")
     importMicronautCatalog("micronaut-sql")
 }
+
